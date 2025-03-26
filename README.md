@@ -43,7 +43,6 @@ Project-Description.
   - [Installation:](#installation)
   - [Run Programing Language Code:](#run-programing-language-code)
     - [Dependencies](#dependencies)
-    - [Dataset - Optional](#dataset---optional)
   - [Contributing](#contributing)
   - [Collaborators](#collaborators)
   - [License](#license)
@@ -100,14 +99,6 @@ cd Master-UTFPR
 
 ```bash
 make dependencies
-```
-
-### Dataset - Optional
-
-1. Download the dataset from [WEBSITE-HERE]() and place it in this project directory `(/Master-UTFPR)` and run the following command:
-
-```bash
-make dataset
 ```
 
 ## Contributing
