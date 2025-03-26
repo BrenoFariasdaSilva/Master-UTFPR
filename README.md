@@ -8,7 +8,9 @@
   
 ---
 
-Project-Description.
+This repository contains a collection of exercises from various subjects in my Master's program in Computer Science at the **Federal University of Technology – Paraná (UTFPR), Campo Mourão**. These exercises cover a range of topics relevant to my coursework, including algorithms and data structures, software engineering, and other advanced computing concepts.  
+
+The goal of this repository is to organize and track my progress while also serving as a reference for future studies. Feel free to explore the exercises, and if you find anything useful or have suggestions, contributions and discussions are always welcome!  
   
 ---
 
