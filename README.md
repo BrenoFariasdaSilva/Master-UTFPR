@@ -42,7 +42,6 @@ Project-Description.
     - [Clone the repository](#clone-the-repository)
   - [Installation:](#installation)
   - [Run Programing Language Code:](#run-programing-language-code)
-    - [Dependencies](#dependencies)
   - [Contributing](#contributing)
   - [Collaborators](#collaborators)
   - [License](#license)
@@ -91,14 +90,6 @@ cd Master-UTFPR
 ## Run Programing Language Code:
 ```bash
 # Command here 
-```
-
-### Dependencies
-
-1. Install the project dependencies with the following command:
-
-```bash
-make dependencies
 ```
 
 ## Contributing
