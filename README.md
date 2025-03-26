@@ -44,7 +44,6 @@ Project-Description.
   - [License](#license)
     - [Apache License 2.0](#apache-license-20)
 
-
 ## Introduction
 
 Detailed project description.
