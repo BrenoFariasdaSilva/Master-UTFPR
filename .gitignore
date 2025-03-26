@@ -46,3 +46,4 @@ desktop.ini
 /CMakeCache.txt
 Makefile
 CMakeLists.txt.user
+output/
