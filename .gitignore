@@ -25,4 +25,24 @@ desktop.ini
 # Ignore the Data Files
 *.csv
 *.xlsx
-.txt
+*.txt
+
+# Ignore compiled C/C++ files
+*.o
+*.obj
+*.exe
+*.out
+*.dll
+*.so
+*.dylib
+*.a
+*.lib
+
+# Ignore build directories
+/build/
+/bin/
+/dist/
+/CMakeFiles/
+/CMakeCache.txt
+Makefile
+CMakeLists.txt.user
