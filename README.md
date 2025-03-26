@@ -44,7 +44,6 @@ Project-Description.
   - [Run Programing Language Code:](#run-programing-language-code)
     - [Dependencies](#dependencies)
     - [Dataset - Optional](#dataset---optional)
-  - [Usage](#usage)
   - [Contributing](#contributing)
   - [Collaborators](#collaborators)
   - [License](#license)
@@ -109,14 +108,6 @@ make dependencies
 
 ```bash
 make dataset
-```
-
-## Usage
-
-In order to run the project, run the following command:
-
-```bash
-make run
 ```
 
 ## Contributing
