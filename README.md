@@ -1,6 +1,6 @@
 <div align="center">
   
-# [Master-UTFPR.](https://github.com/BrenoFariasdaSilva/Master-UTFPR) <img src="Icon-Image-URL"  width="3%" height="3%">
+# [Master-UTFPR.](https://github.com/BrenoFariasdaSilva/Master-UTFPR) <img src="[Icon-Image-URL](https://github.com/BrenoFariasdaSilva/Master-UTFPR/blob/main/.assets/BooksStack.svg)"  width="3%" height="3%">
 
 </div>
 
