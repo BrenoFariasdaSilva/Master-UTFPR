@@ -40,8 +40,6 @@ Project-Description.
   - [Requirements](#requirements)
   - [Setup](#setup)
     - [Clone the repository](#clone-the-repository)
-  - [Installation:](#installation)
-  - [Run Programing Language Code:](#run-programing-language-code)
   - [Contributing](#contributing)
   - [Collaborators](#collaborators)
   - [License](#license)
@@ -65,31 +63,6 @@ Bullet points of the requirements.
 ```bash
 git clone https://github.com/BrenoFariasDaSilva/Master-UTFPR.git
 cd Master-UTFPR
-```
-
-## Installation:
-* Programing Language:
-
-	* Manually:
-		```bash
-		# Programing Language:
-		sudo apt install program-language -y
-		```
-
-  * Using Makefile:
-    ```bash
-    make install
-    ```
-
-  * Using ShellScript:
-    ```bash
-    chmod +x install.sh
-    sudo ./install.sh
-    ```  
-
-## Run Programing Language Code:
-```bash
-# Command here 
 ```
 
 ## Contributing
