@@ -45,7 +45,6 @@ Project-Description.
     - [Dependencies](#dependencies)
     - [Dataset - Optional](#dataset---optional)
   - [Usage](#usage)
-  - [Results - Optional](#results---optional)
   - [Contributing](#contributing)
   - [Collaborators](#collaborators)
   - [License](#license)
@@ -119,10 +118,6 @@ In order to run the project, run the following command:
 ```bash
 make run
 ```
-
-## Results - Optional
-
-Discuss the results obtained in the project.
 
 ## Contributing
 
