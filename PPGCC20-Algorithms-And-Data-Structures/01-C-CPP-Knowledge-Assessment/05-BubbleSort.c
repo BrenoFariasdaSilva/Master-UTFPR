@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void bubbleSort(int vetor[], int n) {
+void bubbleSort(int vetor[], const int n) {
    int temp = 0;
    for (int i = 0; i < n - 1; i++) {
       for (int j = 0; j < n - i - 1; j++) {
@@ -17,7 +17,7 @@ void bubbleSort(int vetor[], int n) {
    }
 }
 
-void printArray(int vetor[], int n) {
+void printArray(const int vetor[], const int n) {
    for (int i = 0; i < n; i++) {
       printf("%d ", vetor[i]);
    }

@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int* matrizTransposta(int matriz[3][3]) {
+int* matrizTransposta(const int matriz[3][3]) {
    // Alocar dinamicamente memória para a matriz transposta (3x3)
    int* transposta = (int*) malloc(9 * sizeof(int)); // 3x3 = 9 elementos
 
@@ -22,7 +22,7 @@ int* matrizTransposta(int matriz[3][3]) {
    return transposta;
 }
 
-void imprimirMatriz(int* matriz) {
+void imprimirMatriz(const int* matriz) {
    for (int i = 0; i < 3; i++) {
       for (int j = 0; j < 3; j++) {
          printf("%d ", matriz[i * 3 + j]);
