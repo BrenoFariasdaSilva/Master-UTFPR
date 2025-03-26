@@ -22,10 +22,10 @@ void lerArquivo(const char* file_name) {
       // Verifica se o caractere é alfabético
       if ((ch >= 'a' && ch <= 'z')) {
          if (!inWord) {
-               inWord = 1; // Estamos começando uma palavra
-               if (ch == 'a') {
-                  count++; // A palavra começa com 'a'
-               }
+            inWord = 1; // Estamos começando uma palavra
+            if (ch == 'a') {
+               count++; // A palavra começa com 'a'
+            }
          }
       } else {
          inWord = 0; // Caractere não alfabético, fim de uma palavra
