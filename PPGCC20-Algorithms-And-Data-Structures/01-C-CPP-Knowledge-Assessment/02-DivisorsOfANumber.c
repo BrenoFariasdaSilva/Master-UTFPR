@@ -4,6 +4,11 @@
 #include <stdlib.h>
 
 int* arrayDivisores(const int number, int* size) {
+   if (number == 0) {
+      *size = 0;
+      return NULL; // Não há divisores bem definidos para zero
+  }
+
    int count = 0;
 
    // Contar o número de divisores
@@ -31,7 +36,7 @@ int* arrayDivisores(const int number, int* size) {
 }
 
 int main() {
-   int number = 28, size;
+   int number = -28, size;
    int* divisors = arrayDivisores(number, &size);
 
    if (divisors != NULL) {
