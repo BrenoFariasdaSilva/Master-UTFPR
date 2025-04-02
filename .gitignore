@@ -37,6 +37,11 @@ desktop.ini
 *.dylib
 *.a
 *.lib
+*
+!*/
+!*.c
+!*.cpp
+!*.h
 
 # Ignore build directories
 /build/
