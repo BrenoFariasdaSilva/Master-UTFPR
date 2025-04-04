@@ -1,7 +1,7 @@
 /*
  * Descrição: Relacionado com a aula de revisão de vetores (arrays unidimensionais) e ponteiros.
  * Autor: Breno Farias da Silva.
- * Data: 02/04/2025.
+ * Data: 03/04/2025.
  */
 
 // Compile: gcc 02-vectorsAndPointers.c -o 02-vectorsAndPointers
