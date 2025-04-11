@@ -95,7 +95,6 @@ int main(void) {
 	int testNum = 1;
 	while (scanf("%u", &numPlayers), numPlayers > 0) { // Enquanto o input não for 0, então continua pegando a pontuação dos jogadores
 		for (unsigned int i = 0; i < numPlayers; i++) { // Para cada jogador:
-			
 			scanf("%s", name); // Lê o nome
 			for (int j = 0; j < 12; j++) { // Lê as 12 pontuações
 				scanf("%hu", &scores[j]); // Lê a pontuação atual
