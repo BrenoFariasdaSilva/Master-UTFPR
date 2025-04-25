@@ -21,7 +21,7 @@
  * Data: 11/04/2025
  */
 
-// Compile and Run: gcc 02.c -o 02 && ./02
+// Compile and Run: gcc 02.c -o 02 && time ./02
 
 #include <stdio.h> // Funções: printf, scanf
 #include <limits.h> // Constante: INT_MIN

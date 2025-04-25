@@ -19,7 +19,7 @@
  * Data: 11/04/2025
  */
 
-// Compile and Run: gcc 03.c -o 03 && ./03
+// Compile and Run: gcc 03.c -o 03 && time ./03
 
  #include <stdio.h>
  #include <stdlib.h>

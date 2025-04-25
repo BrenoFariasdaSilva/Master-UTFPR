@@ -24,7 +24,7 @@
  * Data: 11/04/2025
  */
 
-// Compile and Run: gcc 01.c -o 01 && ./01
+// Compile and Run: gcc 01.c -o 01 && time ./01
 
 #include <stdio.h> // Funções: printf, scanf
 
