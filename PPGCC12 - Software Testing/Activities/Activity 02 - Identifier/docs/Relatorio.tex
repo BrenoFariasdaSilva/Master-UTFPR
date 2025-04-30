@@ -1,0 +1,447 @@
+% Options for packages loaded elsewhere
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+  letterpaper,
+  DIV=11,
+  numbers=noendperiod]{scrartcl}
+\usepackage{xcolor}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+% Make \paragraph and \subparagraph free-standing
+\makeatletter
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}{
+    \@ifstar
+      \xxxParagraphStar
+      \xxxParagraphNoStar
+  }
+  \newcommand{\xxxParagraphStar}[1]{\oldparagraph*{#1}\mbox{}}
+  \newcommand{\xxxParagraphNoStar}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}{
+    \@ifstar
+      \xxxSubParagraphStar
+      \xxxSubParagraphNoStar
+  }
+  \newcommand{\xxxSubParagraphStar}[1]{\oldsubparagraph*{#1}\mbox{}}
+  \newcommand{\xxxSubParagraphNoStar}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+\makeatother
+
+
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+
+
+
+
+
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+
+
+ 
+
+
+\KOMAoption{captions}{tableheading}
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Table of contents}
+\else
+  \newcommand\contentsname{Table of contents}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{List of Figures}
+\else
+  \newcommand\listfigurename{List of Figures}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{List of Tables}
+\else
+  \newcommand\listtablename{List of Tables}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Figure}
+\else
+  \newcommand\figurename{Figure}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Table}
+\else
+  \newcommand\tablename{Table}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Listing}
+\newcommand*\listoflistings{\listof{codelisting}{List of Listings}}
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Relatório Trabalho Prático de Teste Baseado em Especificação},
+  pdfauthor={Breno Farias da Silva},
+  colorlinks=true,
+  linkcolor={blue},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={Blue},
+  pdfcreator={LaTeX via pandoc}}
+
+
+\title{Relatório Trabalho Prático de Teste Baseado em Especificação}
+\usepackage{etoolbox}
+\makeatletter
+\providecommand{\subtitle}[1]{% add subtitle to \maketitle
+  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
+}
+\makeatother
+\subtitle{Validação de identificadores no Silly Pascal}
+\author{Breno Farias da Silva}
+\date{}
+\begin{document}
+\maketitle
+
+\renewcommand*\contentsname{Sumário}
+{
+\hypersetup{linkcolor=}
+\setcounter{tocdepth}{3}
+\tableofcontents
+}
+
+\subsection{Introdução}\label{introduuxe7uxe3o}
+
+Este documento descreve o processo utilizado para a elaboração de testes
+baseados em especificação, aplicados ao método
+\texttt{validateIdentifier(String\ s)}, responsável por validar
+identificadores na linguagem \emph{Silly Pascal}. O objetivo é
+identificar partições de equivalência, valores-limite e derivar casos de
+teste de forma sistemática com base nas regras de negócio fornecidas.
+
+\subsection{Passos para execução do teste efetivo e
+sistemático}\label{passos-para-execuuxe7uxe3o-do-teste-efetivo-e-sistemuxe1tico}
+
+\subsubsection{Passo 1 - Explorar o funcionamento do
+programa}\label{passo-1---explorar-o-funcionamento-do-programa}
+
+O método \texttt{validateIdentifier(String\ s)} deve verificar se uma
+string representa um identificador válido em Silly Pascal, obedecendo às
+seguintes regras:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Conter entre 1 e 6 caracteres;
+\item
+  Iniciar obrigatoriamente com uma letra (maiúscula ou minúscula);
+\item
+  Conter apenas letras e dígitos (não são permitidos espaços, símbolos
+  ou outros caracteres especiais);
+\end{enumerate}
+
+Com base nessas regras, é possível identificar entradas válidas e
+inválidas a partir da análise do comportamento esperado, sem depender da
+lógica interna do método.
+
+\subsubsection{Passo 2 - Identificar as
+partições}\label{passo-2---identificar-as-partiuxe7uxf5es}
+
+\paragraph{Regras de entrada}\label{regras-de-entrada}
+
+\begin{itemize}
+\tightlist
+\item
+  Comprimento da string:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    comprimento \textless{} 1 (inválido)
+  \item
+    comprimento entre 1 e 6 (válido)
+  \item
+    comprimento \textgreater{} 6 (inválido)
+  \end{itemize}
+\item
+  Primeiro caractere:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    letra (válido)
+  \item
+    não letra (inválido)
+  \end{itemize}
+\item
+  Demais caracteres:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    todos são letras ou dígitos (válido)
+  \item
+    pelo menos um caractere inválido (inválido)
+  \end{itemize}
+\end{itemize}
+
+\paragraph{Combinando partições}\label{combinando-partiuxe7uxf5es}
+
+Com base nas regras, temos as seguintes partições significativas:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Vazio (\texttt{""}) -- inválido por comprimento
+\item
+  Uma letra (\texttt{"a"}) -- válido
+\item
+  Uma letra seguida de letras/dígitos válidos (\texttt{"abc123"}) --
+  válido
+\item
+  Começa com número (\texttt{"1abc"}) -- inválido
+\item
+  Caracteres especiais (\texttt{"a@c"}) -- inválido
+\item
+  Excede 6 caracteres (\texttt{"abcdefg"}) -- inválido
+\item
+  Letra seguida de espaços ou outros símbolos (\texttt{"a\ b"}) --
+  inválido
+\end{enumerate}
+
+\subsubsection{Passo 3 - Identificar os valores
+limite}\label{passo-3---identificar-os-valores-limite}
+
+\begin{itemize}
+\tightlist
+\item
+  Limite inferior: comprimento 1 (válido), comprimento 0 (inválido)
+\item
+  Limite superior: comprimento 6 (válido), comprimento 7 (inválido)
+\item
+  Limite para caracteres válidos: letra (válido), dígito (válido),
+  símbolo (inválido)
+\end{itemize}
+
+\subsubsection{Passo 4 - Derivar os casos de
+teste}\label{passo-4---derivar-os-casos-de-teste}
+
+Adicionalmente, foi considerado o caso de strings que possuem apenas
+espaços em branco. Apesar de não serem literalmente vazias (como
+\texttt{""}), elas ainda assim não satisfazem a regra de conter um
+identificador válido, e devem ser tratadas como inválidas.
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.1277}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.3191}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2128}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.3404}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Caso
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Entrada
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Esperado
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Justificativa
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+1 & ``\,'' & false & Comprimento 0 (inválido) \\
+2 & ``a'' & true & Letra única, válido \\
+3 & ``abc123'' & true & 6 caracteres válidos \\
+4 & ``abcdefg'' & false & Mais de 6 caracteres \\
+5 & ``1abc'' & false & Primeiro caractere não é letra \\
+6 & ``a b'' & false & Espaço é inválido \\
+7 & ``ab@1'' & false & Símbolo `@' inválido \\
+8 & ``abc12'' & true & Dentro do limite e todos válidos \\
+9 & ``ab1c!'' & false & Exclamação é inválida \\
+10 & ``AbC9'' & true & Letras e dígitos, caso misto \\
+11 & '' '' & false & String com espaços, mas sem caracteres válidos \\
+\end{longtable}
+
+\subsection{Análise dos resultados dos
+testes}\label{anuxe1lise-dos-resultados-dos-testes}
+
+Os testes foram executados utilizando o framework JUnit, por meio do
+comando \texttt{mvn\ test}. A execução resultou em 4 falhas e 1 erro,
+conforme indicado no relatório do Maven. Esses resultados evidenciam que
+a implementação atual do método \texttt{validateIdentifier} \textbf{não
+está em conformidade com as regras especificadas}. Abaixo, detalhamos os
+casos problemáticos:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{\texttt{testEmptyString}}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Entrada:} \texttt{""} (string vazia)\\
+  \item
+    \textbf{Esperado:} \texttt{false}\\
+  \item
+    \textbf{Obtido:} Erro de execução
+    (\texttt{StringIndexOutOfBoundsException})\\
+  \item
+    \textbf{Comentário:} O método não trata o caso de string vazia,
+    acessando diretamente o índice 0 sem verificação prévia.
+  \end{itemize}
+\item
+  \textbf{\texttt{testContainsSpace}}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Entrada:} \texttt{"abc\ 123"}\\
+  \item
+    \textbf{Esperado:} \texttt{false}\\
+  \item
+    \textbf{Obtido:} \texttt{true}\\
+  \item
+    \textbf{Comentário:} A função aceita espaços como válidos,
+    contrariando a especificação que proíbe qualquer caractere que não
+    seja letra ou dígito.
+  \end{itemize}
+\item
+  \textbf{\texttt{testValidIdentifierMaxLength}}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Entrada:} \texttt{"abcde"}\\
+  \item
+    \textbf{Esperado:} \texttt{true}\\
+  \item
+    \textbf{Obtido:} \texttt{false}\\
+  \item
+    \textbf{Comentário:} Um identificador com 5 letras, que deveria ser
+    aceito, foi incorretamente rejeitado.
+  \end{itemize}
+\item
+  \textbf{\texttt{testMixedCaseWithDigit}}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Entrada:} \texttt{"AbC9"}\\
+  \item
+    \textbf{Esperado:} \texttt{true}\\
+  \item
+    \textbf{Obtido:} \texttt{false}\\
+  \item
+    \textbf{Comentário:} A função não reconhece corretamente combinações
+    válidas de letras maiúsculas/minúsculas com dígitos.
+  \end{itemize}
+\item
+  \textbf{\texttt{testValidIdentifierShort}}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Entrada:} \texttt{"abc12"}\\
+  \item
+    \textbf{Esperado:} \texttt{true}\\
+  \item
+    \textbf{Obtido:} \texttt{false}\\
+  \item
+    \textbf{Comentário:} Um identificador curto e válido foi
+    erroneamente marcado como inválido.
+  \end{itemize}
+\end{itemize}
+
+\subsection{Considerações finais}\label{considerauxe7uxf5es-finais}
+
+A técnica de teste baseado em especificação permite a derivação de casos
+de teste coerentes e eficazes a partir das regras funcionais declaradas,
+sem a necessidade de conhecer a implementação do método. Essa abordagem
+auxilia na validação de comportamentos esperados e na verificação da
+conformidade com os requisitos da linguagem, contribuindo
+significativamente para a garantia da qualidade do software.
+
+Esse resultado indica que a função \texttt{validateIdentifier} possui
+problemas tanto de lógica quanto de robustez, já que retorna valores
+inesperados em alguns casos e lança exceção ao receber uma string vazia.
+
+
+
+
+\end{document}
