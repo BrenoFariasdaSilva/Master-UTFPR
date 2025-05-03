@@ -49,7 +49,6 @@ desktop.ini
 /dist/
 /CMakeFiles/
 /CMakeCache.txt
-Makefile
 CMakeLists.txt.user
 output/
 
