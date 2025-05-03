@@ -27,7 +27,7 @@ desktop.ini
 *.xlsx
 *.txt
 
-# Ignore compiled C/C++ files
+# Ignore compiled C/C++ files (with and without extensions)
 *.o
 *.obj
 *.exe
@@ -37,11 +37,8 @@ desktop.ini
 *.dylib
 *.a
 *.lib
-*
-!*/
-!*.c
-!*.cpp
-!*.h
+a.out      # Common default binary output on Unix-like systems
+core        # Ignore core dumps (optional)
 
 # Ignore build directories
 /build/
@@ -55,4 +52,4 @@ output/
 # Ignore macOS files
 Icon?
 Icon\r
-.DS_Store
+.DS_Store_
