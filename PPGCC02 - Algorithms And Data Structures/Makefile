@@ -1,10 +1,10 @@
 # Makefile para compilar e executar o programa de inserção de string em arquivo texto
 
-# Nome do executável
-TARGET = inserir_string
-
 # Arquivo fonte
 SRC = 01.c
+
+# Nome do executável (sem extensão)
+TARGET = $(basename $(SRC))
 
 # Compilador
 CC = gcc
