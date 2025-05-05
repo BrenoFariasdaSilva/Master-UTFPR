@@ -125,7 +125,6 @@ int main() {
 	// Ordena o vetor
 	sortVector(size, vector);
 
-
 	// Calcula e exibe a mediana
 	const int median = getMedian(size, vector);
 	printf("Mediana do vetor: %d\n", median);

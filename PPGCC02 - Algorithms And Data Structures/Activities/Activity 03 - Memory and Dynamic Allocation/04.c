@@ -72,4 +72,12 @@ int main() {
 	}
 
 	printf("\nv2: ");
-	for
+	for(int i = 0; i < 5; i++) {
+		printf("%d ", v2[i]);
+	}
+
+	free(v1); // Libera a memória alocada para v1
+	free(v2); // Libera a memória alocada para v2
+
+	return 0;
+}

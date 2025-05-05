@@ -62,9 +62,7 @@ void imprimirProduto(const Produto* produto) {
 
 /**
 * Função principal do programa.
-*
 * Demonstra a criação e impressão de um produto.
-*
 * @return Código de status da execução (0: sucesso).
 */
 int main() {
