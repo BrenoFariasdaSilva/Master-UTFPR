@@ -1,28 +1,28 @@
-# Makefile para compilar e executar o programa de inserção de string em arquivo texto
+# Makefile to compile and run the SRC program
 
-# Arquivo fonte
+# Source file
 SRC = 01.c
 
-# Nome do executável (sem extensão)
+# Name of the executable (without extension)
 TARGET = $(basename $(SRC))
 
-# Compilador
+# Compiler
 CC = gcc
 
-# Flags de compilação (opcional, pode incluir -Wall para warnings)
+# Compilation flags (optional, can include -Wall for warnings)
 CFLAGS = -Wall -O2
 
-# Regra padrão
+# Default rule
 all: $(TARGET)
 
-# Regra para gerar o executável
+# Rule to generate the executable
 $(TARGET): $(SRC)
 	$(CC) $(CFLAGS) $(SRC) -o $(TARGET)
 
-# Regra para rodar o programa
+# Rule to run the program
 run: $(TARGET)
 	./$(TARGET)
 
-# Limpeza dos arquivos gerados
+# Clean up generated files
 clean:
 	rm -f $(TARGET)
