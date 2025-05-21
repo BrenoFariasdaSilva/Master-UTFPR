@@ -54,7 +54,7 @@ StaticStack create_stack() {
  * return: status of the operation (1: success, -1: error).
 */
 int push(StaticStack* stack, const ElementType add_element) {
-	if (!stack) {
+	if (!is_valid(stack)) {
 		return -1;
 	}
 
@@ -75,7 +75,7 @@ int push(StaticStack* stack, const ElementType add_element) {
  * return: status of the operation (1: success, -1: error).
 */
 int pop(StaticStack* stack, ElementType* pop_element) {
-	if (!stack || !pop_element) {
+	if (!is_valid(stack) || !pop_element) {
 		return -1;
 	}
 
@@ -95,7 +95,7 @@ int pop(StaticStack* stack, ElementType* pop_element) {
  * return: 1 if empty, 0 if not empty, -1 if error (null pointer).
 */
 int is_empty(StaticStack* stack) {
-	if (!stack) {
+	if (!is_valid(stack)) {
 		return -1;
 	}
 
@@ -108,7 +108,7 @@ int is_empty(StaticStack* stack) {
  * return: 1 if full, 0 if not full, -1 if error (null pointer).
 */
 int is_full(StaticStack* stack) {
-	if (!stack) {
+	if (!is_valid(stack)) {
 		return -1;
 	}
 
@@ -122,7 +122,7 @@ int is_full(StaticStack* stack) {
  * return: status of the operation (1: success, -1: error).
 */
 int peek(const StaticStack* stack, ElementType* top_element) {
-	if (!stack || !top_element) {
+	if (!is_valid(stack) || !top_element) {
 		return -1;
 	}
 
@@ -142,7 +142,7 @@ int peek(const StaticStack* stack, ElementType* top_element) {
  * return: status of the operation (1: success, -1: error).
 */
 int clear(StaticStack* stack) {
-	if (!stack) {
+	if (!is_valid(stack)) {
 		return -1;
 	}
 
@@ -158,13 +158,13 @@ int clear(StaticStack* stack) {
  * return: index from the top (0 = top element), or -1 if not found or error.
  */
 int search(const StaticStack* stack, ElementType element) {
-	if (!stack) {
+	if (!is_valid(stack)) {
 		return -1;
 	}
 
 	for (int i = stack->quantity - 1; i >= 0; i--) {
 		if (stack->vector[i] == element) {
-			return stack->quantity - 1 - i;  // index from top
+			return stack->quantity - 1 - i; // index from top
 		}
 	}
 
@@ -178,7 +178,7 @@ int search(const StaticStack* stack, ElementType element) {
  * return: status of the operation (1: success, -1: error).
 */
 int clone(const StaticStack* stack, StaticStack* clone) {
-	if (!stack || !clone) {
+	if (!is_valid(stack) || !clone) {
 		return -1;
 	}
 
@@ -198,7 +198,7 @@ int clone(const StaticStack* stack, StaticStack* clone) {
  * return: status of the operation (1: success, -1: error).
 */
 int invert(StaticStack* stack) {
-	if (!stack) {
+	if (!is_valid(stack)) {
 		return -1;
 	}
 
@@ -223,7 +223,7 @@ int invert(StaticStack* stack) {
  * return: 1 if equal, 0 if different, -1 if error.
 */
 int is_equal(const StaticStack* stack1, const StaticStack* stack2) {
-	if (!stack1 || !stack2) {
+	if (!is_valid(stack1) || !is_valid(stack2)) {
 		return -1;
 	}
 
@@ -248,7 +248,7 @@ int is_equal(const StaticStack* stack1, const StaticStack* stack2) {
  * return: status of the operation (1: success, -1: error).
 */
 int insert_vector(StaticStack* stack, const ElementType* vector, int size) {
-	if (!stack || !vector || size < 0) {
+	if (!is_valid(stack) || !vector || size < 0) {
 		return -1;
 	}
 
@@ -291,7 +291,7 @@ bool is_valid(StaticStack* stack) {
  * return: status of the operation (1: success, -1: error).
 */
 int print_stack_attributes(const StaticStack* stack) {
-	if (!stack) {
+	if (!is_valid(stack)) {
 		return -1;
 	}
 
@@ -308,7 +308,7 @@ int print_stack_attributes(const StaticStack* stack) {
  * return: status of the operation (1: success, -1: error).
 */
 int print_stack(const StaticStack* stack) {
-	if (!stack) {
+	if (!is_valid(stack)) {
 		return -1;
 	}
 
