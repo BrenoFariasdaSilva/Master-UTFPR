@@ -28,6 +28,12 @@ int is_empty(const StaticQueue* queue);
 int is_full(const StaticQueue* queue);
 int peek(const StaticQueue* queue, ElementType* front_element);
 int clear(StaticQueue* queue);
+int search(const StaticQueue* queue, ElementType element);
+int clone(const StaticQueue* queue, StaticQueue* clone);
+int invert(StaticQueue* queue);
+int is_equal(const StaticQueue* queue1, const StaticQueue* queue2);
+int insert_vector(StaticQueue* queue, const ElementType* vector, int size);
+int is_valid(const StaticQueue* queue);
 int print_queue_attributes(const StaticQueue* queue);
 int print_queue(const StaticQueue* queue);
 
@@ -51,7 +57,7 @@ StaticQueue create_queue() {
  * return: status of the operation (1: success, -1: error).
 */
 int enqueue(StaticQueue* queue, const ElementType add_element) {
-	if (!queue) {
+	if (!is_valid(queue)) {
 		return -1;
 	}
 
@@ -74,7 +80,7 @@ int enqueue(StaticQueue* queue, const ElementType add_element) {
  * return: status of the operation (1: success, -1: error).
 */
 int dequeue(StaticQueue* queue, ElementType* removed_element) {
-	if (!queue || !removed_element) {
+	if (!is_valid(queue) || !removed_element) {
 		return -1;
 	}
 
@@ -96,7 +102,7 @@ int dequeue(StaticQueue* queue, ElementType* removed_element) {
  * return: 1 if empty, 0 if not empty, -1 if error (null pointer).
 */
 int is_empty(const StaticQueue* queue) {
-	if (!queue) {
+	if (!is_valid(queue)) {
 		return -1;
 	}
 
@@ -109,7 +115,7 @@ int is_empty(const StaticQueue* queue) {
  * return: 1 if full, 0 if not full, -1 if error (null pointer).
 */
 int is_full(const StaticQueue* queue) {
-	if (!queue) {
+	if (!is_valid(queue)) {
 		return -1;
 	}
 
@@ -123,7 +129,7 @@ int is_full(const StaticQueue* queue) {
  * return: status of the operation (1: success, -1: error).
 */
 int peek(const StaticQueue* queue, ElementType* front_element) {
-	if (!queue || !front_element) {
+	if (!is_valid(queue) || !front_element) {
 		return -1;
 	}
 
@@ -143,7 +149,7 @@ int peek(const StaticQueue* queue, ElementType* front_element) {
  * return: status of the operation (1: success, -1: error).
 */
 int clear(StaticQueue* queue) {
-	if (!queue) {
+	if (!is_valid(queue)) {
 		return -1;
 	}
 
@@ -155,12 +161,147 @@ int clear(StaticQueue* queue) {
 }
 
 /*
+ * Function to search for an element in the queue.
+ * queue: pointer to the StaticQueue instance.
+ * element: the element to search for.
+ * return: index relative to the front (0-based), -1 if not found or error.
+*/
+int search(const StaticQueue* queue, ElementType element) {
+	if (!is_valid(queue) || queue->quantity == 0) {
+		return -1;
+	}
+
+	int idx = queue->front;
+	for (int i = 0; i < queue->quantity; i++) {
+		if (queue->vector[idx] == element) {
+			return i;
+		}
+		idx = (idx + 1) % queue->size;
+	}
+
+	return -1;
+}
+
+/*
+ * Function to clone a queue into another.
+ * queue: pointer to the original StaticQueue instance.
+ * clone: pointer to the StaticQueue instance that will receive the copy.
+ * return: status of the operation (1: success, -1: error).
+*/
+int clone(const StaticQueue* queue, StaticQueue* clone) {
+	if (!is_valid(queue) || !clone) {
+		return -1;
+	}
+
+	clone->size = queue->size;
+	clone->front = queue->front;
+	clone->rear = queue->rear;
+	clone->quantity = queue->quantity;
+
+	for (int i = 0; i < queue->size; i++) {
+		clone->vector[i] = queue->vector[i];
+	}
+
+	return 1;
+}
+
+/*
+ * Function to invert the queue.
+ * queue: pointer to the StaticQueue instance.
+ * return: status of the operation (1: success, -1: error).
+*/
+int invert(StaticQueue* queue) {
+	if (!is_valid(queue) || queue->quantity <= 1) {
+		return -1;
+	}
+
+	for (int i = 0; i < queue->quantity / 2; i++) {
+		int from_idx = (queue->front + i) % queue->size;
+		int to_idx = (queue->front + queue->quantity - 1 - i) % queue->size;
+		ElementType temp = queue->vector[from_idx];
+		queue->vector[from_idx] = queue->vector[to_idx];
+		queue->vector[to_idx] = temp;
+	}
+
+	return 1;
+}
+
+/*
+ * Function to compare two queues for equality.
+ * queue1: pointer to the first StaticQueue instance.
+ * queue2: pointer to the second StaticQueue instance.
+ * return: 1 if equal, 0 if different, -1 if error.
+*/
+int is_equal(const StaticQueue* queue1, const StaticQueue* queue2) {
+	if (!is_valid(queue1) || !is_valid(queue2)) {
+		return -1;
+	}
+
+	if (queue1->quantity != queue2->quantity || queue1->size != queue2->size) {
+		return 0;
+	}
+
+	for (int i = 0; i < queue1->quantity; i++) {
+		int idx1 = (queue1->front + i) % queue1->size;
+		int idx2 = (queue2->front + i) % queue2->size;
+
+		if (queue1->vector[idx1] != queue2->vector[idx2]) {
+			return 0;
+		}
+	}
+
+	return 1;
+}
+
+/*
+ * Function to insert multiple elements from a vector into the queue.
+ * queue: pointer to the StaticQueue instance.
+ * vector: array of elements to insert.
+ * size: number of elements in the vector.
+ * return: number of elements successfully inserted, -1 if error.
+*/
+int insert_vector(StaticQueue* queue, const ElementType* vector, int size) {
+	if (!is_valid(queue) || !vector || size < 0) {
+		return -1;
+	}
+
+	int inserted = 0;
+	for (int i = 0; i < size; i++) {
+		if (enqueue(queue, vector[i]) == 1) {
+			inserted++;
+		} else {
+			break;
+		}
+	}
+
+	return inserted;
+}
+
+/*
+ * Function to validate the internal state of the queue.
+ * queue: pointer to the StaticQueue instance.
+ * return: 1 if valid, 0 if inconsistent, -1 if null pointer.
+*/
+int is_valid(const StaticQueue* queue) {
+	if (!queue) {
+		return -1;
+	}
+
+	if (queue->size != MAX_SIZE) return 0;
+	if (queue->quantity < 0 || queue->quantity > queue->size) return 0;
+	if (queue->front < 0 || queue->front >= queue->size) return 0;
+	if (queue->rear < 0 || queue->rear >= queue->size) return 0;
+
+	return 1;
+}
+
+/*
  * Function to print queue attributes.
  * queue: pointer to the StaticQueue instance.
  * return: status of the operation (1: success, -1: error).
 */
 int print_queue_attributes(const StaticQueue* queue) {
-	if (!queue) {
+	if (!is_valid(queue)) {
 		return -1;
 	}
 
@@ -177,7 +318,7 @@ int print_queue_attributes(const StaticQueue* queue) {
  * return: status of the operation (1: success, -1: error).
 */
 int print_queue(const StaticQueue* queue) {
-	if (!queue) {
+	if (!is_valid(queue)) {
 		return -1;
 	}
 
@@ -195,7 +336,7 @@ int print_queue(const StaticQueue* queue) {
  * Main function of the program.
  * argc: number of arguments passed when calling the program.
  * argv: array containing the arguments passed to the program.
- * return: program exit status (0: no errors, otherwise, error code).
+ * return: program exit status (0: success, otherwise, error code).
 */
 int main(int argc, char *argv[]) {
 	printf("Welcome to the Static Implementation of a Queue Data Structure!\n\n");
@@ -224,9 +365,51 @@ int main(int argc, char *argv[]) {
 		printf("Failed to peek front element.\n\n");
 	}
 
+	// Test clone
+	StaticQueue cloned_queue = create_queue();
+	if (clone(&queue, &cloned_queue) == 1) {
+		printf("Queue cloned successfully:\n");
+		print_queue_attributes(&cloned_queue);
+	} else {
+		printf("Failed to clone queue.\n");
+	}
+
+	// Test invert
+	if (invert(&queue) == 1) {
+		printf("Queue after inversion:\n");
+		print_queue(&queue);
+	} else {
+		printf("Failed to invert queue.\n");
+	}
+
+	// Test search
+	int position = search(&queue, 20);
+	if (position >= 0) {
+		printf("Element 20 found at relative position: %d\n", position);
+	} else {
+		printf("Element 20 not found in queue.\n");
+	}
+
+	// Test is_equal
+	printf("Are queues equal? %s\n\n", is_equal(&queue, &cloned_queue) == 1 ? "Yes" : "No");
+
+	// Test insert_vector
+	ElementType arr[] = {40, 50, 60};
+	if (insert_vector(&queue, arr, 3) == 1) {
+		printf("Elements inserted from array:\n");
+		print_queue(&queue);
+	} else {
+		printf("Failed to insert elements from array.\n");
+	}
+
+	// Test is_valid
+	printf("Is queue valid? %s\n", is_valid(&queue) == 1 ? "Yes" : "No");
+
 	printf("Clearing the queue...\n");
 	if (clear(&queue) == 1) {
 		printf("Queue cleared successfully.\n\n");
+	} else {
+		printf("Failed to clear queue.\n\n");
 	}
 
 	print_queue_attributes(&queue);
