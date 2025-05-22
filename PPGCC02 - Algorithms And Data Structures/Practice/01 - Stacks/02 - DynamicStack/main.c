@@ -38,7 +38,7 @@ int insert_vector(DynamicStack* stack, const ElementType* vector, int size);
 bool is_valid(const DynamicStack* stack);
 int print_stack_attributes(const DynamicStack* stack);
 int print_stack(const DynamicStack* stack);
-void free_stack(DynamicStack* stack);
+void free_stack(DynamicStack **stack);
 
 /*
  * Function to create a new DynamicStack instance using dynamic memory.
@@ -47,11 +47,16 @@ void free_stack(DynamicStack* stack);
 DynamicStack* create_stack() {
 	DynamicStack* stack = (DynamicStack*) malloc(sizeof(DynamicStack));
 
-	if (!is_valid(stack)) {
+	if (!stack) {
 		return NULL;
 	}
 
 	initialize_stack(stack);
+
+	if (!is_valid(stack)) {
+		free(stack);
+		return NULL;
+	}
 
 	return stack;
 }
@@ -62,7 +67,7 @@ DynamicStack* create_stack() {
  * return: status of the operation (1: success, -1: error).
  */
 int initialize_stack(DynamicStack* stack) {
-	if (!is_valid(stack)) {
+	if (!stack) {
 		return -1;
 	}
 
@@ -103,12 +108,8 @@ int push(DynamicStack *stack, const ElementType add_element) {
  * return: status of the operation (1: success, -1: error).
  */
 int pop(DynamicStack *stack, ElementType* pop_element) {
-	if (!is_valid(stack) || !pop_element) {
+	if (!is_valid(stack) || !pop_element || is_empty(stack)) {
 		return -1; // Invalid input
-	}
-
-	if (!is_empty(stack)) {
-		return -1; // Stack underflow
 	}
 
 	Node* pop_node = stack->head;
@@ -129,7 +130,7 @@ int pop(DynamicStack *stack, ElementType* pop_element) {
  * return: status of the operation (1: success, -1: error).
  */
 int peek(const DynamicStack *stack, ElementType* top_element) {
-	if (!is_valid(stack) || !top_element || !is_empty(stack)) {
+	if (!is_valid(stack) || !top_element || is_empty(stack)) {
 		return -1;
 	}
 
@@ -183,12 +184,8 @@ int search(const DynamicStack* stack, ElementType element) {
  * return: 1 on success, -1 on error.
  */
 int clone(const DynamicStack* stack, DynamicStack* clone) {
-	if (!is_valid(stack) || !is_valid(clone)) {
+	if (!is_valid(stack) || !is_valid(clone) || is_empty(clone)) {
 		return -1;
-	}
-
-	if (!is_empty(stack)) {
-		return 1; // empty stack cloned as empty
 	}
 
 	// Use an array to store elements temporarily for correct order cloning
@@ -226,7 +223,7 @@ int invert(DynamicStack* stack) {
 		return -1;
 	}
 
-	if (!is_empty(stack) || stack->size < 2) {
+	if (is_empty(stack) || stack->size < 2) {
 		return 1; // Nothing to invert
 	}
 
@@ -362,20 +359,20 @@ int print_stack_attributes(const DynamicStack* stack) {
  * stack: pointer to the DynamicStack instance.
  * return: void.
  */
-void free_stack(DynamicStack* stack) {
-	if (!is_valid(stack)) {
+void free_stack(DynamicStack **stack) {
+	if (!stack || !(*stack)) {
 		return;
 	}
 
-	Node* current = stack->head;
+	Node *current = (*stack)->head;
 	while (current) {
-		Node* temp = current;
+		Node *temp = current;
 		current = current->below;
 		free(temp);
 	}
 
-	free(stack); // Free the stack structure itself
-	stack = NULL; // Avoid dangling pointer
+	free(*stack);	// Free the stack structure itself
+	*stack = NULL; // Set the original pointer to NULL to avoid dangling pointer
 }
 
 /*
@@ -454,8 +451,8 @@ int main(int argc, char *argv[]) {
 	}
 
 	// Free both stacks
-	free_stack(stack);
-	free_stack(clone_stack);
+	free_stack(&stack);
+	free_stack(&clone_stack);
 
 	return 0;
 }
