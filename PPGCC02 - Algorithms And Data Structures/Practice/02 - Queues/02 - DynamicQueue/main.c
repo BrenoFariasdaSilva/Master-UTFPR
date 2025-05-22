@@ -7,7 +7,7 @@
 // Compile: gcc main.c -o main
 // Run: ./main
 
-#include <stdio.h>  // printf, scanf
+#include <stdio.h> // printf, scanf
 #include <stdlib.h> // malloc, free
 #include <stdbool.h> // 'bool', 'true', and 'false' keywords
 
@@ -20,8 +20,8 @@ typedef struct node {
 
 typedef struct {
 	Node *front; // Pointer to the front node of the queue.
-	Node *rear;  // Pointer to the rear node of the queue.
-	int size;    // Size of the queue.
+	Node *rear; // Pointer to the rear node of the queue.
+	int size; // Size of the queue.
 } DynamicQueue;
 
 // Function declarations
@@ -39,7 +39,7 @@ bool is_valid(const DynamicQueue* queue);
 bool is_empty(const DynamicQueue *queue);
 int print_queue(const DynamicQueue* queue);
 int print_queue_attributes(const DynamicQueue* queue);
-void free_queue(DynamicQueue* queue);
+void free_queue(DynamicQueue** queue);
 
 /*
  * Function to create a new DynamicQueue instance using dynamic memory.
@@ -175,7 +175,7 @@ int clone_queue(const DynamicQueue* source, DynamicQueue* destination) {
 	Node* current = source->front;
 	while (current) {
 		if (enqueue(destination, current->data) == -1) {
-			free_queue(destination);
+			free_queue(&destination);
 			return -1;
 		}
 		current = current->next;
@@ -383,20 +383,18 @@ int print_queue_attributes(const DynamicQueue* queue) {
  * queue: pointer to the DynamicQueue instance.
  * return: void.
  */
-void free_queue(DynamicQueue* queue) {
-	if (!queue) {
-		return;
-	}
+void free_queue(DynamicQueue** queue) {
+	if (!queue || !*queue) return;
 
-	Node* current = queue->front;
+	Node* current = (*queue)->front;
 	while (current) {
 		Node* temp = current;
 		current = current->next;
 		free(temp);
 	}
 
-	free(queue);
-	queue = NULL;
+	free(*queue);
+	*queue = NULL;
 }
 
 /*
@@ -527,8 +525,8 @@ int main(int argc, char *argv[]) {
 
 	// Free both queues
 	printf("Freeing the original and cloned queues...\n");
-	free_queue(queue);
-	free_queue(cloned_queue);
+	free_queue(&queue);
+	free_queue(&cloned_queue);
 
 	return 0;
 }
