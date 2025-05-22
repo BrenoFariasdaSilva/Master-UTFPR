@@ -1,7 +1,7 @@
 # Makefile to compile and run the SRC program
 
 # Source file
-SRC = 01.c
+SRC = main.c
 
 # Name of the executable (without extension)
 TARGET = $(basename $(SRC))
