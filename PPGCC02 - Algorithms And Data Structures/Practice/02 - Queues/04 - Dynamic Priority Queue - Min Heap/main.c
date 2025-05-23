@@ -10,6 +10,7 @@
 #include <stdio.h> // printf, scanf
 #include <stdlib.h> // malloc, realloc, free
 #include <stdbool.h> // bool type
+#include <limits.h> // INT_MIN
 #include <math.h> // log function
 
 /*
@@ -32,6 +33,7 @@ void heapifyUp(Heap *heap, int index);
 void heapifyDown(Heap *heap, const int index);
 void insert(Heap *heap, const int value);
 void insertVector(Heap *heap, const int *values, const int count);
+int peekTop(const Heap *heap);
 int extractRoot(Heap *heap);
 void freeHeap(Heap *heap);
 void invertHeap(Heap *heap);
@@ -170,6 +172,16 @@ void insertVector(Heap *heap, const int *values, const int count) {
 	}
 }
 
+/*
+ * Returns the root of the heap without removing it.
+ * Returns INT_MIN if the heap is NULL or empty.
+ */
+int peekTop(const Heap *heap) {
+	if (heap == NULL || heap->size == 0) {
+		return INT_MIN; // Heap is empty
+	}
+	return heap->data[0];
+}
 
 /*
  * Function to remove and return the root of the heap.
