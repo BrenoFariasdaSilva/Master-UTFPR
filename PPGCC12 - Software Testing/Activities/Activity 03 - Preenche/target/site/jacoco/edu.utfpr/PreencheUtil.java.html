@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PreencheUtil.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">adicaonumerosgrandes</a> &gt; <a href="index.source.html" class="el_package">edu.utfpr</a> &gt; <span class="el_source">PreencheUtil.java</span></div><h1>PreencheUtil.java</h1><pre class="source lang-java linenums">package edu.utfpr;
+
+/*
+ * ESPECIFICAÇÃO:
+ * O método estático preenche() realiza o preenchimento à esquerda de uma string, utilizando outra string fornecida como preenchimento.
+ * 
+ * Assinatura:
+ * public static String preenche(final String str, final int size, String stringPreenche)
+ * 
+ * Parâmetros:
+ * - str: a string original a ser preenchida. Pode ser null.
+ * - size: o tamanho final desejado da string preenchida.
+ * - stringPreenche: a string usada como preenchimento. Se for null ou vazia, será substituída por um espaço (&quot; &quot;).
+ * 
+ * Regras de funcionamento:
+ * - Se str for null, o método retorna null.
+ * - Se o comprimento de str for maior ou igual ao valor de size, str é retornada sem modificações.
+ * - Caso contrário, o método preenche à esquerda a string str com repetições de stringPreenche até atingir o tamanho size.
+ * - O preenchimento é truncado caso ultrapasse o tamanho necessário.
+ * 
+ * Exemplo de uso:
+ * preenche(&quot;abc&quot;, 5, &quot;-&quot;) retorna &quot;--abc&quot;
+ * preenche(&quot;abc&quot;, 6, &quot;*&quot;) retorna &quot;***abc&quot;
+ * preenche(&quot;abc&quot;, 3, &quot;-&quot;) retorna &quot;abc&quot;
+ * preenche(null, 4, &quot;-&quot;) retorna null
+ * preenche(&quot;abc&quot;, 5, null) retorna &quot;  abc&quot;
+ */
+
+<span class="nc" id="L29">public class PreencheUtil {</span>
+
+    public static String preenche(final String str, final int size, String stringPreenche) {
+<span class="fc bfc" id="L32" title="All 2 branches covered.">        if (str == null) {</span>
+<span class="fc" id="L33">            return null;</span>
+        }
+
+<span class="fc bfc" id="L36" title="All 4 branches covered.">        if (stringPreenche == null || stringPreenche.isEmpty()) {</span>
+<span class="fc" id="L37">            stringPreenche = &quot; &quot;;</span>
+        }
+
+<span class="fc" id="L40">        int fillLength = size - str.length();</span>
+<span class="fc bfc" id="L41" title="All 2 branches covered.">        if (fillLength &lt;= 0) {</span>
+<span class="fc" id="L42">            return str;</span>
+        }
+
+<span class="fc" id="L45">        StringBuilder filler = new StringBuilder();</span>
+<span class="fc bfc" id="L46" title="All 2 branches covered.">        while (filler.length() &lt; fillLength) {</span>
+<span class="fc" id="L47">            filler.append(stringPreenche);</span>
+        }
+
+<span class="fc" id="L50">        return filler.substring(0, fillLength) + str;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

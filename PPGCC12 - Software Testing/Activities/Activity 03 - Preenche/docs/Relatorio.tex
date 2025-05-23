@@ -1,0 +1,575 @@
+% Options for packages loaded elsewhere
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+  letterpaper,
+  DIV=11,
+  numbers=noendperiod]{scrartcl}
+\usepackage{xcolor}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+% Make \paragraph and \subparagraph free-standing
+\makeatletter
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}{
+    \@ifstar
+      \xxxParagraphStar
+      \xxxParagraphNoStar
+  }
+  \newcommand{\xxxParagraphStar}[1]{\oldparagraph*{#1}\mbox{}}
+  \newcommand{\xxxParagraphNoStar}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}{
+    \@ifstar
+      \xxxSubParagraphStar
+      \xxxSubParagraphNoStar
+  }
+  \newcommand{\xxxSubParagraphStar}[1]{\oldsubparagraph*{#1}\mbox{}}
+  \newcommand{\xxxSubParagraphNoStar}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+\makeatother
+
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\newenvironment{Shaded}{}{}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{#1}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\BuiltInTok}[1]{\textcolor[rgb]{0.00,0.50,0.00}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{#1}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{#1}}
+\newcommand{\ImportTok}[1]{\textcolor[rgb]{0.00,0.50,0.00}{\textbf{#1}}}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{#1}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+
+
+
+
+
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+
+
+ 
+
+
+\KOMAoption{captions}{tableheading}
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Table of contents}
+\else
+  \newcommand\contentsname{Table of contents}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{List of Figures}
+\else
+  \newcommand\listfigurename{List of Figures}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{List of Tables}
+\else
+  \newcommand\listtablename{List of Tables}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Figure}
+\else
+  \newcommand\figurename{Figure}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Table}
+\else
+  \newcommand\tablename{Table}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Listing}
+\newcommand*\listoflistings{\listof{codelisting}{List of Listings}}
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Relatório Trabalho Prático de Teste Baseado em Especificação},
+  pdfauthor={Breno Farias da Silva},
+  colorlinks=true,
+  linkcolor={blue},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={Blue},
+  pdfcreator={LaTeX via pandoc}}
+
+
+\title{Relatório Trabalho Prático de Teste Baseado em Especificação}
+\usepackage{etoolbox}
+\makeatletter
+\providecommand{\subtitle}[1]{% add subtitle to \maketitle
+  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
+}
+\makeatother
+\subtitle{Validação do método preenche(String str, int size, String
+stringPreenche)}
+\author{Breno Farias da Silva}
+\date{}
+\begin{document}
+\maketitle
+
+\renewcommand*\contentsname{Sumário}
+{
+\hypersetup{linkcolor=}
+\setcounter{tocdepth}{3}
+\tableofcontents
+}
+
+\subsection{Introdução}\label{introduuxe7uxe3o}
+
+Este relatório descreve o processo de teste da função \texttt{preenche},
+responsável por preencher uma string à esquerda até atingir um tamanho
+especificado, utilizando uma string de preenchimento fornecida. O método
+recebe três parâmetros: a string original (\texttt{str}), o tamanho
+desejado (\texttt{size}) e a string de preenchimento
+(\texttt{stringPreenche}). O relatório é dividido entre os testes
+baseados em especificação e os testes estruturais utilizando o critério
+MC/DC, além da análise de cobertura com a ferramenta Jacoco.
+
+\subsection{Teste baseado em
+especificação}\label{teste-baseado-em-especificauxe7uxe3o}
+
+\subsubsection{Análise da
+especificação}\label{anuxe1lise-da-especificauxe7uxe3o}
+
+A especificação define os seguintes comportamentos:
+
+\begin{itemize}
+\tightlist
+\item
+  Se \texttt{str} for \texttt{null}, o método retorna \texttt{null}.
+\item
+  Se \texttt{stringPreenche} for \texttt{null} ou vazia, deve ser
+  tratada como um espaço em branco.
+\item
+  Se o tamanho de \texttt{str} for maior ou igual a \texttt{size}, o
+  método retorna \texttt{str}.
+\item
+  Caso contrário, a string é preenchida à esquerda com
+  \texttt{stringPreenche} até atingir o tamanho \texttt{size}.
+\end{itemize}
+
+\subsubsection{Identificação de partições de
+equivalência}\label{identificauxe7uxe3o-de-partiuxe7uxf5es-de-equivaluxeancia}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{str}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{null} → retorna \texttt{null}
+  \item
+    não nula:
+
+    \begin{itemize}
+    \tightlist
+    \item
+      vazia: \texttt{""}
+    \item
+      1 caractere: \texttt{"x"}
+    \item
+      múltiplos caracteres: \texttt{"abc"}
+    \end{itemize}
+  \end{itemize}
+\item
+  \texttt{stringPreenche}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{null} ou \texttt{""} → tratado como \texttt{"\ "}
+  \item
+    não vazia:
+
+    \begin{itemize}
+    \tightlist
+    \item
+      1 caractere: \texttt{"*"}
+    \item
+      mais de 1 caractere: \texttt{"-="}
+    \end{itemize}
+  \end{itemize}
+\item
+  \texttt{size}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    menor que \texttt{str.length()} → retorna \texttt{str}
+  \item
+    igual a \texttt{str.length()} → retorna \texttt{str}
+  \item
+    maior que \texttt{str.length()}:
+
+    \begin{itemize}
+    \tightlist
+    \item
+      diferença de 1 caractere
+    \item
+      diferença de múltiplos caracteres (para avaliar padrão de
+      repetição)
+    \end{itemize}
+  \end{itemize}
+\end{itemize}
+
+\subsubsection{Casos de teste derivados}\label{casos-de-teste-derivados}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.0600}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1100}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.0800}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1800}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1600}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.4100}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Caso
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\texttt{str}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\texttt{size}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\texttt{stringPreenche}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Esperado
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Justificativa
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+1 & \texttt{null} & 5 & ``-'' & \texttt{null} & \texttt{str} é
+\texttt{null} \\
+2 & \texttt{""} & 3 & ``.'' & ``\ldots{}'' & \texttt{str} vazia,
+preenchida completamente \\
+3 & ``a'' & 3 & ``-'' & ``--a'' & preenchimento de 2 com 1 caractere \\
+4 & ``abc'' & 3 & ``*'' & ``abc'' & tamanho já suficiente \\
+5 & ``abc'' & 4 & ``*'' & ``*abc'' & precisa de 1 caractere \\
+6 & ``abc'' & 6 & ``-='' & ``-=-abc'' & padrão de preenchimento longo \\
+7 & ``abc'' & 5 & \texttt{""} & '' abc'' & stringPreenche vazia →
+espaço \\
+8 & ``abc'' & 5 & \texttt{null} & '' abc'' & stringPreenche null →
+espaço \\
+9 & ``abcdef'' & 4 & ``\#'' & ``abcdef'' & já tem tamanho maior que
+size \\
+10 & ``abc'' & 10 & ``123'' & ``1231231abc'' & múltiplos preenchimentos
++ truncamento \\
+11 & ``abc'' & 5 & '' '' & '' abc'' & espaço explícito como
+preenchimento \\
+\end{longtable}
+
+\subsection{Teste estrutural (MC/DC)}\label{teste-estrutural-mcdc}
+
+\subsubsection{Passo 1: Definir as condições atômicas do
+método}\label{passo-1-definir-as-condiuxe7uxf5es-atuxf4micas-do-muxe9todo}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{C1:} \texttt{str\ ==\ null} (true/false)\\
+\item
+  \textbf{C2:} \texttt{stringPreenche\ ==\ null} (true/false)\\
+\item
+  \textbf{C3:} \texttt{stringPreenche.isEmpty()} (true/false) --- só
+  avaliada se \texttt{C2\ =\ false}, mas para a tabela verdade,
+  considerada independente\\
+\item
+  \textbf{C4:} \texttt{fillLength\ \textless{}=\ 0} (true/false), onde
+  \texttt{fillLength\ =\ size\ -\ str.length()}
+\end{itemize}
+
+Como temos 4 condições binárias, o total será 2⁴ = 16 linhas na tabela
+verdade completa.
+
+\subsubsection{Passo 2: Tabela verdade
+completa}\label{passo-2-tabela-verdade-completa}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1111}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.0741}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.0741}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.0741}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.0741}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.3704}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.2222}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Caso
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+C1
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+C2
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+C3
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+C4
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Resultado esperado
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Observação
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+T1 & 1 & 0 & 0 & 0 & retorna null & str null \\
+T2 & 1 & 0 & 0 & 1 & retorna null & str null \\
+T3 & 1 & 0 & 1 & 0 & retorna null & str null \\
+T4 & 1 & 0 & 1 & 1 & retorna null & str null \\
+T5 & 1 & 1 & 0 & 0 & retorna null & str null \\
+T6 & 1 & 1 & 0 & 1 & retorna null & str null \\
+T7 & 1 & 1 & 1 & 0 & retorna null & str null \\
+T8 & 1 & 1 & 1 & 1 & retorna null & str null \\
+T9 & 0 & 0 & 0 & 0 & preenche com stringPreenche & Caso normal
+preenche \\
+T10 & 0 & 0 & 0 & 1 & retorna str & fillLength \textless= 0 \\
+T11 & 0 & 0 & 1 & 0 & preenche com espaço & stringPreenche.isEmpty() =
+true \\
+T12 & 0 & 0 & 1 & 1 & retorna str & fillLength \textless= 0 \\
+T13 & 0 & 1 & 0 & 0 & preenche com espaço & stringPreenche == null \\
+T14 & 0 & 1 & 0 & 1 & retorna str & fillLength \textless= 0 \\
+T15 & 0 & 1 & 1 & 0 & preenche com espaço & stringPreenche == null e
+isEmpty \\
+T16 & 0 & 1 & 1 & 1 & retorna str & fillLength \textless= 0 \\
+\end{longtable}
+
+\subsubsection{Passo 3: Explicação dos pares de independência para
+MC/DC}\label{passo-3-explicauxe7uxe3o-dos-pares-de-independuxeancia-para-mcdc}
+
+O critério MC/DC exige que cada condição atômica:
+
+\begin{itemize}
+\tightlist
+\item
+  Afete a decisão final
+\item
+  Seja demonstrada por pares de casos de teste onde apenas aquela
+  condição muda e as outras permanecem iguais
+\end{itemize}
+
+\subsubsection{Passo 4: Seleção de pares independentes para cada
+condição}\label{passo-4-seleuxe7uxe3o-de-pares-independentes-para-cada-condiuxe7uxe3o}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{C1:} Pares (T8, T16)
+\item
+  \textbf{C2:} Pares (T9, T13)
+\item
+  \textbf{C3:} Pares (T9, T11)
+\item
+  \textbf{C4:} Pares (T9, T10)
+\end{itemize}
+
+\subsubsection{Passo 5: Tabela final reduzida para
+MC/DC}\label{passo-5-tabela-final-reduzida-para-mcdc}
+
+\begin{longtable}[]{@{}llllll@{}}
+\toprule\noalign{}
+Caso & C1 & C2 & C3 & C4 & Resultado esperado \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+T8 & 1 & 1 & 1 & 1 & retorna null \\
+T16 & 0 & 1 & 1 & 1 & retorna str \\
+T9 & 0 & 0 & 0 & 0 & preenche com stringPreenche \\
+T13 & 0 & 1 & 0 & 0 & preenche com espaço \\
+T11 & 0 & 0 & 1 & 0 & preenche com espaço \\
+T10 & 0 & 0 & 0 & 1 & retorna str \\
+\end{longtable}
+
+\subsubsection{Passo 6: Testes JUnit para esses
+casos}\label{passo-6-testes-junit-para-esses-casos}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\AttributeTok{@Test}
+\DataTypeTok{void} \FunctionTok{testStrNull}\OperatorTok{()} \OperatorTok{\{}
+    \FunctionTok{assertNull}\OperatorTok{(}\FunctionTok{preenche}\OperatorTok{(}\KeywordTok{null}\OperatorTok{,} \DecValTok{5}\OperatorTok{,} \StringTok{"{-}"}\OperatorTok{));}
+\OperatorTok{\}}
+
+\AttributeTok{@Test}
+\DataTypeTok{void} \FunctionTok{testPreencheComStringPreenche}\OperatorTok{()} \OperatorTok{\{}
+    \FunctionTok{assertEquals}\OperatorTok{(}\StringTok{"***abc"}\OperatorTok{,} \FunctionTok{preenche}\OperatorTok{(}\StringTok{"abc"}\OperatorTok{,} \DecValTok{6}\OperatorTok{,} \StringTok{"*"}\OperatorTok{));}
+\OperatorTok{\}}
+
+\AttributeTok{@Test}
+\DataTypeTok{void} \FunctionTok{testPreencheComEspacoStringPreencheNull}\OperatorTok{()} \OperatorTok{\{}
+    \FunctionTok{assertEquals}\OperatorTok{(}\StringTok{"  abc"}\OperatorTok{,} \FunctionTok{preenche}\OperatorTok{(}\StringTok{"abc"}\OperatorTok{,} \DecValTok{5}\OperatorTok{,} \KeywordTok{null}\OperatorTok{));}
+\OperatorTok{\}}
+
+\AttributeTok{@Test}
+\DataTypeTok{void} \FunctionTok{testPreencheComEspacoStringPreencheEmpty}\OperatorTok{()} \OperatorTok{\{}
+    \FunctionTok{assertEquals}\OperatorTok{(}\StringTok{"  abc"}\OperatorTok{,} \FunctionTok{preenche}\OperatorTok{(}\StringTok{"abc"}\OperatorTok{,} \DecValTok{5}\OperatorTok{,} \StringTok{""}\OperatorTok{));}
+\OperatorTok{\}}
+
+\AttributeTok{@Test}
+\DataTypeTok{void} \FunctionTok{testRetornaStrFillLengthZero}\OperatorTok{()} \OperatorTok{\{}
+    \FunctionTok{assertEquals}\OperatorTok{(}\StringTok{"abcdef"}\OperatorTok{,} \FunctionTok{preenche}\OperatorTok{(}\StringTok{"abcdef"}\OperatorTok{,} \DecValTok{4}\OperatorTok{,} \StringTok{"\#"}\OperatorTok{));}
+\OperatorTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Análise de cobertura com
+Jacoco}\label{anuxe1lise-de-cobertura-com-jacoco}
+
+A cobertura de código foi medida utilizando a ferramenta Jacoco em dois
+momentos:
+
+\subsubsection{Sem os testes MC/DC}\label{sem-os-testes-mcdc}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Instruções cobertas:} 93\% (40 de 43 instruções)
+\item
+  \textbf{Branches cobertos:} 100\% (10 de 10 branches)
+\item
+  \textbf{Linhas cobertas:} 12 de 13 linhas
+\item
+  \textbf{Métodos cobertos:} 2 de 2 métodos
+\item
+  \textbf{Classes cobertas:} 1 de 1 classe
+\end{itemize}
+
+\subsubsection{Com os testes MC/DC}\label{com-os-testes-mcdc}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Instruções cobertas:} 93\% (40 de 43 instruções)
+\item
+  \textbf{Branches cobertos:} 100\% (10 de 10 branches)
+\item
+  \textbf{Linhas cobertas:} 12 de 13 linhas
+\item
+  \textbf{Métodos cobertos:} 2 de 2 métodos
+\item
+  \textbf{Classes cobertas:} 1 de 1 classe
+\end{itemize}
+
+\subsubsection{Conclusão}\label{conclusuxe3o}
+
+O critério MC/DC foi aplicado com sucesso, identificando as condições
+atômicas relevantes e garantindo que cada uma seja testada de forma
+independente. Os casos selecionados cobrem todas as combinações
+necessárias para garantir o correto funcionamento da função
+\texttt{preenche}. A ferramenta \textbf{Jacoco} pode ser usada para
+validar a cobertura dos testes.
+
+
+
+
+\end{document}
