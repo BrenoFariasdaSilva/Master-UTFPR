@@ -3,11 +3,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int* arrayDivisores(const int number, int* size) {
+int *arrayDivisores(const int number, int *size) {
    if (number == 0) {
       *size = 0;
       return NULL; // Não há divisores bem definidos para zero
-  }
+   }
 
    int count = 0;
 
@@ -18,7 +18,7 @@ int* arrayDivisores(const int number, int* size) {
    }
 
    // Alocar memória com base na quantidade de divisores
-   int* divisors = (int*) malloc(sizeof(int) * count);
+   int *divisors = (int *)malloc(sizeof(int) * count);
    if (divisors == NULL) {
       return NULL; // Verifica se a alocação falhou
    }
@@ -31,13 +31,13 @@ int* arrayDivisores(const int number, int* size) {
       }
    }
 
-   *size = count;  
+   *size = count;
    return divisors;
 }
 
 int main() {
    int number = -28, size;
-   int* divisors = arrayDivisores(number, &size);
+   int *divisors = arrayDivisores(number, &size);
 
    if (divisors != NULL) {
       printf("Divisores de %d: ", number);

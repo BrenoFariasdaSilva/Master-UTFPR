@@ -9,7 +9,7 @@
 
 // Compile and Run: gcc 04.c -o 04 && time ./04
 
-#include <stdio.h>  // Funções: printf
+#include <stdio.h> // Funções: printf
 #include <stdlib.h> // Funções: malloc, free
 
 /**
@@ -19,10 +19,10 @@
  * @param val Valor para preencher cada posição.
  * @return Ponteiro para o vetor criado.
  */
-int* vetor_novoA(int tam, int val) {
+int *vetor_novoA(int tam, int val) {
 	if (tam <= 0) return NULL;
 
-	int *vetor = (int*) malloc(tam * sizeof(int));
+	int *vetor = (int *)malloc(tam * sizeof(int));
 	if (vetor == NULL) return NULL;
 
 	for (int i = 0; i < tam; i++) {
@@ -45,7 +45,7 @@ void vetor_novoB(int tam, int val, int **endereco) {
 		return;
 	}
 
-	*endereco = (int*) malloc(tam * sizeof(int));
+	*endereco = (int *)malloc(tam * sizeof(int));
 	if (*endereco == NULL) return;
 
 	for (int i = 0; i < tam; i++) {
@@ -72,7 +72,7 @@ int main() {
 	}
 
 	printf("\nv2: ");
-	for(int i = 0; i < 5; i++) {
+	for (int i = 0; i < 5; i++) {
 		printf("%d ", v2[i]);
 	}
 

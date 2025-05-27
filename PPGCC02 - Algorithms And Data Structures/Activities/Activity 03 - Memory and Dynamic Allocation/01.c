@@ -24,7 +24,7 @@
  * @param N Número de elementos dos arrays.
  * @return Ponteiro para o novo array contendo os produtos, ou NULL em caso de erro.
  */
-int* produto(int *v1, int *v2, int N) {
+int *produto(int *v1, int *v2, int N) {
 	// Verificação de entrada inválida: ponteiros nulos ou tamanho inválido
 	if (v1 == NULL || v2 == NULL || N <= 0) {
 		return NULL;
@@ -33,7 +33,7 @@ int* produto(int *v1, int *v2, int N) {
 	// Alocação dinâmica para o array de resultado
 	int *resultado = (int *)malloc(N * sizeof(int));
 	if (resultado == NULL) {
-	// Retorna NULL em caso de falha na alocação de memória
+		// Retorna NULL em caso de falha na alocação de memória
 		return NULL;
 	}
 

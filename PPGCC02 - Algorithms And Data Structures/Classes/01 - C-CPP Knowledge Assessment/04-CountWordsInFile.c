@@ -3,8 +3,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void lerArquivo(const char* file_name) {
-   FILE* fptr = fopen(file_name, "r");
+void lerArquivo(const char *file_name) {
+   FILE *fptr = fopen(file_name, "r");
 
    if (fptr == NULL) {
       printf("Erro ao abrir o arquivo.\n");
@@ -27,7 +27,8 @@ void lerArquivo(const char* file_name) {
                count++; // A palavra começa com 'a'
             }
          }
-      } else {
+      }
+      else {
          inWord = 0; // Caractere não alfabético, fim de uma palavra
       }
    }

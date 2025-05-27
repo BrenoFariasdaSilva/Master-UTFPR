@@ -8,17 +8,17 @@
 #include <stdio.h> // Biblioteca necessária para usar printf
 
 /* Cabeçalhos das funções utilizadas no programa */
-int formatVector(int* vector, const int size);
-int printVector(const int* vector, const int size);
-void runTest(int* vector, const int size, const char* description);
+int formatVector(int *vector, const int size);
+int printVector(const int *vector, const int size);
+void runTest(int *vector, const int size, const char *description);
 
 /*
  * Função que reorganiza os elementos do vetor, colocando os pares à esquerda e os ímpares à direita.
  * vector: ponteiro para o vetor de inteiros a ser reorganizado.
  * size: tamanho do vetor.
  * retorno: 0 em caso de sucesso, -1 se o ponteiro for nulo ou o tamanho inválido.
-*/
-int formatVector(int* vector, const int size) {
+ */
+int formatVector(int *vector, const int size) {
    // Verifica se o ponteiro é nulo ou se o tamanho é inválido
    if (vector == NULL || size < 0) {
       return -1;
@@ -52,12 +52,12 @@ int formatVector(int* vector, const int size) {
 }
 
 /*
-* Função que imprime os elementos de um vetor na tela.
-* vector: ponteiro para o vetor de inteiros.
-* size: tamanho do vetor.
-* retorno: 0 em caso de sucesso, -1 em caso de erro.
-*/
-int printVector(const int* vector, const int size) {
+ * Função que imprime os elementos de um vetor na tela.
+ * vector: ponteiro para o vetor de inteiros.
+ * size: tamanho do vetor.
+ * retorno: 0 em caso de sucesso, -1 em caso de erro.
+ */
+int printVector(const int *vector, const int size) {
    // Verifica se o ponteiro é nulo ou se o tamanho é inválido
    if (vector == NULL || size < 0) {
       return -1;
@@ -73,14 +73,19 @@ int printVector(const int* vector, const int size) {
 }
 
 /*
-* Função que executa um teste genérico, imprimindo o vetor original e o vetor formatado.
-* vector: ponteiro para o vetor a ser testado.
-* size: tamanho do vetor.
-* description: string que descreve o teste (ex: "Teste 01:").
-* retorno: void
-*/
-void runTest(int* vector, const int size, const char* description) {
-   
+ * Função que executa um teste genérico, imprimindo o vetor original e o vetor formatado.
+ * vector: ponteiro para o vetor a ser testado.
+ * size: tamanho do vetor.
+ * description: string que descreve o teste (ex: "Teste 01:").
+ * retorno: void
+ */
+void runTest(int *vector, const int size, const char *description) {
+   // Verifica se o vetor é nulo ou se o tamanho é inválido
+   if (vector == NULL || size < 0 || description == NULL) {
+      printf("Erro: vetor inválido ou descrição nula.\n");
+      return;
+   }
+
    printf("%s\n", description);
 
    // Imprime o vetor antes da formatação
@@ -94,7 +99,8 @@ void runTest(int* vector, const int size, const char* description) {
    if (resultado == 0) {
       printf("Vetor Formatado: ");
       printVector(vector, size);
-   } else {
+   }
+   else {
       printf("Erro ao formatar o vetor.\n");
    }
 
@@ -102,16 +108,16 @@ void runTest(int* vector, const int size, const char* description) {
 }
 
 /*
-* Função principal do programa.
-* argc: quantidade de argumentos passados na chamada do programa.
-* argv: vetor com os argumentos passados na chamada do programa.
-* retorno: status de execução do programa (0: sem erros, caso contrário, código de erro).
-*/
-int main(const int argc, const char* argv[]) {
+ * Função principal do programa.
+ * argc: quantidade de argumentos passados na chamada do programa.
+ * argv: vetor com os argumentos passados na chamada do programa.
+ * retorno: status de execução do programa (0: sem erros, caso contrário, código de erro).
+ */
+int main(const int argc, const char *argv[]) {
    // Vetores de exemplo com tamanhos e distribuições diferentes de pares e ímpares
-   int v1[] = {1, 2, 3, 4, 5, 6};               // Alternado
-   int v2[] = {2, 4, 6, 1, 3, 5, 7};            // Pares à frente, ímpares ao final
-   int v3[] = {1, 3, 5, 7, 2, 4, 6, 8};         // Ímpares à frente, pares ao final
+   int v1[] = {1, 2, 3, 4, 5, 6}; // Alternado
+   int v2[] = {2, 4, 6, 1, 3, 5, 7}; // Pares à frente, ímpares ao final
+   int v3[] = {1, 3, 5, 7, 2, 4, 6, 8}; // Ímpares à frente, pares ao final
 
    // Executa os testes chamando a função genérica com os vetores definidos
    runTest(v1, sizeof(v1) / sizeof(v1[0]), "Teste 01:");
