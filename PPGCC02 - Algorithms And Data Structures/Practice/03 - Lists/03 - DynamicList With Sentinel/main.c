@@ -49,6 +49,7 @@ ElementType getAt(const DynamicList *list, const int position);
 bool isEmpty(const DynamicList *list);
 bool isFull(const DynamicList *list);
 bool invertList(DynamicList *list);
+bool interleaveLists(const DynamicList *list1, const DynamicList *list2, DynamicList *result);
 void printList(const DynamicList *list);
 
 // --- Function implementations ---
@@ -384,6 +385,37 @@ bool invertList(DynamicList *list) {
    temp = list->sentinel->next;
    list->sentinel->next = list->sentinel->prev;
    list->sentinel->prev = temp;
+
+   return true;
+}
+
+/*
+ * Interleaves two lists into a result list.
+ * list1: pointer to the first DynamicList.
+ * list2: pointer to the second DynamicList.
+ * result: pointer to the result DynamicList.
+ * return: true if interleaved successfully, false if any list is NULL or result is full.
+ */
+bool interleaveLists(const DynamicList *list1, const DynamicList *list2, DynamicList *result) {
+   if (list1 == NULL || list2 == NULL || result == NULL) return false;
+
+   // Initialize result list
+   initializeList(result);
+
+   Node *current1 = list1->sentinel->next;
+   Node *current2 = list2->sentinel->next;
+
+   // Interleave elements from both lists
+   while (current1 != list1->sentinel || current2 != list2->sentinel) {
+      if (current1 != list1->sentinel) {
+         insertAtEnd(result, current1->data);
+         current1 = current1->next;
+      }
+      if (current2 != list2->sentinel) {
+         insertAtEnd(result, current2->data);
+         current2 = current2->next;
+      }
+   }
 
    return true;
 }

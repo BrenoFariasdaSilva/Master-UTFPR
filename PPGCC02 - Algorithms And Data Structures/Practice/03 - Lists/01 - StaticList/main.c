@@ -40,6 +40,7 @@ ElementType getAt(const StaticList *list, const int position);
 bool isEmpty(const StaticList *list);
 bool isFull(const StaticList *list);
 bool invertList(StaticList *list);
+bool interleaveLists(const StaticList *list1, const StaticList *list2, StaticList *result);
 void printList(const StaticList *list);
 
 // --- Function implementations ---
@@ -296,6 +297,33 @@ bool invertList(StaticList *list) {
 		list->data[list->quantity - 1 - i] = temp;
 	}
 
+	return true;
+}
+
+/*
+ * Interleaves two lists into a result list.
+ * list1: pointer to the first list.
+ * list2: pointer to the second list.
+ * result: pointer to the result list.
+ * return: true if interleaved successfully, false if any list is NULL or result is full.
+ */
+bool interleaveLists(const StaticList *list1, const StaticList *list2, StaticList *result) {
+	if (list1 == NULL || list2 == NULL || result == NULL || isFull(result))
+		return false;
+
+	for (int i = 0; i < list1->quantity + list2->quantity; i++) {
+		if (i % 2 == 0 && i / 2 < list1->quantity) {
+			// Take from list1
+			if (!insertAtEnd(result, list1->data[i / 2])) {
+				return false; // Failed to insert
+			}
+		} else if (i / 2 < list2->quantity) {
+			// Take from list2
+			if (!insertAtEnd(result, list2->data[i / 2])) {
+				return false; // Failed to insert
+			}
+		}
+	}
 	return true;
 }
 
