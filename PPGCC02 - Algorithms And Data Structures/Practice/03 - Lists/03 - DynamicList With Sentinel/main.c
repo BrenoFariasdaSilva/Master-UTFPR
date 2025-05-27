@@ -50,6 +50,7 @@ bool isEmpty(const DynamicList *list);
 bool isFull(const DynamicList *list);
 bool invertList(DynamicList *list);
 bool interleaveLists(const DynamicList *list1, const DynamicList *list2, DynamicList *result);
+bool isSorted(const DynamicList *list);
 void printList(const DynamicList *list);
 
 // --- Function implementations ---
@@ -418,6 +419,25 @@ bool interleaveLists(const DynamicList *list1, const DynamicList *list2, Dynamic
    }
 
    return true;
+}
+
+/*
+ * Verify if the list is sorted in ascending order.
+ * list: pointer to the DynamicList.
+ * return: true if sorted, false otherwise.
+ */
+bool isSorted(const DynamicList *list) {
+   if (list == NULL || isEmpty(list)) return true; // An empty list is considered sorted
+
+   Node *current = list->sentinel->next;
+   while (current->next != list->sentinel) {
+      if (current->data > current->next->data) {
+         return false; // Found an out-of-order pair
+      }
+      current = current->next;
+   }
+
+   return true; // No out-of-order pairs found
 }
 
 /*

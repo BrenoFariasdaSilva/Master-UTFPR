@@ -41,6 +41,7 @@ bool isEmpty(const StaticList *list);
 bool isFull(const StaticList *list);
 bool invertList(StaticList *list);
 bool interleaveLists(const StaticList *list1, const StaticList *list2, StaticList *result);
+bool isSorted(const StaticList *list);
 void printList(const StaticList *list);
 
 // --- Function implementations ---
@@ -264,7 +265,7 @@ ElementType getAt(const StaticList *list, const int position) {
 }
 
 /*
- * Checks if the list is empty.
+ * Verify if the list is empty.
  * list: pointer to the list.
  * return: true if empty, false otherwise.
  */
@@ -273,7 +274,7 @@ bool isEmpty(const StaticList *list) {
 }
 
 /*
- * Checks if the list is full.
+ * Verify if the list is full.
  * list: pointer to the list.
  * return: true if full, false otherwise.
  */
@@ -325,6 +326,23 @@ bool interleaveLists(const StaticList *list1, const StaticList *list2, StaticLis
 		}
 	}
 	return true;
+}
+
+/*
+ * Verify if the list is sorted in non-decreasing order.
+ * list: pointer to the list.
+ * return: true if sorted, false otherwise.
+ */
+bool isSorted(const StaticList *list) {
+	if (list == NULL || isEmpty(list))
+		return true; // An empty list is considered sorted
+
+	for (int i = 1; i < list->quantity; i++) {
+		if (list->data[i] < list->data[i - 1]) {
+			return false; // Found an unsorted pair
+		}
+	}
+	return true; // All elements are in non-decreasing order
 }
 
 /*
