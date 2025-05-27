@@ -34,7 +34,6 @@ int get_filename_from_user(char* filename, int maxLen) {
 	return 1;
 }
 
-
 /*
 * Lê os primeiros bytes de um arquivo e armazena no buffer fornecido.
 * filename: nome do arquivo a ser lido.
