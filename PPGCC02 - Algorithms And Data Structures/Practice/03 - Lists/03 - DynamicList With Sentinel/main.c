@@ -18,7 +18,7 @@ typedef int ElementType; // Define the type of elements in the list
  * Each node contains data, a pointer to the previous node, and a pointer to the next node.
  */
 typedef struct Node {
-   ElementType data;  // Data stored in the node
+   ElementType data; // Data stored in the node
    struct Node *prev; // Pointer to the previous node
    struct Node *next; // Pointer to the next node
 } Node;
