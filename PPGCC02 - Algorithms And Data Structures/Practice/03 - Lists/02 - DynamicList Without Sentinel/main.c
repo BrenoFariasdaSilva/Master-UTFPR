@@ -48,6 +48,7 @@ bool removeAt(DynamicList *list, const int position);
 ElementType getAt(const DynamicList *list, const int position);
 bool isEmpty(const DynamicList *list);
 void destroyList(DynamicList *list);
+bool invertList(DynamicList *list);
 void printList(const DynamicList *list);
 
 // --- Function implementations ---
@@ -310,6 +311,33 @@ void destroyList(DynamicList *list) {
 	}
 	list->head = list->tail = NULL;
 	list->size = 0;
+}
+
+/*
+ * Inverts the order of elements in the list.
+ * list: pointer to the DynamicList.
+ * return: true if inverted, false if the list is empty or NULL.
+ */
+bool invertList(DynamicList *list) {
+   if (list == NULL || isEmpty(list)) return false;
+
+   Node *current = list->head;
+	Node *temp = NULL;
+
+	// Swap next and prev pointers for each node
+	while (current) {
+		temp = current->prev;
+		current->prev = current->next;
+		current->next = temp;
+		current = current->prev; // Move to the next node in the original order
+	}
+
+	// Adjust head and tail pointers
+	temp = list->head;
+	list->head = list->tail;
+	list->tail = temp;
+
+	return true;
 }
 
 /*

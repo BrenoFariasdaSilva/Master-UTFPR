@@ -48,6 +48,7 @@ void destroyList(DynamicList *list);
 ElementType getAt(const DynamicList *list, const int position);
 bool isEmpty(const DynamicList *list);
 bool isFull(const DynamicList *list);
+bool invertList(DynamicList *list);
 void printList(const DynamicList *list);
 
 // --- Function implementations ---
@@ -358,6 +359,33 @@ bool isFull(const DynamicList *list) {
    // Always returns false for dynamic list (limited only by memory)
    // If you want to simulate a full condition, implement a maximum size and check against it in the insert functions.
    return false;
+}
+
+/*
+ * Inverts the order of elements in the list.
+ * list: pointer to the DynamicList.
+ * return: true if inverted, false if the list is empty or NULL.
+ */
+bool invertList(DynamicList *list) {
+   if (list == NULL || isEmpty(list)) return false;
+
+   Node *current = list->sentinel->next;
+   Node *temp = NULL;
+
+   // Swap next and prev pointers for each node
+   while (current != list->sentinel) {
+      temp = current->prev;
+      current->prev = current->next;
+      current->next = temp;
+      current = current->prev; // Move to the next node in the original order
+   }
+
+   // Adjust sentinel pointers
+   temp = list->sentinel->next;
+   list->sentinel->next = list->sentinel->prev;
+   list->sentinel->prev = temp;
+
+   return true;
 }
 
 /*

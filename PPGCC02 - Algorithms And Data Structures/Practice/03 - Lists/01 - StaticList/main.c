@@ -39,6 +39,7 @@ void destroyList(StaticList *list);
 ElementType getAt(const StaticList *list, const int position);
 bool isEmpty(const StaticList *list);
 bool isFull(const StaticList *list);
+bool invertList(StaticList *list);
 void printList(const StaticList *list);
 
 // --- Function implementations ---
@@ -277,6 +278,25 @@ bool isEmpty(const StaticList *list) {
  */
 bool isFull(const StaticList *list) {
 	return (list != NULL && list->quantity >= list->size);
+}
+
+/*
+ * Inverts the order of elements in the list.
+ * list: pointer to the list.
+ * return: true if inverted, false if the list is empty or NULL.
+ */
+bool invertList(StaticList *list) {
+	if (list == NULL || isEmpty(list))
+		return false;
+
+	for (int i = 0; i < list->quantity / 2; i++) {
+		// Swap elements at positions i and quantity - 1 - i
+		ElementType temp = list->data[i];
+		list->data[i] = list->data[list->quantity - 1 - i];
+		list->data[list->quantity - 1 - i] = temp;
+	}
+
+	return true;
 }
 
 /*
