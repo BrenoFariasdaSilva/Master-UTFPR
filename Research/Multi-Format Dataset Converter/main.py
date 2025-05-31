@@ -95,6 +95,7 @@ def get_dataset_files(directory=INPUT_DIRECTORY):
 def clean_file(input_path, cleaned_path):
    """
    Cleans ARFF, TXT, and CSV files by removing extra spaces in comma-separated values or domains.
+
    :param input_path: Path to the input file (.arff, .txt, .csv).
    :param cleaned_path: Path to save the cleaned file.
    :return: None
@@ -135,6 +136,7 @@ def clean_file(input_path, cleaned_path):
 def load_dataset(input_path):
    """
    Load a dataset from a file in CSV, ARFF, or TXT format into a pandas DataFrame.
+
    :param input_path: Path to the input dataset file.
    :return: pandas DataFrame containing the dataset.
    """
@@ -162,6 +164,7 @@ def load_dataset(input_path):
 def convert_to_arff(df, output_path):
    """
    Convert a pandas DataFrame to ARFF format and save it to the specified output path.
+
    :param df: pandas DataFrame to be converted.
    :param output_path: Path to save the converted ARFF file.
    :return: None
@@ -185,6 +188,7 @@ def convert_to_arff(df, output_path):
 def convert_to_csv(df, output_path):
    """
    Convert a pandas DataFrame to CSV format and save it to the specified output path.
+
    :param df: pandas DataFrame to be converted.
    :param output_path: Path to save the converted CSV file.
    :return: None
@@ -197,6 +201,7 @@ def convert_to_csv(df, output_path):
 def convert_to_txt(df, output_path):
    """
    Convert a pandas DataFrame to TXT format and save it to the specified output path.
+
    :param df: pandas DataFrame to be converted.
    :param output_path: Path to save the converted TXT file.
    :return: None
@@ -209,6 +214,7 @@ def convert_to_txt(df, output_path):
 def batch_convert(input_directory=INPUT_DIRECTORY, output_directory=OUTPUT_DIRECTORY):
    """
    Batch convert dataset files from the input directory to multiple formats (ARFF, CSV, TXT) in the output directory.
+   
    :param INPUT_DIRECTORY: Path to the input directory containing dataset files.
    :param OUTPUT_DIRECTORY: Path to the output directory where converted files will be saved.
    :return: None
