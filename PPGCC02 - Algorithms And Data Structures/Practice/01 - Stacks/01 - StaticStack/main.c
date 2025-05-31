@@ -9,6 +9,9 @@
 
 #include <stdio.h> // printf, scanf
 #include <stdbool.h> // 'bool', 'true', and 'false' keywords
+#include <string.h> // strtok
+#include <stdlib.h> // atoi
+#include <ctype.h> // isdigit
 
 #define ElementType int // Define a macro for the element type in the Stack.
 #define MAX_SIZE 100 // Define the Max Size of the Stack.
@@ -32,9 +35,11 @@ int clone(const StaticStack* stack, StaticStack* clone);
 int invert(StaticStack* stack);
 int is_equal(const StaticStack* stack1, const StaticStack* stack2);
 int insert_vector(StaticStack* stack, const ElementType* vector, int size);
-bool is_valid(StaticStack* stack);
+bool is_valid(const StaticStack* stack);
 int print_stack_attributes(const StaticStack* stack);
 int print_stack(const StaticStack* stack);
+int validate_parentheses_expression(const char* expression);
+int evaluate_postfix_expression(const char* expression, int* result);
 
 /*
  * Function to create and initialize the stack.
@@ -269,7 +274,7 @@ int insert_vector(StaticStack* stack, const ElementType* vector, int size) {
  * stack: pointer to the StaticStack instance.
  * return: true if valid, false otherwise.
 */
-bool is_valid(StaticStack* stack) {
+bool is_valid(const StaticStack* stack) {
 	if (!stack) {
 		return false;
 	}
@@ -319,6 +324,116 @@ int print_stack(const StaticStack* stack) {
 	printf("\n");
 
 	return 1;
+}
+
+/*
+ * Function to validate the use of parentheses in a mathematical expression.
+ * expression: string containing the mathematical expression.
+ * return: status of the validation (1: balanced, -1: unbalanced).
+ */
+int validate_parentheses_expression(const char* expression) {
+	if (!expression) {
+		return -1;
+	}
+
+	StaticStack stack = create_stack();
+
+	for (int i = 0; expression[i] != '\0'; i++) {
+		char ch = expression[i];
+
+		// Push opening parenthesis to the stack
+		if (ch == '(') {
+			if (push(&stack, ch) == -1) {
+				return -1;
+			}
+		}
+
+		// On closing parenthesis, check for matching opening
+		if (ch == ')') {
+			char temp;
+			if (pop(&stack, (int*)&temp) == -1) {
+				// Stack is empty, so no matching opening parenthesis
+				printf("Unmatched closing parenthesis at position %d.\n", i);
+				return -1;
+			}
+		}
+	}
+
+	// After full traversal, stack should be empty
+	if (stack.quantity != 0) {
+		printf("Unmatched opening parenthesis.\n");
+		return -1;
+	}
+
+	return 1;
+}
+
+/*
+ * Function to evaluate a postfix (Reverse Polish Notation) expression.
+ * expression: string containing the postfix expression, tokens separated by spaces.
+ * result: pointer to store the final result of the evaluated expression.
+ * return: status of the operation (1: success, -1: error).
+ */
+int evaluate_postfix_expression(const char* expression, int* result) {
+	if (!expression || !result) {
+		return -1;
+	}
+
+	StaticStack stack = create_stack();
+	char expr_copy[256];
+	strncpy(expr_copy, expression, sizeof(expr_copy) - 1);
+	expr_copy[sizeof(expr_copy) - 1] = '\0';
+
+	char* token = strtok(expr_copy, " ");
+	while (token != NULL) {
+		// Check if token is a number (positive or negative)
+		if (isdigit(token[0]) || (token[0] == '-' && isdigit(token[1]))) {
+			int number = atoi(token);
+			if (push(&stack, number) == -1) {
+				return -1;
+			}
+		} else {
+			// Token is expected to be an operator
+			int b, a;
+
+			if (pop(&stack, &b) == -1 || pop(&stack, &a) == -1) {
+				printf("Invalid expression: not enough operands.\n");
+				return -1;
+			}
+
+			int res;
+			if (strcmp(token, "+") == 0) {
+				res = a + b;
+			} else if (strcmp(token, "-") == 0) {
+				res = a - b;
+			} else if (strcmp(token, "*") == 0) {
+				res = a * b;
+			} else if (strcmp(token, "/") == 0) {
+				if (b == 0) {
+					printf("Division by zero.\n");
+					return -1;
+				}
+				res = a / b;
+			} else {
+				printf("Unknown operator: %s\n", token);
+				return -1;
+			}
+
+			if (push(&stack, res) == -1) {
+				return -1;
+			}
+		}
+
+		token = strtok(NULL, " ");
+	}
+
+	// Final check: only one result should remain on the stack
+	if (stack.quantity != 1) {
+		printf("Invalid expression: too many operands.\n");
+		return -1;
+	}
+
+	return pop(&stack, result);
 }
 
 /*
@@ -408,6 +523,25 @@ int main(int argc, char *argv[]) {
 	print_stack_attributes(&stack);
 
 	printf("Is Stack Full? %s\n", is_full(&stack) == 1 ? "Yes" : "No");
+
+	// Evaluate a postfix expression
+	const char* expression = "3 4 + 2 * 7 /";
+	int eval_result;
+	printf("\nEvaluating postfix expression: \"%s\"\n", expression);
+	if (evaluate_postfix_expression(expression, &eval_result) == 1) {
+		printf("Result of expression: %d\n", eval_result);
+	} else {
+		printf("Failed to evaluate the postfix expression.\n");
+	}
+
+	// Validate parentheses in an infix expression
+	const char* infix_expression = "(3 + 4) * (2 - (1 + 1))";
+	printf("\nValidating parentheses in expression: \"%s\"\n", infix_expression);
+	if (validate_parentheses_expression(infix_expression) == 1) {
+		printf("Parentheses are balanced and correctly nested.\n");
+	} else {
+		printf("Parentheses are not balanced or incorrectly nested.\n");
+	}
 
 	return 0;
 }
