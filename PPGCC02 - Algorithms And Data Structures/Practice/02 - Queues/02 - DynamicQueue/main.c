@@ -13,11 +13,22 @@
 
 #define ElementType int // Define a macro for the element type in the Queue.
 
+/*
+ * Structure to represent a node in the dynamic queue.
+ * data: the element stored in the node.
+ * next: pointer to the next node in the queue.
+ */
 typedef struct node {
-	ElementType data;
-	struct node *next;
+	ElementType data; // Data of the node.
+	struct node *next; // Pointer to the next node in the queue.
 } Node;
 
+/*
+ * Structure to represent the dynamic queue.
+ * front: pointer to the front node of the queue.
+ * rear: pointer to the rear node of the queue.
+ * size: current size of the queue.
+ */
 typedef struct {
 	Node *front; // Pointer to the front node of the queue.
 	Node *rear; // Pointer to the rear node of the queue.

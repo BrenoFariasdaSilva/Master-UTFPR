@@ -12,6 +12,14 @@
 #define ElementType int // Define a macro for the element type in the Queue.
 #define MAX_SIZE 100 // Define the Max Size of the Queue.
 
+/*
+ * Structure representing a Static Queue.
+ * vector: fixed-size array to hold elements.
+ * front: index of the front element.
+ * rear: index where the next element will be inserted.
+ * size: maximum size (capacity) of the queue.
+ * quantity: current number of elements in the queue.
+ */
 typedef struct {
 	ElementType vector[MAX_SIZE]; // Fixed-size array
 	int front; // Index of the front element
@@ -22,6 +30,7 @@ typedef struct {
 
 // Function declarations
 StaticQueue create_queue();
+int initialize_queue(StaticQueue *queue);
 int enqueue(StaticQueue *queue, const ElementType add_element);
 int dequeue(StaticQueue *queue, ElementType *removed_element);
 int is_empty(const StaticQueue *queue);
@@ -44,11 +53,33 @@ int destroy_queue(StaticQueue *queue);
 */
 StaticQueue create_queue() {
 	StaticQueue queue;
-	queue.front = 0;
-	queue.rear = 0;
-	queue.size = MAX_SIZE;
-	queue.quantity = 0;
+	
+	if (initialize_queue(&queue) == -1) {
+		printf("Error initializing the queue.\n");
+	}
+
 	return queue;
+}
+
+/* Function to initialize the queue.
+ * queue: pointer to the StaticQueue instance.
+ * return: status of the operation (1: success, -1: error).
+*/
+int initialize_queue(StaticQueue *queue) {
+	if (!queue) {
+		return -1;
+	}
+
+	queue->front = 0;
+	queue->rear = 0;
+	queue->size = MAX_SIZE;
+	queue->quantity = 0;
+
+	for (int i = 0; i < MAX_SIZE; i++) {
+		queue->vector[i] = 0; // Initialize all elements to 0
+	}
+
+	return 1;
 }
 
 /*
