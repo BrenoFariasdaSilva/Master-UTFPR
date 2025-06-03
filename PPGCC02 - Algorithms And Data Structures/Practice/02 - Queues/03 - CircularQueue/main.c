@@ -14,7 +14,7 @@
 #define ElementType int
 
 typedef struct {
-	ElementType* data; // Pointer to dynamically allocated array for queue elements
+	ElementType *data; // Pointer to dynamically allocated array for queue elements
 	int capacity; // Maximum number of elements the queue can hold
 	int front; // Index of the front element
 	int rear; // Index of the last element
@@ -22,29 +22,29 @@ typedef struct {
 } CircularQueue;
 
 // Function declarations
-CircularQueue* create_circular_queue(int capacity);
-int initialize_circular_queue(CircularQueue* queue, int capacity);
+CircularQueue *create_circular_queue(int capacity);
+int initialize_circular_queue(CircularQueue *queue, int capacity);
 int enqueue(CircularQueue *queue, const ElementType add_element);
-int dequeue(CircularQueue *queue, ElementType* removed_element);
-int peek_front(const CircularQueue *queue, ElementType* front_element);
-int clone_circular_queue(const CircularQueue* source, CircularQueue* destination);
-int invert_circular_queue(CircularQueue* queue);
-int search_element(const CircularQueue* queue, ElementType value);
-int are_circular_queues_equal(const CircularQueue* q1, const CircularQueue* q2);
-int insert_vector(CircularQueue* queue, const ElementType* array, int length);
-bool is_valid(const CircularQueue* queue);
+int dequeue(CircularQueue *queue, ElementType *removed_element);
+int peek_front(const CircularQueue *queue, ElementType *front_element);
+int clone_circular_queue(const CircularQueue *source, CircularQueue *destination);
+int invert_circular_queue(CircularQueue *queue);
+int search_element(const CircularQueue *queue, const ElementType value);
+int are_circular_queues_equal(const CircularQueue *q1, const CircularQueue *q2);
+int insert_vector(CircularQueue *queue, const ElementType *array, const int size);
+bool is_valid(const CircularQueue *queue);
 bool is_empty(const CircularQueue *queue);
-int print_circular_queue(const CircularQueue* queue);
-int print_circular_queue_attributes(const CircularQueue* queue);
-void free_circular_queue(CircularQueue** queue);
+int print_circular_queue(const CircularQueue *queue);
+int print_circular_queue_attributes(const CircularQueue *queue);
+void free_circular_queue(CircularQueue **queue);
 
 /*
  * Function to create a new CircularQueue.
  * capacity: maximum number of elements.
  * return: pointer to the newly allocated CircularQueue, or NULL on failure.
  */
-CircularQueue* create_circular_queue(int capacity) {
-	CircularQueue* queue = (CircularQueue*) malloc(sizeof(CircularQueue));
+CircularQueue *create_circular_queue(int capacity) {
+	CircularQueue *queue = (CircularQueue *) malloc(sizeof(CircularQueue));
 	if (!queue) return NULL;
 
 	if (initialize_circular_queue(queue, capacity) == -1) {
@@ -61,7 +61,7 @@ CircularQueue* create_circular_queue(int capacity) {
  * capacity: size of the internal array.
  * return: status (1: success, -1: error).
  */
-int initialize_circular_queue(CircularQueue* queue, int capacity) {
+int initialize_circular_queue(CircularQueue *queue, int capacity) {
 	if (!queue || capacity <= 0) return -1;
 
 	queue->data = (ElementType*) malloc(sizeof(ElementType) * capacity);
@@ -97,7 +97,7 @@ int enqueue(CircularQueue *queue, const ElementType add_element) {
  * removed_element: pointer to store the removed value.
  * return: status (1: success, -1: queue empty or error).
  */
-int dequeue(CircularQueue *queue, ElementType* removed_element) {
+int dequeue(CircularQueue *queue, ElementType *removed_element) {
 	if (!queue || queue->size == 0) return -1;
 
 	if (removed_element) {
@@ -116,7 +116,7 @@ int dequeue(CircularQueue *queue, ElementType* removed_element) {
  * front_element: pointer to store the front element.
  * return: status (1: success, -1: queue empty or error).
  */
-int peek_front(const CircularQueue *queue, ElementType* front_element) {
+int peek_front(const CircularQueue *queue, ElementType *front_element) {
 	if (!queue || queue->size == 0 || !front_element) return -1;
 
 	*front_element = queue->data[queue->front];
@@ -129,7 +129,7 @@ int peek_front(const CircularQueue *queue, ElementType* front_element) {
  * destination: pointer to the destination queue (must be initialized).
  * return: status (1: success, -1: error).
  */
-int clone_circular_queue(const CircularQueue* source, CircularQueue* destination) {
+int clone_circular_queue(const CircularQueue *source, CircularQueue *destination) {
 	if (!source || !destination) return -1;
 	if (destination->capacity < source->capacity) return -1;
 
@@ -150,7 +150,7 @@ int clone_circular_queue(const CircularQueue* source, CircularQueue* destination
  * queue: pointer to the CircularQueue.
  * return: status (1: success, -1: error).
  */
-int invert_circular_queue(CircularQueue* queue) {
+int invert_circular_queue(CircularQueue *queue) {
 	if (!queue || queue->size <= 1) return -1;
 
 	int left = 0;
@@ -177,7 +177,7 @@ int invert_circular_queue(CircularQueue* queue) {
  * value: element to search.
  * return: index of element (0-based relative to front), or -1 if not found.
  */
-int search_element(const CircularQueue* queue, ElementType value) {
+int search_element(const CircularQueue *queue, const ElementType value) {
 	if (!queue || queue->size == 0) return -1;
 
 	for (int i = 0; i < queue->size; i++) {
@@ -194,7 +194,7 @@ int search_element(const CircularQueue* queue, ElementType value) {
  * q1, q2: pointers to the CircularQueues.
  * return: 1 if equal, 0 if not equal, -1 on error.
  */
-int are_circular_queues_equal(const CircularQueue* q1, const CircularQueue* q2) {
+int are_circular_queues_equal(const CircularQueue *q1, const CircularQueue *q2) {
 	if (!q1 || !q2) return -1;
 	if (q1->size != q2->size) return 0;
 
@@ -213,14 +213,14 @@ int are_circular_queues_equal(const CircularQueue* q1, const CircularQueue* q2) 
  * Function to insert an array of elements into the CircularQueue.
  * queue: pointer to the CircularQueue.
  * array: pointer to the array of elements.
- * length: number of elements to insert.
+ * size: number of elements to insert.
  * return: number of elements actually inserted, or -1 on error.
  */
-int insert_vector(CircularQueue* queue, const ElementType* array, int length) {
-	if (!queue || !array || length <= 0) return -1;
+int insert_vector(CircularQueue *queue, const ElementType *array, const int size) {
+	if (!queue || !array || size <= 0) return -1;
 
 	int inserted = 0;
-	for (int i = 0; i < length; i++) {
+	for (int i = 0; i < size; i++) {
 		if (enqueue(queue, array[i]) == -1) {
 			break; // Queue full
 		}
@@ -234,7 +234,7 @@ int insert_vector(CircularQueue* queue, const ElementType* array, int length) {
  * queue: pointer to the CircularQueue.
  * return: true if valid, false otherwise.
  */
-bool is_valid(const CircularQueue* queue) {
+bool is_valid(const CircularQueue *queue) {
 	if (!queue) return false;
 	if (!queue->data) return false;
 	if (queue->capacity <= 0) return false;
@@ -258,7 +258,7 @@ bool is_empty(const CircularQueue *queue) {
  * queue: pointer to the CircularQueue.
  * return: number of elements printed, or -1 on error.
  */
-int print_circular_queue(const CircularQueue* queue) {
+int print_circular_queue(const CircularQueue *queue) {
 	if (!queue || queue->size == 0) {
 		printf("Queue is empty.\n");
 		return -1;
@@ -278,7 +278,7 @@ int print_circular_queue(const CircularQueue* queue) {
  * queue: pointer to the CircularQueue.
  * return: 1 on success, -1 on error.
  */
-int print_circular_queue_attributes(const CircularQueue* queue) {
+int print_circular_queue_attributes(const CircularQueue *queue) {
 	if (!queue) return -1;
 
 	printf("Queue capacity: %d\n", queue->capacity);
@@ -293,7 +293,7 @@ int print_circular_queue_attributes(const CircularQueue* queue) {
  * Function to free the CircularQueue and its resources.
  * queue: double pointer to the CircularQueue.
  */
-void free_circular_queue(CircularQueue** queue) {
+void free_circular_queue(CircularQueue ** queue) {
 	if (!queue || !(*queue)) return;
 
 	free((*queue)->data);
@@ -315,7 +315,7 @@ int main(int argc, char *argv[]) {
 	int capacity = 5;
 
 	// Create a new circular queue
-	CircularQueue* queue = create_circular_queue(capacity);
+	CircularQueue *queue = create_circular_queue(capacity);
 	if (!queue) {
 		printf("Failed to create queue.\n");
 		return 1;
@@ -388,7 +388,7 @@ int main(int argc, char *argv[]) {
 
 	// Clone the queue
 	printf("\nCloning the queue...\n");
-	CircularQueue* clone = create_circular_queue(capacity);
+	CircularQueue *clone = create_circular_queue(capacity);
 	if (!clone) {
 		printf("Failed to create clone queue.\n");
 		free_circular_queue(&queue);
