@@ -34,6 +34,7 @@ typedef struct {
 } DynamicList;
 
 // Function declarations
+DynamicList* createList();
 void initializeList(DynamicList *list);
 bool insertAtEnd(DynamicList *list, const ElementType value);
 bool insertAtBeginning(DynamicList *list, const ElementType value);
@@ -54,6 +55,18 @@ bool isSorted(const DynamicList *list);
 void printList(const DynamicList *list);
 
 // --- Function implementations ---
+
+/*
+ * Creates a new DynamicList and initializes it.
+ * return: pointer to the newly created DynamicList (NULL on failure).
+ */
+DynamicList* createList() {
+	DynamicList *list = (DynamicList *)malloc(sizeof(DynamicList));
+	if (!list) return NULL;
+
+	initializeList(list);
+	return list;
+}
 
 /*
  * Initializes an empty list.
@@ -424,68 +437,71 @@ void printList(const DynamicList *list) {
 int main(int argc, char *argv[]) {
 	printf("Welcome to the Dynamic Doubly Linked List Implementation!\n\n");
 
-	DynamicList list;
-	initializeList(&list);
+	DynamicList *list = createList();
+	if (!list) {
+		printf("Failed to create list.\n");
+		return 1;
+	}
 
 	// Test insertAtEnd
-	insertAtEnd(&list, 5);
-	insertAtEnd(&list, 10);
+	insertAtEnd(list, 5);
+	insertAtEnd(list, 10);
 
 	// Test insertAtBeginning
-	insertAtBeginning(&list, 1);
+	insertAtBeginning(list, 1);
 
 	// Test insertAt (insert 7 at position 1)
-	insertAt(&list, 1, 7);
+	insertAt(list, 1, 7);
 
 	// Print list (expected: 1 7 5 10)
 	printf("List after inserts:\n");
-	printList(&list);
+	printList(list);
 
 	// Test insertArray
 	ElementType array[] = {20, 25, 30};
-	bool insertedArray = insertArray(&list, array, 3);
+	bool insertedArray = insertArray(list, array, 3);
 	printf("Inserted array? %s\n", insertedArray ? "Yes" : "No");
-	printList(&list); // Expected: 1 7 5 10 20 25 30
+	printList(list); // Expected: 1 7 5 10 20 25 30
 
 	// Test replaceAll (replace all 10 with 15)
-	int replacedCount = replaceAll(&list, 10, 15);
+	int replacedCount = replaceAll(list, 10, 15);
 	printf("Replaced %d occurrences of 10 with 15\n", replacedCount);
-	printList(&list); // Expected: 1 7 5 15 20 25 30
+	printList(list); // Expected: 1 7 5 15 20 25 30
 
 	// Test replaceFirstOccurrence (replace first 7 with 8)
-	bool replacedFirst = replaceFirstOccurrence(&list, 7, 8);
+	bool replacedFirst = replaceFirstOccurrence(list, 7, 8);
 	printf("Replaced first occurrence of 7 with 8? %s\n", replacedFirst ? "Yes" : "No");
-	printList(&list); // Expected: 1 8 5 15 20 25 30
+	printList(list); // Expected: 1 8 5 15 20 25 30
 
 	// Test findFirst (position of 20)
-	int pos = findFirst(&list, 20);
+	int pos = findFirst(list, 20);
 	printf("Position of 20: %d\n", pos); // Expected: 4 (0-based)
 
 	// Test getListSize
-	int size = getListSize(&list);
+	int size = getListSize(list);
 	printf("List size: %d\n", size); // Expected: 7
 
 	// Test findFirst (first occurrence of 5)
-	int firstPos = findFirst(&list, 5);
+	int firstPos = findFirst(list, 5);
 	printf("First occurrence of 5 at: %d\n", firstPos); // Expected: 2
 
 	// Test isEmpty and isFull
-	printf("Is list empty? %s\n", isEmpty(&list) ? "Yes" : "No"); // Expected: No
-	printf("Is list full? %s\n", isFull(&list) ? "Yes" : "No"); // Depends on capacity if any
+	printf("Is list empty? %s\n", isEmpty(list) ? "Yes" : "No"); // Expected: No
+	printf("Is list full? %s\n", isFull(list) ? "Yes" : "No"); // Depends on capacity if any
 
 	// Test getAt (element at position 3)
-	ElementType valAt = getAt(&list, 3);
+	ElementType valAt = getAt(list, 3);
 	printf("Element at position 3: %d\n", valAt); // Expected: 15
 
 	// Test removeAt (remove element at position 1)
-	bool removed = removeAt(&list, 1);
+	bool removed = removeAt(list, 1);
 	printf("Removed element at position 1? %s\n", removed ? "Yes" : "No");
-	printList(&list); // Expected: 1 5 15 20 25 30
+	printList(list); // Expected: 1 5 15 20 25 30
 
 	// Destroy list and print again
-	destroyList(&list);
+	destroyList(list);
 	printf("After destroying list:\n");
-	printList(&list); // Should say list is empty
+	printList(list); // Should say list is empty
 
 	return 0;
 }
