@@ -34,25 +34,26 @@ typedef struct {
 } DynamicList;
 
 // Function declarations
-DynamicList* createList();
-void initializeList(DynamicList *list);
-bool insertAtEnd(DynamicList *list, const ElementType value);
-bool insertAtBeginning(DynamicList *list, const ElementType value);
-bool insertAt(DynamicList *list, const int position, const ElementType value);
-bool insertArray(DynamicList *list, const ElementType *array, const int length);
-int replaceAll(DynamicList *list, const ElementType oldValue, const ElementType newValue);
-bool replaceFirstOccurrence(DynamicList *list, const ElementType oldValue, const ElementType newValue);
-int findFirst(const DynamicList *list, const ElementType value);
-int getListSize(const DynamicList *list);
-bool isFull(const DynamicList *list);
-bool removeAt(DynamicList *list, const int position);
-ElementType getAt(const DynamicList *list, const int position);
-bool isEmpty(const DynamicList *list);
-void destroyList(DynamicList *list);
-bool invertList(DynamicList *list);
-bool interleaveLists(const DynamicList *list1, const DynamicList *list2, DynamicList *result);
-bool isSorted(const DynamicList *list);
-void printList(const DynamicList *list);
+DynamicList* create_list();
+void initialize_list(DynamicList *list);
+bool insert_at_end(DynamicList *list, const ElementType value);
+bool insert_at_beginning(DynamicList *list, const ElementType value);
+bool insert_at(DynamicList *list, const int position, const ElementType value);
+bool insert_array(DynamicList *list, const ElementType *array, const int length);
+int replace_all(DynamicList *list, const ElementType oldValue, const ElementType newValue);
+bool replace_first_occurrence(DynamicList *list, const ElementType oldValue, const ElementType newValue);
+int find_first(const DynamicList *list, const ElementType value);
+int find_last(const DynamicList *list, const ElementType value);
+int get_list_size(const DynamicList *list);
+bool is_full(const DynamicList *list);
+bool remove_at(DynamicList *list, const int position);
+ElementType get_at(const DynamicList *list, const int position);
+bool is_empty(const DynamicList *list);
+void destroy_list(DynamicList *list);
+bool invert_list(DynamicList *list);
+bool interleave_lists(const DynamicList *list1, const DynamicList *list2, DynamicList *result);
+bool is_sorted(const DynamicList *list);
+void print_list(const DynamicList *list);
 
 // --- Function implementations ---
 
@@ -60,11 +61,11 @@ void printList(const DynamicList *list);
  * Creates a new DynamicList and initializes it.
  * return: pointer to the newly created DynamicList (NULL on failure).
  */
-DynamicList* createList() {
-	DynamicList *list = (DynamicList *)malloc(sizeof(DynamicList));
+DynamicList* create_list() {
+	DynamicList *list = (DynamicList *) malloc(sizeof(DynamicList));
 	if (!list) return NULL;
 
-	initializeList(list);
+	initialize_list(list);
 	return list;
 }
 
@@ -73,7 +74,7 @@ DynamicList* createList() {
  * list: pointer to the DynamicList to initialize.
  * return: void
  */
-void initializeList(DynamicList *list) {
+void initialize_list(DynamicList *list) {
 	list->head = NULL;
 	list->tail = NULL;
 	list->size = 0;
@@ -85,15 +86,15 @@ void initializeList(DynamicList *list) {
  * value: the value to be inserted.
  * return: true if inserted, false if memory allocation fails.
  */
-bool insertAtEnd(DynamicList *list, const ElementType value) {
-	Node *newNode = (Node *)malloc(sizeof(Node));
+bool insert_at_end(DynamicList *list, const ElementType value) {
+	Node *newNode = (Node *) malloc(sizeof(Node));
 	if (!newNode) return false;
 
 	newNode->data = value;
 	newNode->next = NULL;
 	newNode->prev = list->tail;
 
-	if (isEmpty(list)) {
+	if (is_empty(list)) {
 		list->head = newNode;
 	} else {
 		list->tail->next = newNode;
@@ -110,15 +111,15 @@ bool insertAtEnd(DynamicList *list, const ElementType value) {
  * value: the value to be inserted.
  * return: true if inserted, false if memory allocation fails.
  */
-bool insertAtBeginning(DynamicList *list, const ElementType value) {
-	Node *newNode = (Node *)malloc(sizeof(Node));
+bool insert_at_beginning(DynamicList *list, const ElementType value) {
+	Node *newNode = (Node *) malloc(sizeof(Node));
 	if (!newNode) return false;
 
 	newNode->data = value;
 	newNode->prev = NULL;
 	newNode->next = list->head;
 
-	if (isEmpty(list)) {
+	if (is_empty(list)) {
 		list->tail = newNode;
 	} else {
 		list->head->prev = newNode;
@@ -136,12 +137,12 @@ bool insertAtBeginning(DynamicList *list, const ElementType value) {
  * value: the value to insert.
  * return: true if inserted, false if position is invalid or memory allocation fails.
  */
-bool insertAt(DynamicList *list, const int position, const ElementType value) {
+bool insert_at(DynamicList *list, const int position, const ElementType value) {
 	if (position < 0 || position > list->size) return false;
-	if (position == 0) return insertAtBeginning(list, value);
-	if (position == list->size) return insertAtEnd(list, value);
+	if (position == 0) return insert_at_beginning(list, value);
+	if (position == list->size) return insert_at_end(list, value);
 
-	Node *newNode = (Node *)malloc(sizeof(Node));
+	Node *newNode = (Node *) malloc(sizeof(Node));
 	if (!newNode) return false;
 
 	Node *current = list->head;
@@ -165,9 +166,9 @@ bool insertAt(DynamicList *list, const int position, const ElementType value) {
  * length: number of elements in the array.
  * return: true if all elements are inserted successfully, false otherwise.
  */
-bool insertArray(DynamicList *list, const ElementType *array, const int length) {
+bool insert_array(DynamicList *list, const ElementType *array, const int length) {
 	for (int i = 0; i < length; i++) {
-		if (!insertAtEnd(list, array[i])) {
+		if (!insert_at_end(list, array[i])) {
 			return false; // Failed to insert due to memory allocation failure
 		}
 	}
@@ -181,7 +182,7 @@ bool insertArray(DynamicList *list, const ElementType *array, const int length) 
  * newValue: the value to replace with.
  * return: the count of replaced elements.
  */
-int replaceAll(DynamicList *list, const ElementType oldValue, const ElementType newValue) {
+int replace_all(DynamicList *list, const ElementType oldValue, const ElementType newValue) {
 	int count = 0;
 	Node *current = list->head;
 
@@ -202,7 +203,7 @@ int replaceAll(DynamicList *list, const ElementType oldValue, const ElementType 
  * newValue: the value to replace with.
  * return: true if a replacement was made, false otherwise.
  */
-bool replaceFirstOccurrence(DynamicList *list, const ElementType oldValue, const ElementType newValue) {
+bool replace_first_occurrence(DynamicList *list, const ElementType oldValue, const ElementType newValue) {
 	Node *current = list->head;
 	while (current) {
 		if (current->data == oldValue) {
@@ -220,7 +221,7 @@ bool replaceFirstOccurrence(DynamicList *list, const ElementType oldValue, const
  * value: the value to find.
  * return: index of the value if found (0-based), -1 if not found.
  */
-int findFirst(const DynamicList *list, const ElementType value) {
+int find_first(const DynamicList *list, const ElementType value) {
 	Node *current = list->head;
 	int index = 0;
 
@@ -236,11 +237,34 @@ int findFirst(const DynamicList *list, const ElementType value) {
 }
 
 /*
+ * Finds the position of the last occurrence of value in the list.
+ * list: pointer to the DynamicList.
+ * value: the value to find.
+ * return: index of the value if found (0-based), -1 if not found.
+ */
+int find_last(const DynamicList *list, const ElementType value) {
+	if (!list) return -1;
+
+	Node *current = list->head;
+	int position = -1;
+	int index = 0;
+	while (current) {
+		if (current->data == value) {
+			position = index;
+		}
+		current = current->next;
+		index++;
+	}
+
+	return position;
+}
+
+/*
  * Gets the current size (number of elements) of the list.
  * list: pointer to the DynamicList.
  * return: size of the list.
  */
-int getListSize(const DynamicList *list) {
+int get_list_size(const DynamicList *list) {
 	return list->size;
 }
 
@@ -249,7 +273,7 @@ int getListSize(const DynamicList *list) {
  * Since this is a dynamic list, it is never full unless memory is exhausted.
  * return: always false.
  */
-bool isFull(const DynamicList *list) {
+bool is_full(const DynamicList *list) {
    // Always returns false for dynamic list (limited only by memory)
    // If you want to simulate a full condition, implement a maximum size and check against it in the insert functions.
    return false;
@@ -261,8 +285,8 @@ bool isFull(const DynamicList *list) {
  * position: index of the value to remove (0-based).
  * return: true if removed, false if position is invalid or list is empty.
  */
-bool removeAt(DynamicList *list, const int position) {
-	if (position < 0 || position >= list->size || isEmpty(list)) return false;
+bool remove_at(DynamicList *list, const int position) {
+	if (position < 0 || position >= list->size || is_empty(list)) return false;
 
 	Node *current = list->head;
 	for (int i = 0; i < position; i++) {
@@ -292,8 +316,8 @@ bool removeAt(DynamicList *list, const int position) {
  * position: index to retrieve (0-based).
  * return: the value at the given position, or -1 if invalid.
  */
-ElementType getAt(const DynamicList *list, const int position) {
-	if (position < 0 || position >= list->size || isEmpty(list)) return -1;
+ElementType get_at(const DynamicList *list, const int position) {
+	if (position < 0 || position >= list->size || is_empty(list)) return -1;
 
 	Node *current = list->head;
 	for (int i = 0; i < position; i++) {
@@ -308,7 +332,7 @@ ElementType getAt(const DynamicList *list, const int position) {
  * list: pointer to the DynamicList.
  * return: true if empty, false otherwise.
  */
-bool isEmpty(const DynamicList *list) {
+bool is_empty(const DynamicList *list) {
 	return list->size == 0;
 }
 
@@ -317,7 +341,7 @@ bool isEmpty(const DynamicList *list) {
  * list: pointer to the DynamicList.
  * return: void
  */
-void destroyList(DynamicList *list) {
+void destroy_list(DynamicList *list) {
 	Node *current = list->head;
 	while (current) {
 		Node *next = current->next;
@@ -333,8 +357,8 @@ void destroyList(DynamicList *list) {
  * list: pointer to the DynamicList.
  * return: true if inverted, false if the list is empty or NULL.
  */
-bool invertList(DynamicList *list) {
-   if (list == NULL || isEmpty(list)) return false;
+bool invert_list(DynamicList *list) {
+   if (!list || is_empty(list)) return false;
 
    Node *current = list->head;
 	Node *temp = NULL;
@@ -362,26 +386,26 @@ bool invertList(DynamicList *list) {
  * result: pointer to the DynamicList where the interleaved result will be stored (must be initialized).
  * return: bool
  */
-bool interleaveLists(const DynamicList *list1, const DynamicList *list2, DynamicList *result) {
-	if (list1 == NULL || list2 == NULL || result == NULL) return false;
+bool interleave_lists(const DynamicList *list1, const DynamicList *list2, DynamicList *result) {
+	if (!list1 || !list2 || !result) return false;
 
-	if (isEmpty(list1) && isEmpty(list2)) {
-		initializeList(result);
+	if (is_empty(list1) && is_empty(list2)) {
+		initialize_list(result);
 		return true; // Both lists are empty, result is also empty
 	}
 
-	initializeList(result);
+	initialize_list(result);
 
 	// Interleave elements from list1 and list2
 	Node *current1 = list1->head;
 	Node *current2 = list2->head;
 	while (current1 || current2) {
 		if (current1) {
-			insertAtEnd(result, current1->data);
+			insert_at_end(result, current1->data);
 			current1 = current1->next;
 		}
 		if (current2) {
-			insertAtEnd(result, current2->data);
+			insert_at_end(result, current2->data);
 			current2 = current2->next;
 		}
 	}
@@ -394,8 +418,8 @@ bool interleaveLists(const DynamicList *list1, const DynamicList *list2, Dynamic
  * list: pointer to the DynamicList.
  * return: true if sorted, false otherwise.
  */
-bool isSorted(const DynamicList *list) {
-	if (list == NULL || isEmpty(list)) return true; // An empty list is considered sorted
+bool is_sorted(const DynamicList *list) {
+	if (!list || is_empty(list)) return true; // An empty list is considered sorted
 
 	Node *current = list->head;
 	while (current && current->next) {
@@ -413,8 +437,8 @@ bool isSorted(const DynamicList *list) {
  * list: pointer to the DynamicList.
  * return: void
  */
-void printList(const DynamicList *list) {
-	if (isEmpty(list)) {
+void print_list(const DynamicList *list) {
+	if (is_empty(list)) {
 		printf("List is empty.\n");
 		return;
 	}
@@ -437,71 +461,75 @@ void printList(const DynamicList *list) {
 int main(int argc, char *argv[]) {
 	printf("Welcome to the Dynamic Doubly Linked List Implementation!\n\n");
 
-	DynamicList *list = createList();
+	DynamicList *list = create_list();
 	if (!list) {
 		printf("Failed to create list.\n");
 		return 1;
 	}
 
-	// Test insertAtEnd
-	insertAtEnd(list, 5);
-	insertAtEnd(list, 10);
+	// Test insert_at_end
+	insert_at_end(list, 5);
+	insert_at_end(list, 10);
 
-	// Test insertAtBeginning
-	insertAtBeginning(list, 1);
+	// Test insert_at_beginning
+	insert_at_beginning(list, 1);
 
-	// Test insertAt (insert 7 at position 1)
-	insertAt(list, 1, 7);
+	// Test insert_at (insert 7 at position 1)
+	insert_at(list, 1, 7);
 
 	// Print list (expected: 1 7 5 10)
 	printf("List after inserts:\n");
-	printList(list);
+	print_list(list);
 
-	// Test insertArray
+	// Test insert_array
 	ElementType array[] = {20, 25, 30};
-	bool insertedArray = insertArray(list, array, 3);
+	bool insertedArray = insert_array(list, array, 3);
 	printf("Inserted array? %s\n", insertedArray ? "Yes" : "No");
-	printList(list); // Expected: 1 7 5 10 20 25 30
+	print_list(list); // Expected: 1 7 5 10 20 25 30
 
-	// Test replaceAll (replace all 10 with 15)
-	int replacedCount = replaceAll(list, 10, 15);
+	// Test replace_all (replace all 10 with 15)
+	int replacedCount = replace_all(list, 10, 15);
 	printf("Replaced %d occurrences of 10 with 15\n", replacedCount);
-	printList(list); // Expected: 1 7 5 15 20 25 30
+	print_list(list); // Expected: 1 7 5 15 20 25 30
 
-	// Test replaceFirstOccurrence (replace first 7 with 8)
-	bool replacedFirst = replaceFirstOccurrence(list, 7, 8);
+	// Test replace_first_occurrence (replace first 7 with 8)
+	bool replacedFirst = replace_first_occurrence(list, 7, 8);
 	printf("Replaced first occurrence of 7 with 8? %s\n", replacedFirst ? "Yes" : "No");
-	printList(list); // Expected: 1 8 5 15 20 25 30
+	print_list(list); // Expected: 1 8 5 15 20 25 30
 
-	// Test findFirst (position of 20)
-	int pos = findFirst(list, 20);
+	// Test find_first (position of 20)
+	int pos = find_first(list, 20);
 	printf("Position of 20: %d\n", pos); // Expected: 4 (0-based)
 
-	// Test getListSize
-	int size = getListSize(list);
+	// Test get_list_size
+	int size = get_list_size(list);
 	printf("List size: %d\n", size); // Expected: 7
 
-	// Test findFirst (first occurrence of 5)
-	int firstPos = findFirst(list, 5);
+	// Test find_first (first occurrence of 5)
+	int firstPos = find_first(list, 5);
 	printf("First occurrence of 5 at: %d\n", firstPos); // Expected: 2
 
-	// Test isEmpty and isFull
-	printf("Is list empty? %s\n", isEmpty(list) ? "Yes" : "No"); // Expected: No
-	printf("Is list full? %s\n", isFull(list) ? "Yes" : "No"); // Depends on capacity if any
+	// Test find_last (last occurrence of 20)
+	int lastPos = find_last(list, 20);
+	printf("Last occurrence of 20 at: %d\n", lastPos); // Expected: 4
 
-	// Test getAt (element at position 3)
-	ElementType valAt = getAt(list, 3);
+	// Test is_empty and is_full
+	printf("Is list empty? %s\n", is_empty(list) ? "Yes" : "No"); // Expected: No
+	printf("Is list full? %s\n", is_full(list) ? "Yes" : "No"); // Depends on capacity if any
+
+	// Test get_at (element at position 3)
+	ElementType valAt = get_at(list, 3);
 	printf("Element at position 3: %d\n", valAt); // Expected: 15
 
-	// Test removeAt (remove element at position 1)
-	bool removed = removeAt(list, 1);
+	// Test remove_at (remove element at position 1)
+	bool removed = remove_at(list, 1);
 	printf("Removed element at position 1? %s\n", removed ? "Yes" : "No");
-	printList(list); // Expected: 1 5 15 20 25 30
+	print_list(list); // Expected: 1 5 15 20 25 30
 
 	// Destroy list and print again
-	destroyList(list);
+	destroy_list(list);
 	printf("After destroying list:\n");
-	printList(list); // Should say list is empty
+	print_list(list); // Should say list is empty
 
 	return 0;
 }
