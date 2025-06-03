@@ -25,19 +25,19 @@ typedef struct {
 
 // Function declarations
 DynamicStack* create_stack();
-int initialize_stack(DynamicStack* stack);
+int initialize_stack(DynamicStack *stack);
 int push(DynamicStack *stack, const ElementType add_element);
-int pop(DynamicStack *stack, ElementType* pop_element);
+int pop(DynamicStack *stack, ElementType *pop_element);
 int peek(const DynamicStack *stack, ElementType* top_element);
 int is_empty(const DynamicStack *stack);
-int search(const DynamicStack* stack, ElementType element);
-int clone(const DynamicStack* stack, DynamicStack* clone);
-int invert(DynamicStack* stack);
+int search(const DynamicStack *stack, ElementType element);
+int clone(const DynamicStack *stack, DynamicStack* clone);
+int invert(DynamicStack *stack);
 bool is_equal(const DynamicStack* stack1, const DynamicStack* stack2);
-int insert_vector(DynamicStack* stack, const ElementType* vector, int size);
-bool is_valid(const DynamicStack* stack);
-int print_stack_attributes(const DynamicStack* stack);
-int print_stack(const DynamicStack* stack);
+int insert_vector(DynamicStack *stack, const ElementType* vector, int size);
+bool is_valid(const DynamicStack *stack);
+int print_stack_attributes(const DynamicStack *stack);
+int print_stack(const DynamicStack *stack);
 void free_stack(DynamicStack **stack);
 
 /*
@@ -45,7 +45,7 @@ void free_stack(DynamicStack **stack);
  * return: pointer to a newly allocated DynamicStack (NULL on failure).
  */
 DynamicStack* create_stack() {
-	DynamicStack* stack = (DynamicStack*) malloc(sizeof(DynamicStack));
+	DynamicStack *stack = (DynamicStack*) malloc(sizeof(DynamicStack));
 
 	if (!stack) {
 		return NULL;
@@ -66,7 +66,7 @@ DynamicStack* create_stack() {
  * stack: pointer to the DynamicStack to initialize.
  * return: status of the operation (1: success, -1: error).
  */
-int initialize_stack(DynamicStack* stack) {
+int initialize_stack(DynamicStack *stack) {
 	if (!stack) {
 		return -1;
 	}
@@ -107,7 +107,7 @@ int push(DynamicStack *stack, const ElementType add_element) {
  * pop_element: pointer to store the popped element.
  * return: status of the operation (1: success, -1: error).
  */
-int pop(DynamicStack *stack, ElementType* pop_element) {
+int pop(DynamicStack *stack, ElementType *pop_element) {
 	if (!is_valid(stack) || !pop_element || is_empty(stack)) {
 		return -1; // Invalid input
 	}
@@ -158,7 +158,7 @@ int is_empty(const DynamicStack *stack) {
  * element: element to search for.
  * return: index (0-based from head) if found, -1 if not found or error.
  */
-int search(const DynamicStack* stack, ElementType element) {
+int search(const DynamicStack *stack, ElementType element) {
 	if (!is_valid(stack)) {
 		return -1;
 	}
@@ -183,7 +183,7 @@ int search(const DynamicStack* stack, ElementType element) {
  * clone: pointer to destination stack (must be initialized).
  * return: 1 on success, -1 on error.
  */
-int clone(const DynamicStack* stack, DynamicStack* clone) {
+int clone(const DynamicStack *stack, DynamicStack* clone) {
 	if (!is_valid(stack) || !is_valid(clone) || is_empty(clone)) {
 		return -1;
 	}
@@ -218,7 +218,7 @@ int clone(const DynamicStack* stack, DynamicStack* clone) {
  * stack: pointer to DynamicStack instance.
  * return: 1 on success, -1 on error.
  */
-int invert(DynamicStack* stack) {
+int invert(DynamicStack *stack) {
 	if (!is_valid(stack)) {
 		return -1;
 	}
@@ -274,7 +274,7 @@ bool is_equal(const DynamicStack* stack1, const DynamicStack* stack2) {
  * size: number of elements in vector.
  * return: 1 on success, -1 on error.
  */
-int insert_vector(DynamicStack* stack, const ElementType* vector, int size) {
+int insert_vector(DynamicStack *stack, const ElementType* vector, int size) {
 	if (!is_valid(stack) || !vector || size < 1) {
 		return -1;
 	}
@@ -294,7 +294,7 @@ int insert_vector(DynamicStack* stack, const ElementType* vector, int size) {
  * stack: pointer to DynamicStack instance.
  * return: true if valid, false otherwise.
  */
-bool is_valid(const DynamicStack* stack) {
+bool is_valid(const DynamicStack *stack) {
 	if (!stack) {
 		return false;
 	}
@@ -315,7 +315,7 @@ bool is_valid(const DynamicStack* stack) {
  * stack: pointer to the DynamicStack instance.
  * return: status of the operation (1: success, -1: error).
  */
-int print_stack(const DynamicStack* stack) {
+int print_stack(const DynamicStack *stack) {
 	if (!is_valid(stack)) {
 		return -1;
 	}
@@ -336,7 +336,7 @@ int print_stack(const DynamicStack* stack) {
  * stack: pointer to the DynamicStack instance.
  * return: status of the operation (1: success, -1: error).
  */
-int print_stack_attributes(const DynamicStack* stack) {
+int print_stack_attributes(const DynamicStack *stack) {
 	if (!is_valid(stack)) {
 		return -1;
 	}
