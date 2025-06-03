@@ -35,7 +35,7 @@ void insert(Heap *heap, const int value);
 void insertVector(Heap *heap, const int *values, const int count);
 int peekTop(const Heap *heap);
 int extractRoot(Heap *heap);
-void freeHeap(Heap *heap);
+int freeHeap(Heap *heap);
 void invertHeap(Heap *heap);
 void printHeap(const Heap *heap);
 void printHeapAsTree(const Heap *heap);
@@ -206,12 +206,14 @@ int extractRoot(Heap *heap) {
 /*
  * Function to free the memory used by the heap.
  * heap: pointer to the heap.
+ * return: 1 on success, -1 if heap is NULL.
  */
-void freeHeap(Heap *heap) {
-	if (heap == NULL) return; // Check for null pointer
+int freeHeap(Heap *heap) {
+	if (heap == NULL) return -1; // Check for null pointer
 
 	free(heap->data);
 	free(heap);
+	return 1; // Return 0 to indicate success
 }
 
 /*

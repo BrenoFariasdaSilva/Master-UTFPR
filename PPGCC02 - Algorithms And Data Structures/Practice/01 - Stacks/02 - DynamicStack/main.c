@@ -38,7 +38,7 @@ int insert_vector(DynamicStack *stack, const ElementType *vector, int size);
 bool is_valid(const DynamicStack *stack);
 int print_stack_attributes(const DynamicStack *stack);
 int print_stack(const DynamicStack *stack);
-void free_stack(DynamicStack **stack);
+int free_stack(DynamicStack **stack);
 
 /*
  * Function to create a new DynamicStack instance using dynamic memory.
@@ -357,11 +357,11 @@ int print_stack_attributes(const DynamicStack *stack) {
 /*
  * Function to free all memory associated with the stack.
  * stack: pointer to the DynamicStack instance.
- * return: void.
+ * return: 1 on success, -1 on error.
  */
-void free_stack(DynamicStack **stack) {
+int free_stack(DynamicStack **stack) {
 	if (!stack || !(*stack)) {
-		return;
+		return -1;
 	}
 
 	Node *current = (*stack)->head;
@@ -373,6 +373,7 @@ void free_stack(DynamicStack **stack) {
 
 	free(*stack); // Free the stack structure itself
 	*stack = NULL; // Set the original pointer to NULL to avoid dangling pointer
+	return 1;
 }
 
 /*

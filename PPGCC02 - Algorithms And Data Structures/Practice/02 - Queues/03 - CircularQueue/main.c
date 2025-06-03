@@ -36,7 +36,7 @@ bool is_valid(const CircularQueue *queue);
 bool is_empty(const CircularQueue *queue);
 int print_circular_queue(const CircularQueue *queue);
 int print_circular_queue_attributes(const CircularQueue *queue);
-void free_circular_queue(CircularQueue **queue);
+int free_circular_queue(CircularQueue **queue);
 
 /*
  * Function to create a new CircularQueue.
@@ -292,15 +292,17 @@ int print_circular_queue_attributes(const CircularQueue *queue) {
 /*
  * Function to free the CircularQueue and its resources.
  * queue: double pointer to the CircularQueue.
+ * return: 1 on success, -1 on error.
  */
-void free_circular_queue(CircularQueue **queue) {
-	if (!queue || !(*queue)) return;
+int free_circular_queue(CircularQueue **queue) {
+	if (!queue || !(*queue)) return -1;
 
 	free((*queue)->data);
 	(*queue)->data = NULL;
 
 	free(*queue);
 	*queue = NULL;
+	return 1;
 }
 
 /*

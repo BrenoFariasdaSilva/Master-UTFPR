@@ -39,7 +39,7 @@ bool is_valid(const DynamicQueue *queue);
 bool is_empty(const DynamicQueue *queue);
 int print_queue(const DynamicQueue *queue);
 int print_queue_attributes(const DynamicQueue *queue);
-void free_queue(DynamicQueue **queue);
+int free_queue(DynamicQueue **queue);
 
 /*
  * Function to create a new DynamicQueue instance using dynamic memory.
@@ -381,10 +381,10 @@ int print_queue_attributes(const DynamicQueue *queue) {
 /*
  * Function to free all memory associated with the queue.
  * queue: pointer to the DynamicQueue instance.
- * return: void.
+ * return: 1 on success, -1 on error.
  */
-void free_queue(DynamicQueue **queue) {
-	if (!queue || !*queue) return;
+int free_queue(DynamicQueue **queue) {
+	if (!queue || !*queue) return -1;
 
 	Node* current = (*queue)->front;
 	while (current) {
@@ -395,6 +395,7 @@ void free_queue(DynamicQueue **queue) {
 
 	free(*queue);
 	*queue = NULL;
+	return 1;
 }
 
 /*
