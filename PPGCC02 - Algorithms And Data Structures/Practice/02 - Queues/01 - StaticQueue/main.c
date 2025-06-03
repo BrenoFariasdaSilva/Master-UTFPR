@@ -36,6 +36,7 @@ int insert_vector(StaticQueue *queue, const ElementType *vector, const int size)
 int is_valid(const StaticQueue *queue);
 int print_queue_attributes(const StaticQueue *queue);
 int print_queue(const StaticQueue *queue);
+int destroy_queue(StaticQueue *queue);
 
 /*
  * Function to create and initialize the queue.
@@ -333,6 +334,23 @@ int print_queue(const StaticQueue *queue) {
 }
 
 /*
+ * Function to destroy the queue and free resources.
+ * queue: pointer to the StaticQueue instance.
+ * return: status of the operation (1: success, -1: error).
+*/
+int destroy_queue(StaticQueue *queue) {
+	if (!is_valid(queue)) {
+		return -1;
+	}
+
+	queue->front = 0;
+	queue->rear = 0;
+	queue->quantity = 0;
+
+	return 1;
+}
+
+/*
  * Main function of the program.
  * argc: number of arguments passed when calling the program.
  * argv: array containing the arguments passed to the program.
@@ -415,6 +433,13 @@ int main(int argc, char *argv[]) {
 	print_queue_attributes(&queue);
 
 	printf("Is Queue Full? %s\n", is_full(&queue) == 1 ? "Yes" : "No");
+
+	printf("Destroying the queue...\n");
+	if (destroy_queue(&queue) == 1) {
+		printf("Queue destroyed successfully.\n");
+	} else {
+		printf("Failed to destroy queue.\n");
+	}
 
 	return 0;
 }
