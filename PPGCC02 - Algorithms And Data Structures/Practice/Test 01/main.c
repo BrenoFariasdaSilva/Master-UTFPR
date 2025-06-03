@@ -157,14 +157,14 @@ int main(const int argc, const char *argv[]) {
 		printf("argv[0] = %s, strcmp(argv[0], \"./main\") = %d\n\n", argv[0], (int)strcmp(argv[0], "./main"));
 
 		// Alocação de memória para uma matriz 2D.
-		int **pMatrix = (int **)malloc(m * sizeof(int *));
+		int **pMatrix = (int **) malloc(m * sizeof(int *));
 		if (pMatrix == NULL) { // Verifica se a alocação foi bem-sucedida.
 			printf("Erro: falha ao alocar memória para as linhas da matriz.\n");
 			return 1; // Retorna erro.
 		}
 
 		for (int i = 0; i < m; i++) { // Itera sobre as linhas da matriz.
-			pMatrix[i] = (int *)malloc(n * sizeof(int)); // Aloca memória para cada linha.
+			pMatrix[i] = (int *) malloc(n * sizeof(int)); // Aloca memória para cada linha.
 			if (pMatrix[i] == NULL) { // Verifica se a alocação foi bem-sucedida.
 				printf("Erro ao alocar a %d linha", i);
 				return -1; // Retorna erro.
@@ -179,7 +179,7 @@ int main(const int argc, const char *argv[]) {
 	User staticUser = {"Breno", 25, {"17", "04", "2001"}}; // Declaração de um usuário estático.
 	printStaticUser(staticUser); // Imprime os dados do usuário estático.
 
-	User *dynamicUser = (User *)malloc(sizeof(User)); // Aloca memória para um usuário dinâmico.
+	User *dynamicUser = (User *) malloc(sizeof(User)); // Aloca memória para um usuário dinâmico.
 	strcpy(dynamicUser->name, "Breno"); // Inicializa o nome do usuário.
 	dynamicUser->age = 25; // Inicializa a idade do usuário.
 	strcpy(dynamicUser->date.day, "17"); // Inicializa o dia do aniversário.
