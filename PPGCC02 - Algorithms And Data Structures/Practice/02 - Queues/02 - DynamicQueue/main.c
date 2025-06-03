@@ -383,7 +383,7 @@ int print_queue_attributes(const DynamicQueue *queue) {
  * queue: pointer to the DynamicQueue instance.
  * return: void.
  */
-void free_queue(DynamicQueue ** queue) {
+void free_queue(DynamicQueue **queue) {
 	if (!queue || !*queue) return;
 
 	Node* current = (*queue)->front;

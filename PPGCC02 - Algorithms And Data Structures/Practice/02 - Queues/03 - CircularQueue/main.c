@@ -293,7 +293,7 @@ int print_circular_queue_attributes(const CircularQueue *queue) {
  * Function to free the CircularQueue and its resources.
  * queue: double pointer to the CircularQueue.
  */
-void free_circular_queue(CircularQueue ** queue) {
+void free_circular_queue(CircularQueue **queue) {
 	if (!queue || !(*queue)) return;
 
 	free((*queue)->data);
