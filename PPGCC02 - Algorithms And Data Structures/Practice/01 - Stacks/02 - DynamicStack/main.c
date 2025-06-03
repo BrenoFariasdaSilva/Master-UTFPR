@@ -28,13 +28,13 @@ DynamicStack* create_stack();
 int initialize_stack(DynamicStack *stack);
 int push(DynamicStack *stack, const ElementType add_element);
 int pop(DynamicStack *stack, ElementType *pop_element);
-int peek(const DynamicStack *stack, ElementType* top_element);
+int peek(const DynamicStack *stack, ElementType *top_element);
 int is_empty(const DynamicStack *stack);
-int search(const DynamicStack *stack, ElementType element);
-int clone(const DynamicStack *stack, DynamicStack* clone);
+int search(const DynamicStack *stack, const ElementType element);
+int clone(const DynamicStack *stack, DynamicStack *clone);
 int invert(DynamicStack *stack);
-bool is_equal(const DynamicStack* stack1, const DynamicStack* stack2);
-int insert_vector(DynamicStack *stack, const ElementType* vector, int size);
+bool is_equal(const DynamicStack *stack1, const DynamicStack *stack2);
+int insert_vector(DynamicStack *stack, const ElementType *vector, int size);
 bool is_valid(const DynamicStack *stack);
 int print_stack_attributes(const DynamicStack *stack);
 int print_stack(const DynamicStack *stack);
@@ -129,7 +129,7 @@ int pop(DynamicStack *stack, ElementType *pop_element) {
  * top_element: pointer to store the top element.
  * return: status of the operation (1: success, -1: error).
  */
-int peek(const DynamicStack *stack, ElementType* top_element) {
+int peek(const DynamicStack *stack, ElementType *top_element) {
 	if (!is_valid(stack) || !top_element || is_empty(stack)) {
 		return -1;
 	}
@@ -158,7 +158,7 @@ int is_empty(const DynamicStack *stack) {
  * element: element to search for.
  * return: index (0-based from head) if found, -1 if not found or error.
  */
-int search(const DynamicStack *stack, ElementType element) {
+int search(const DynamicStack *stack, const ElementType element) {
 	if (!is_valid(stack)) {
 		return -1;
 	}
@@ -183,13 +183,13 @@ int search(const DynamicStack *stack, ElementType element) {
  * clone: pointer to destination stack (must be initialized).
  * return: 1 on success, -1 on error.
  */
-int clone(const DynamicStack *stack, DynamicStack* clone) {
+int clone(const DynamicStack *stack, DynamicStack *clone) {
 	if (!is_valid(stack) || !is_valid(clone) || is_empty(clone)) {
 		return -1;
 	}
 
 	// Use an array to store elements temporarily for correct order cloning
-	ElementType* temp = (ElementType*) malloc(stack->size * sizeof(ElementType));
+	ElementType *temp = (ElementType*) malloc(stack->size * sizeof(ElementType));
 	if (!temp) {
 		return -1;
 	}
@@ -244,7 +244,7 @@ int invert(DynamicStack *stack) {
  * stack1, stack2: pointers to stacks.
  * return: 1 if equal, 0 if not equal, -1 on error.
  */
-bool is_equal(const DynamicStack* stack1, const DynamicStack* stack2) {
+bool is_equal(const DynamicStack *stack1, const DynamicStack *stack2) {
 	if (!is_valid(stack1) || !is_valid(stack2)) {
 		return -1;
 	}
@@ -274,7 +274,7 @@ bool is_equal(const DynamicStack* stack1, const DynamicStack* stack2) {
  * size: number of elements in vector.
  * return: 1 on success, -1 on error.
  */
-int insert_vector(DynamicStack *stack, const ElementType* vector, int size) {
+int insert_vector(DynamicStack *stack, const ElementType *vector, int size) {
 	if (!is_valid(stack) || !vector || size < 1) {
 		return -1;
 	}
