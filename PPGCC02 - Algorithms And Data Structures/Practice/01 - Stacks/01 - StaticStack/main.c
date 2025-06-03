@@ -24,23 +24,23 @@ typedef struct {
 
 // Function declarations
 StaticStack create_stack();
-int push(StaticStack* stack, const ElementType add_element);
-int pop(StaticStack* stack, ElementType* pop_element);
-int is_empty(StaticStack* stack);
-int is_full(StaticStack* stack);
-int peek(const StaticStack* stack, ElementType* top_element);
-int clear(StaticStack* stack);
-int search(const StaticStack* stack, ElementType element);
-int clone(const StaticStack* stack, StaticStack* clone);
-int invert(StaticStack* stack);
+int push(StaticStack *stack, const ElementType add_element);
+int pop(StaticStack *stack, ElementType *pop_element);
+int is_empty(StaticStack *stack);
+int is_full(StaticStack *stack);
+int peek(const StaticStack *stack, ElementType* top_element);
+int clear(StaticStack *stack);
+int search(const StaticStack *stack, ElementType element);
+int clone(const StaticStack *stack, StaticStack* clone);
+int invert(StaticStack *stack);
 int is_equal(const StaticStack* stack1, const StaticStack* stack2);
-int insert_vector(StaticStack* stack, const ElementType* vector, int size);
-bool is_valid(const StaticStack* stack);
-int print_stack_attributes(const StaticStack* stack);
-int print_stack(const StaticStack* stack);
+int insert_vector(StaticStack *stack, const ElementType* vector, int size);
+bool is_valid(const StaticStack *stack);
+int print_stack_attributes(const StaticStack *stack);
+int print_stack(const StaticStack *stack);
 int validate_parentheses_expression(const char* expression);
 int evaluate_postfix_expression(const char* expression, int* result);
-int destroy(StaticStack* stack);
+int destroy(StaticStack *stack);
 
 /*
  * Function to create and initialize the stack.
@@ -59,7 +59,7 @@ StaticStack create_stack() {
  * add_element: the element to add to the stack.
  * return: status of the operation (1: success, -1: error).
 */
-int push(StaticStack* stack, const ElementType add_element) {
+int push(StaticStack *stack, const ElementType add_element) {
 	if (!is_valid(stack)) {
 		return -1;
 	}
@@ -80,7 +80,7 @@ int push(StaticStack* stack, const ElementType add_element) {
  * pop_element: pointer to store the popped element.
  * return: status of the operation (1: success, -1: error).
 */
-int pop(StaticStack* stack, ElementType* pop_element) {
+int pop(StaticStack *stack, ElementType *pop_element) {
 	if (!is_valid(stack) || !pop_element) {
 		return -1;
 	}
@@ -100,7 +100,7 @@ int pop(StaticStack* stack, ElementType* pop_element) {
  * stack: pointer to the StaticStack instance.
  * return: 1 if empty, 0 if not empty, -1 if error (null pointer).
 */
-int is_empty(StaticStack* stack) {
+int is_empty(StaticStack *stack) {
 	if (!is_valid(stack)) {
 		return -1;
 	}
@@ -113,7 +113,7 @@ int is_empty(StaticStack* stack) {
  * stack: pointer to the StaticStack instance.
  * return: 1 if full, 0 if not full, -1 if error (null pointer).
 */
-int is_full(StaticStack* stack) {
+int is_full(StaticStack *stack) {
 	if (!is_valid(stack)) {
 		return -1;
 	}
@@ -127,7 +127,7 @@ int is_full(StaticStack* stack) {
  * top_element: pointer to store the top element.
  * return: status of the operation (1: success, -1: error).
 */
-int peek(const StaticStack* stack, ElementType* top_element) {
+int peek(const StaticStack *stack, ElementType* top_element) {
 	if (!is_valid(stack) || !top_element) {
 		return -1;
 	}
@@ -147,7 +147,7 @@ int peek(const StaticStack* stack, ElementType* top_element) {
  * stack: pointer to the StaticStack instance.
  * return: status of the operation (1: success, -1: error).
 */
-int clear(StaticStack* stack) {
+int clear(StaticStack *stack) {
 	if (!is_valid(stack)) {
 		return -1;
 	}
@@ -163,7 +163,7 @@ int clear(StaticStack* stack) {
  * element: the element to search for.
  * return: index from the top (0 = top element), or -1 if not found or error.
  */
-int search(const StaticStack* stack, ElementType element) {
+int search(const StaticStack *stack, ElementType element) {
 	if (!is_valid(stack)) {
 		return -1;
 	}
@@ -183,7 +183,7 @@ int search(const StaticStack* stack, ElementType element) {
  * clone: pointer to the destination StaticStack.
  * return: status of the operation (1: success, -1: error).
 */
-int clone(const StaticStack* stack, StaticStack* clone) {
+int clone(const StaticStack *stack, StaticStack* clone) {
 	if (!is_valid(stack) || !clone) {
 		return -1;
 	}
@@ -203,7 +203,7 @@ int clone(const StaticStack* stack, StaticStack* clone) {
  * stack: pointer to the StaticStack instance.
  * return: status of the operation (1: success, -1: error).
 */
-int invert(StaticStack* stack) {
+int invert(StaticStack *stack) {
 	if (!is_valid(stack)) {
 		return -1;
 	}
@@ -253,7 +253,7 @@ int is_equal(const StaticStack* stack1, const StaticStack* stack2) {
  * size: number of elements in the vector.
  * return: status of the operation (1: success, -1: error).
 */
-int insert_vector(StaticStack* stack, const ElementType* vector, int size) {
+int insert_vector(StaticStack *stack, const ElementType* vector, int size) {
 	if (!is_valid(stack) || !vector || size < 0) {
 		return -1;
 	}
@@ -275,7 +275,7 @@ int insert_vector(StaticStack* stack, const ElementType* vector, int size) {
  * stack: pointer to the StaticStack instance.
  * return: true if valid, false otherwise.
 */
-bool is_valid(const StaticStack* stack) {
+bool is_valid(const StaticStack *stack) {
 	if (!stack) {
 		return false;
 	}
@@ -296,7 +296,7 @@ bool is_valid(const StaticStack* stack) {
  * stack: pointer to the StaticStack instance.
  * return: status of the operation (1: success, -1: error).
 */
-int print_stack_attributes(const StaticStack* stack) {
+int print_stack_attributes(const StaticStack *stack) {
 	if (!is_valid(stack)) {
 		return -1;
 	}
@@ -313,7 +313,7 @@ int print_stack_attributes(const StaticStack* stack) {
  * stack: pointer to the StaticStack instance.
  * return: status of the operation (1: success, -1: error).
 */
-int print_stack(const StaticStack* stack) {
+int print_stack(const StaticStack *stack) {
 	if (!is_valid(stack)) {
 		return -1;
 	}
@@ -442,7 +442,7 @@ int evaluate_postfix_expression(const char* expression, int* result) {
  * stack: pointer to the StaticStack instance to be destroyed.
  * return: status of the operation (1: success, -1: error).
 */
-int destroy(StaticStack* stack) {
+int destroy(StaticStack *stack) {
 	if (!is_valid(stack)) {
 		return -1;
 	}
