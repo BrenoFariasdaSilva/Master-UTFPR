@@ -33,6 +33,7 @@ typedef struct {
 } DynamicList;
 
 // Function declarations
+DynamicList* createList();
 void initializeList(DynamicList *list);
 bool insertAtEnd(DynamicList *list, const ElementType value);
 bool insertAtBeginning(DynamicList *list, const ElementType value);
@@ -54,6 +55,21 @@ bool isSorted(const DynamicList *list);
 void printList(const DynamicList *list);
 
 // --- Function implementations ---
+
+/*
+ * Creates a new DynamicList and initializes it.
+ * Returns a pointer to the newly created list, or NULL if memory allocation fails.
+ */
+DynamicList* createList() {
+   DynamicList *list = (DynamicList *)malloc(sizeof(DynamicList));
+   if (list == NULL) {
+      printf("Memory allocation failed while creating the list.\n");
+      return NULL;
+   }
+
+   initializeList(list);
+   return list;
+}
 
 /*
  * Initializes the list by creating the sentinel node.
@@ -475,65 +491,69 @@ void printList(const DynamicList *list) {
 int main(int argc, char *argv[]) {
    printf("Welcome to the Dynamic Doubly Linked List with Sentinel Implementation!\n\n");
 
-   DynamicList list;
-   initializeList(&list);
+   DynamicList *list = createList(); // Create a new dynamic list
+
+   if (list == NULL) {
+      printf("Failed to create the list.\n");
+      return 1; // Exit with error
+   }
 
    // Insert elements at the end
-   insertAtEnd(&list, 5);
-   insertAtEnd(&list, 10);
+   insertAtEnd(list, 5);
+   insertAtEnd(list, 10);
 
    // Insert element at the beginning
-   insertAtBeginning(&list, 1);
+   insertAtBeginning(list, 1);
 
    // Insert at position 1 (0-based)
-   insertAt(&list, 1, 7);
+   insertAt(list, 1, 7);
 
    // Print current list
-   printList(&list); // Expected: 1 7 5 10
+   printList(list); // Expected: 1 7 5 10
 
    // Insert array of elements at the end
    ElementType arr[] = {20, 25, 30};
-   insertArray(&list, arr, 3);
-   printList(&list); // Expected: 1 7 5 10 20 25 30
+   insertArray(list, arr, 3);
+   printList(list); // Expected: 1 7 5 10 20 25 30
 
    // Replace all 10 with 15
-   int replaced = replaceAll(&list, 10, 15);
+   int replaced = replaceAll(list, 10, 15);
    printf("Replaced %d occurrence(s) of 10 with 15\n", replaced);
-   printList(&list); // Expected: 1 7 5 15 20 25 30
+   printList(list); // Expected: 1 7 5 15 20 25 30
 
    // Replace first occurrence of 7 with 8
-   bool replacedFirst = replaceFirstOccurrence(&list, 7, 8);
+   bool replacedFirst = replaceFirstOccurrence(list, 7, 8);
    printf("Replaced first occurrence of 7 with 8? %s\n", replacedFirst ? "Yes" : "No");
-   printList(&list); // Expected: 1 8 5 15 20 25 30
+   printList(list); // Expected: 1 8 5 15 20 25 30
 
    // Find last position of 20
-   int lastPos = findValuePosition(&list, 20);
+   int lastPos = findValuePosition(list, 20);
    printf("Last position of 20: %d\n", lastPos); // Expected: 4 (0-based)
 
    // Get list size
-   int size = getListSize(&list);
+   int size = getListSize(list);
    printf("List size: %d\n", size); // Expected: 7
 
    // Find first occurrence of 5
-   int firstPos = findFirst(&list, 5);
+   int firstPos = findFirst(list, 5);
    printf("First occurrence of 5: %d\n", firstPos); // Expected: 2
 
    // Check if list is empty or full
-   printf("Is list empty? %s\n", isEmpty(&list) ? "Yes" : "No");
-   printf("Is list full? %s\n", isFull(&list) ? "Yes" : "No");
+   printf("Is list empty? %s\n", isEmpty(list) ? "Yes" : "No");
+   printf("Is list full? %s\n", isFull(list) ? "Yes" : "No");
 
    // Get element at position 3
-   ElementType val = getAt(&list, 3);
+   ElementType val = getAt(list, 3);
    printf("Element at position 3: %d\n", val); // Expected: 15
 
    // Remove element at position 1
-   bool removed = removeAt(&list, 1);
+   bool removed = removeAt(list, 1);
    printf("Removed element at position 1? %s\n", removed ? "Yes" : "No");
-   printList(&list); // Expected: 1 5 15 20 25 30
+   printList(list); // Expected: 1 5 15 20 25 30
 
    // Destroy the list
-   destroyList(&list);
-   printList(&list); // Expected: List is empty.
+   destroyList(list);
+   printList(list); // Expected: List is empty.
 
    return 0;
 }
