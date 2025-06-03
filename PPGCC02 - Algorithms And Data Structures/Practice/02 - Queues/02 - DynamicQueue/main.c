@@ -25,28 +25,28 @@ typedef struct {
 } DynamicQueue;
 
 // Function declarations
-DynamicQueue* create_queue();
-int initialize_queue(DynamicQueue* queue);
+DynamicQueue *create_queue();
+int initialize_queue(DynamicQueue *queue);
 int enqueue(DynamicQueue *queue, const ElementType add_element);
-int dequeue(DynamicQueue *queue, ElementType* removed_element);
-int peek_front(const DynamicQueue *queue, ElementType* front_element);
-int clone_queue(const DynamicQueue* source, DynamicQueue* destination);
-int invert_queue(DynamicQueue* queue);
-int search_element(const DynamicQueue* queue, ElementType value);
-int are_queues_equal(const DynamicQueue* q1, const DynamicQueue* q2);
-int insert_vector(DynamicQueue* queue, const ElementType* array, int length);
-bool is_valid(const DynamicQueue* queue);
+int dequeue(DynamicQueue *queue, ElementType *removed_element);
+int peek_front(const DynamicQueue *queue, ElementType *front_element);
+int clone_queue(const DynamicQueue *source, DynamicQueue *destination);
+int invert_queue(DynamicQueue *queue);
+int search_element(const DynamicQueue *queue, const ElementType value);
+int are_queues_equal(const DynamicQueue *q1, const DynamicQueue *q2);
+int insert_vector(DynamicQueue *queue, const ElementType *array, const int size);
+bool is_valid(const DynamicQueue *queue);
 bool is_empty(const DynamicQueue *queue);
-int print_queue(const DynamicQueue* queue);
-int print_queue_attributes(const DynamicQueue* queue);
-void free_queue(DynamicQueue** queue);
+int print_queue(const DynamicQueue *queue);
+int print_queue_attributes(const DynamicQueue *queue);
+void free_queue(DynamicQueue **queue);
 
 /*
  * Function to create a new DynamicQueue instance using dynamic memory.
  * return: pointer to a newly allocated DynamicQueue (NULL on failure).
  */
-DynamicQueue* create_queue() {
-	DynamicQueue* queue = (DynamicQueue*) malloc(sizeof(DynamicQueue));
+DynamicQueue *create_queue() {
+	DynamicQueue *queue = (DynamicQueue *) malloc(sizeof(DynamicQueue));
 
 	if (!queue) {
 		return NULL;
@@ -67,7 +67,7 @@ DynamicQueue* create_queue() {
  * queue: pointer to the DynamicQueue to initialize.
  * return: status of the operation (1: success, -1: error).
  */
-int initialize_queue(DynamicQueue* queue) {
+int initialize_queue(DynamicQueue *queue) {
 	if (!queue) {
 		return -1;
 	}
@@ -118,7 +118,7 @@ int enqueue(DynamicQueue *queue, const ElementType add_element) {
  * removed_element: pointer to store the dequeued element.
  * return: status of the operation (1: success, -1: error).
  */
-int dequeue(DynamicQueue *queue, ElementType* removed_element) {
+int dequeue(DynamicQueue *queue, ElementType *removed_element) {
 	if (!is_valid(queue) || !removed_element) {
 		return -1;
 	}
@@ -149,7 +149,7 @@ int dequeue(DynamicQueue *queue, ElementType* removed_element) {
  * front_element: pointer to store the front element.
  * return: status of the operation (1: success, -1: error).
  */
-int peek_front(const DynamicQueue *queue, ElementType* front_element) {
+int peek_front(const DynamicQueue *queue, ElementType *front_element) {
 	if (!is_valid(queue) || !front_element || !queue->front) {
 		return -1;
 	}
@@ -165,7 +165,7 @@ int peek_front(const DynamicQueue *queue, ElementType* front_element) {
  * destination: pointer to the destination DynamicQueue instance.
  * return: status of the operation (1: success, -1: error).
  */
-int clone_queue(const DynamicQueue* source, DynamicQueue* destination) {
+int clone_queue(const DynamicQueue *source, DynamicQueue *destination) {
 	if (!source || !destination) {
 		return -1;
 	}
@@ -189,7 +189,7 @@ int clone_queue(const DynamicQueue* source, DynamicQueue* destination) {
  * queue: pointer to the DynamicQueue instance.
  * return: status of the operation (1: success, -1: error).
  */
-int invert_queue(DynamicQueue* queue) {
+int invert_queue(DynamicQueue *queue) {
 	if (!is_valid(queue)) {
 		return -1;
 	}
@@ -218,7 +218,7 @@ int invert_queue(DynamicQueue* queue) {
  * value: element value to be searched.
  * return: 1 if found, 0 if not found, -1 on error.
  */
-int search_element(const DynamicQueue* queue, ElementType value) {
+int search_element(const DynamicQueue *queue, const ElementType value) {
 	if (!is_valid(queue)) {
 		return -1;
 	}
@@ -240,7 +240,7 @@ int search_element(const DynamicQueue* queue, ElementType value) {
  * q2: pointer to the second DynamicQueue instance.
  * return: 1 if equal, 0 if different, -1 on error.
  */
-int are_queues_equal(const DynamicQueue* q1, const DynamicQueue* q2) {
+int are_queues_equal(const DynamicQueue *q1, const DynamicQueue *q2) {
 	if (!q1 || !q2) {
 		return -1;
 	}
@@ -270,12 +270,12 @@ int are_queues_equal(const DynamicQueue* q1, const DynamicQueue* q2) {
  * length: number of elements in the array.
  * return: status of the operation (1: success, -1: error).
  */
-int insert_vector(DynamicQueue* queue, const ElementType* array, int length) {
-	if (!is_valid(queue) || !array || length <= 0) {
+int insert_vector(DynamicQueue *queue, const ElementType *array, const int size) {
+	if (!is_valid(queue) || !array || size <= 0) {
 		return -1;
 	}
 
-	for (int i = 0; i < length; i++) {
+	for (int i = 0; i < size; i++) {
 		if (enqueue(queue, array[i]) == -1) {
 			return -1;
 		}
@@ -290,7 +290,7 @@ int insert_vector(DynamicQueue* queue, const ElementType* array, int length) {
  * queue: pointer to DynamicQueue instance.
  * return: true if valid, false otherwise.
  */
-bool is_valid(const DynamicQueue* queue) {
+bool is_valid(const DynamicQueue *queue) {
 	if (!queue) return false;
 
 	int count = 0;
@@ -333,7 +333,7 @@ bool is_empty(const DynamicQueue *queue) {
  * queue: pointer to the DynamicQueue instance.
  * return: status of the operation (1: success, -1: error).
  */
-int print_queue(const DynamicQueue* queue) {
+int print_queue(const DynamicQueue *queue) {
 	if (!is_valid(queue)) {
 		return -1;
 	}
@@ -354,7 +354,7 @@ int print_queue(const DynamicQueue* queue) {
  * queue: pointer to the DynamicQueue instance.
  * return: status of the operation (1: success, -1: error).
  */
-int print_queue_attributes(const DynamicQueue* queue) {
+int print_queue_attributes(const DynamicQueue *queue) {
 	if (!is_valid(queue)) {
 		return -1;
 	}
@@ -383,7 +383,7 @@ int print_queue_attributes(const DynamicQueue* queue) {
  * queue: pointer to the DynamicQueue instance.
  * return: void.
  */
-void free_queue(DynamicQueue** queue) {
+void free_queue(DynamicQueue ** queue) {
 	if (!queue || !*queue) return;
 
 	Node* current = (*queue)->front;
@@ -485,7 +485,7 @@ int main(int argc, char *argv[]) {
 	printf("\n");
 
 	// Clone queue into a new queue
-	DynamicQueue* cloned_queue = create_queue();
+	DynamicQueue *cloned_queue = create_queue();
 	printf("Cloning current queue into a new queue...\n");
 	if (clone_queue(queue, cloned_queue) == 1) {
 		printf("Cloning successful. Cloned queue attributes:\n");
