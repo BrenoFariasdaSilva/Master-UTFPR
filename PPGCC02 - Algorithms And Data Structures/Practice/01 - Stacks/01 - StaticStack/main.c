@@ -569,6 +569,5 @@ int main(int argc, char *argv[]) {
 		printf("Failed to destroy the stack.\n");
 	}
 
-
 	return 0;
 }
