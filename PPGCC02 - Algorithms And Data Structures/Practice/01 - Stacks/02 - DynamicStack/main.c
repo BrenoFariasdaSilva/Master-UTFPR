@@ -371,7 +371,7 @@ void free_stack(DynamicStack **stack) {
 		free(temp);
 	}
 
-	free(*stack);	// Free the stack structure itself
+	free(*stack); // Free the stack structure itself
 	*stack = NULL; // Set the original pointer to NULL to avoid dangling pointer
 }
 
