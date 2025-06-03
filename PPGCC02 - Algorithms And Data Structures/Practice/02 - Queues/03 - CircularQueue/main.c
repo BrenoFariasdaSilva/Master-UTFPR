@@ -22,7 +22,7 @@ typedef struct {
 } CircularQueue;
 
 // Function declarations
-CircularQueue *create_circular_queue(int capacity);
+CircularQueue* create_circular_queue(int capacity);
 int initialize_circular_queue(CircularQueue *queue, int capacity);
 int enqueue(CircularQueue *queue, const ElementType add_element);
 int dequeue(CircularQueue *queue, ElementType *removed_element);
@@ -43,7 +43,7 @@ void free_circular_queue(CircularQueue **queue);
  * capacity: maximum number of elements.
  * return: pointer to the newly allocated CircularQueue, or NULL on failure.
  */
-CircularQueue *create_circular_queue(int capacity) {
+CircularQueue* create_circular_queue(int capacity) {
 	CircularQueue *queue = (CircularQueue *) malloc(sizeof(CircularQueue));
 	if (!queue) return NULL;
 

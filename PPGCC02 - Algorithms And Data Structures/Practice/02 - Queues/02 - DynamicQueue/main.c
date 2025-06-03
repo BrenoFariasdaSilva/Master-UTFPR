@@ -25,7 +25,7 @@ typedef struct {
 } DynamicQueue;
 
 // Function declarations
-DynamicQueue *create_queue();
+DynamicQueue* create_queue();
 int initialize_queue(DynamicQueue *queue);
 int enqueue(DynamicQueue *queue, const ElementType add_element);
 int dequeue(DynamicQueue *queue, ElementType *removed_element);
@@ -45,7 +45,7 @@ void free_queue(DynamicQueue **queue);
  * Function to create a new DynamicQueue instance using dynamic memory.
  * return: pointer to a newly allocated DynamicQueue (NULL on failure).
  */
-DynamicQueue *create_queue() {
+DynamicQueue* create_queue() {
 	DynamicQueue *queue = (DynamicQueue *) malloc(sizeof(DynamicQueue));
 
 	if (!queue) {
