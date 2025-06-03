@@ -13,11 +13,21 @@
 
 #define ElementType int // Define a macro for the element type in the Stack.
 
+/*
+ * Structure to represent a node in the dynamic stack.
+ * data: the element stored in the node.
+ * below: pointer to the next node below this one in the stack.
+ */
 typedef struct node {
-	ElementType data;
-	struct node *below;
+	ElementType data; // Data stored in the node.
+	struct node *below; // Pointer to the node below this one in the stack.
 } Node;
 
+/*
+ * Structure to represent a dynamic stack.
+ * head: pointer to the top node of the stack.
+ * size: current number of elements in the stack.
+ */
 typedef struct {
 	Node *head; // Pointer to node in the head of the stack.
 	int size; // Size of the stack.
@@ -51,7 +61,10 @@ DynamicStack* create_stack() {
 		return NULL;
 	}
 
-	initialize_stack(stack);
+	if (initialize_stack(stack) == -1) {
+		free(stack);
+		return NULL; // Initialization failed
+	}
 
 	if (!is_valid(stack)) {
 		free(stack);

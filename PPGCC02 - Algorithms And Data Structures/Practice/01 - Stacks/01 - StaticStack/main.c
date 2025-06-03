@@ -16,6 +16,12 @@
 #define ElementType int // Define a macro for the element type in the Stack.
 #define MAX_SIZE 100 // Define the Max Size of the Stack.
 
+/*
+ * Structure to represent a static stack.
+ * vector: fixed-size array to hold stack elements.
+ * size: maximum size (capacity) of the stack.
+ * quantity: current number of elements in the stack.
+ */
 typedef struct {
 	ElementType vector[MAX_SIZE]; // Fixed-size array
 	int size; // Maximum size (capacity)
@@ -24,6 +30,7 @@ typedef struct {
 
 // Function declarations
 StaticStack create_stack();
+int initialize_stack(StaticStack *stack);
 int push(StaticStack *stack, const ElementType add_element);
 int pop(StaticStack *stack, ElementType *pop_element);
 int is_empty(const StaticStack *stack);
@@ -48,9 +55,30 @@ int destroy(StaticStack *stack);
 */
 StaticStack create_stack() {
 	StaticStack stack;
-	stack.size = MAX_SIZE;
-	stack.quantity = 0;
+
+	initialize_stack(&stack);
+
 	return stack;
+}
+
+/*
+ * Function to initialize the stack.
+ * stack: pointer to the StaticStack instance.
+ * return: status of the operation (1: success, -1: error).
+ */
+int initialize_stack(StaticStack *stack) {
+	if (!stack) {
+		return -1;
+	}
+
+	stack->size = MAX_SIZE;
+	stack->quantity = 0;
+
+	for (int i = 0; i < MAX_SIZE; i++) {
+		stack->vector[i] = 0; // Initialize all elements to 0
+	}
+
+	return 1;
 }
 
 /*
