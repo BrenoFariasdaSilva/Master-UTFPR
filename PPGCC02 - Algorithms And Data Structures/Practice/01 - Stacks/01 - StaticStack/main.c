@@ -26,20 +26,20 @@ typedef struct {
 StaticStack create_stack();
 int push(StaticStack *stack, const ElementType add_element);
 int pop(StaticStack *stack, ElementType *pop_element);
-int is_empty(StaticStack *stack);
-int is_full(StaticStack *stack);
-int peek(const StaticStack *stack, ElementType* top_element);
+int is_empty(const StaticStack *stack);
+int is_full(const StaticStack *stack);
+int peek(const StaticStack *stack, ElementType *top_element);
 int clear(StaticStack *stack);
-int search(const StaticStack *stack, ElementType element);
-int clone(const StaticStack *stack, StaticStack* clone);
+int search(const StaticStack *stack, const ElementType element);
+int clone(const StaticStack *stack, StaticStack *clone);
 int invert(StaticStack *stack);
-int is_equal(const StaticStack* stack1, const StaticStack* stack2);
-int insert_vector(StaticStack *stack, const ElementType* vector, int size);
+int is_equal(const StaticStack *stack1, const StaticStack *stack2);
+int insert_vector(StaticStack *stack, const ElementType *vector, const int size);
 bool is_valid(const StaticStack *stack);
 int print_stack_attributes(const StaticStack *stack);
 int print_stack(const StaticStack *stack);
-int validate_parentheses_expression(const char* expression);
-int evaluate_postfix_expression(const char* expression, int* result);
+int validate_parentheses_expression(const char *expression);
+int evaluate_postfix_expression(const char *expression, int *result);
 int destroy(StaticStack *stack);
 
 /*
@@ -100,7 +100,7 @@ int pop(StaticStack *stack, ElementType *pop_element) {
  * stack: pointer to the StaticStack instance.
  * return: 1 if empty, 0 if not empty, -1 if error (null pointer).
 */
-int is_empty(StaticStack *stack) {
+int is_empty(const StaticStack *stack) {
 	if (!is_valid(stack)) {
 		return -1;
 	}
@@ -113,7 +113,7 @@ int is_empty(StaticStack *stack) {
  * stack: pointer to the StaticStack instance.
  * return: 1 if full, 0 if not full, -1 if error (null pointer).
 */
-int is_full(StaticStack *stack) {
+int is_full(const StaticStack *stack) {
 	if (!is_valid(stack)) {
 		return -1;
 	}
@@ -127,7 +127,7 @@ int is_full(StaticStack *stack) {
  * top_element: pointer to store the top element.
  * return: status of the operation (1: success, -1: error).
 */
-int peek(const StaticStack *stack, ElementType* top_element) {
+int peek(const StaticStack *stack, ElementType *top_element) {
 	if (!is_valid(stack) || !top_element) {
 		return -1;
 	}
@@ -183,7 +183,7 @@ int search(const StaticStack *stack, ElementType element) {
  * clone: pointer to the destination StaticStack.
  * return: status of the operation (1: success, -1: error).
 */
-int clone(const StaticStack *stack, StaticStack* clone) {
+int clone(const StaticStack *stack, StaticStack *clone) {
 	if (!is_valid(stack) || !clone) {
 		return -1;
 	}
@@ -228,7 +228,7 @@ int invert(StaticStack *stack) {
  * stack2: pointer to the second StaticStack.
  * return: 1 if equal, 0 if different, -1 if error.
 */
-int is_equal(const StaticStack* stack1, const StaticStack* stack2) {
+int is_equal(const StaticStack *stack1, const StaticStack *stack2) {
 	if (!is_valid(stack1) || !is_valid(stack2)) {
 		return -1;
 	}
@@ -253,7 +253,7 @@ int is_equal(const StaticStack* stack1, const StaticStack* stack2) {
  * size: number of elements in the vector.
  * return: status of the operation (1: success, -1: error).
 */
-int insert_vector(StaticStack *stack, const ElementType* vector, int size) {
+int insert_vector(StaticStack *stack, const ElementType *vector, const int size) {
 	if (!is_valid(stack) || !vector || size < 0) {
 		return -1;
 	}
@@ -332,7 +332,7 @@ int print_stack(const StaticStack *stack) {
  * expression: string containing the mathematical expression.
  * return: status of the validation (1: balanced, -1: unbalanced).
  */
-int validate_parentheses_expression(const char* expression) {
+int validate_parentheses_expression(const char *expression) {
 	if (!expression) {
 		return -1;
 	}
@@ -375,7 +375,7 @@ int validate_parentheses_expression(const char* expression) {
  * result: pointer to store the final result of the evaluated expression.
  * return: status of the operation (1: success, -1: error).
  */
-int evaluate_postfix_expression(const char* expression, int* result) {
+int evaluate_postfix_expression(const char *expression, int *result) {
 	if (!expression || !result) {
 		return -1;
 	}
@@ -543,7 +543,7 @@ int main(int argc, char *argv[]) {
 	printf("Is Stack Full? %s\n", is_full(&stack) == 1 ? "Yes" : "No");
 
 	// Evaluate a postfix expression
-	const char* expression = "3 4 + 2 * 7 /";
+	const char *expression = "3 4 + 2 * 7 /";
 	int eval_result;
 	printf("\nEvaluating postfix expression: \"%s\"\n", expression);
 	if (evaluate_postfix_expression(expression, &eval_result) == 1) {
@@ -553,7 +553,7 @@ int main(int argc, char *argv[]) {
 	}
 
 	// Validate parentheses in an infix expression
-	const char* infix_expression = "(3 + 4) * (2 - (1 + 1))";
+	const char *infix_expression = "(3 + 4) * (2 - (1 + 1))";
 	printf("\nValidating parentheses in expression: \"%s\"\n", infix_expression);
 	if (validate_parentheses_expression(infix_expression) == 1) {
 		printf("Parentheses are balanced and correctly nested.\n");
