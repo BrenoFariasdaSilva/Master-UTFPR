@@ -40,6 +40,7 @@ int print_stack_attributes(const StaticStack* stack);
 int print_stack(const StaticStack* stack);
 int validate_parentheses_expression(const char* expression);
 int evaluate_postfix_expression(const char* expression, int* result);
+int destroy(StaticStack* stack);
 
 /*
  * Function to create and initialize the stack.
@@ -437,6 +438,23 @@ int evaluate_postfix_expression(const char* expression, int* result) {
 }
 
 /*
+ * Function to destroy the stack.
+ * stack: pointer to the StaticStack instance to be destroyed.
+ * return: status of the operation (1: success, -1: error).
+*/
+int destroy(StaticStack* stack) {
+	if (!is_valid(stack)) {
+		return -1;
+	}
+
+	stack->size = 0;
+	stack->quantity = 0;
+
+	return 1;
+}
+
+
+/*
  * Main function of the program.
  * argc: number of arguments passed when calling the program.
  * argv: array containing the arguments passed to the program.
@@ -542,6 +560,15 @@ int main(int argc, char *argv[]) {
 	} else {
 		printf("Parentheses are not balanced or incorrectly nested.\n");
 	}
+
+	// Destroy the stack
+	printf("\nDestroying the stack...\n");
+	if (destroy(&stack) == 1) {
+		printf("Stack destroyed successfully.\n");
+	} else {
+		printf("Failed to destroy the stack.\n");
+	}
+
 
 	return 0;
 }
