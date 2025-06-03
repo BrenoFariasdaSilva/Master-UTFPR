@@ -22,20 +22,20 @@ typedef struct {
 
 // Function declarations
 StaticQueue create_queue();
-int enqueue(StaticQueue* queue, const ElementType add_element);
-int dequeue(StaticQueue* queue, ElementType* removed_element);
-int is_empty(const StaticQueue* queue);
-int is_full(const StaticQueue* queue);
-int peek(const StaticQueue* queue, ElementType* front_element);
-int clear(StaticQueue* queue);
-int search(const StaticQueue* queue, ElementType element);
-int clone(const StaticQueue* queue, StaticQueue* clone);
-int invert(StaticQueue* queue);
-int is_equal(const StaticQueue* queue1, const StaticQueue* queue2);
-int insert_vector(StaticQueue* queue, const ElementType* vector, int size);
-int is_valid(const StaticQueue* queue);
-int print_queue_attributes(const StaticQueue* queue);
-int print_queue(const StaticQueue* queue);
+int enqueue(StaticQueue *queue, const ElementType add_element);
+int dequeue(StaticQueue *queue, ElementType *removed_element);
+int is_empty(const StaticQueue *queue);
+int is_full(const StaticQueue *queue);
+int peek(const StaticQueue *queue, ElementType *front_element);
+int clear(StaticQueue *queue);
+int search(const StaticQueue *queue, const ElementType element);
+int clone(const StaticQueue *queue, StaticQueue *clone);
+int invert(StaticQueue *queue);
+int is_equal(const StaticQueue *queue1, const StaticQueue *queue2);
+int insert_vector(StaticQueue *queue, const ElementType *vector, const int size);
+int is_valid(const StaticQueue *queue);
+int print_queue_attributes(const StaticQueue *queue);
+int print_queue(const StaticQueue *queue);
 
 /*
  * Function to create and initialize the queue.
@@ -56,7 +56,7 @@ StaticQueue create_queue() {
  * add_element: the element to add to the queue.
  * return: status of the operation (1: success, -1: error).
 */
-int enqueue(StaticQueue* queue, const ElementType add_element) {
+int enqueue(StaticQueue *queue, const ElementType add_element) {
 	if (!is_valid(queue)) {
 		return -1;
 	}
@@ -79,7 +79,7 @@ int enqueue(StaticQueue* queue, const ElementType add_element) {
  * removed_element: pointer to store the dequeued element.
  * return: status of the operation (1: success, -1: error).
 */
-int dequeue(StaticQueue* queue, ElementType* removed_element) {
+int dequeue(StaticQueue *queue, ElementType *removed_element) {
 	if (!is_valid(queue) || !removed_element) {
 		return -1;
 	}
@@ -101,7 +101,7 @@ int dequeue(StaticQueue* queue, ElementType* removed_element) {
  * queue: pointer to the StaticQueue instance.
  * return: 1 if empty, 0 if not empty, -1 if error (null pointer).
 */
-int is_empty(const StaticQueue* queue) {
+int is_empty(const StaticQueue *queue) {
 	if (!is_valid(queue)) {
 		return -1;
 	}
@@ -114,7 +114,7 @@ int is_empty(const StaticQueue* queue) {
  * queue: pointer to the StaticQueue instance.
  * return: 1 if full, 0 if not full, -1 if error (null pointer).
 */
-int is_full(const StaticQueue* queue) {
+int is_full(const StaticQueue *queue) {
 	if (!is_valid(queue)) {
 		return -1;
 	}
@@ -128,7 +128,7 @@ int is_full(const StaticQueue* queue) {
  * front_element: pointer to store the front element.
  * return: status of the operation (1: success, -1: error).
 */
-int peek(const StaticQueue* queue, ElementType* front_element) {
+int peek(const StaticQueue *queue, ElementType *front_element) {
 	if (!is_valid(queue) || !front_element) {
 		return -1;
 	}
@@ -148,7 +148,7 @@ int peek(const StaticQueue* queue, ElementType* front_element) {
  * queue: pointer to the StaticQueue instance.
  * return: status of the operation (1: success, -1: error).
 */
-int clear(StaticQueue* queue) {
+int clear(StaticQueue *queue) {
 	if (!is_valid(queue)) {
 		return -1;
 	}
@@ -166,7 +166,7 @@ int clear(StaticQueue* queue) {
  * element: the element to search for.
  * return: index relative to the front (0-based), -1 if not found or error.
 */
-int search(const StaticQueue* queue, ElementType element) {
+int search(const StaticQueue *queue, const ElementType element) {
 	if (!is_valid(queue) || queue->quantity == 0) {
 		return -1;
 	}
@@ -188,7 +188,7 @@ int search(const StaticQueue* queue, ElementType element) {
  * clone: pointer to the StaticQueue instance that will receive the copy.
  * return: status of the operation (1: success, -1: error).
 */
-int clone(const StaticQueue* queue, StaticQueue* clone) {
+int clone(const StaticQueue *queue, StaticQueue *clone) {
 	if (!is_valid(queue) || !clone) {
 		return -1;
 	}
@@ -210,7 +210,7 @@ int clone(const StaticQueue* queue, StaticQueue* clone) {
  * queue: pointer to the StaticQueue instance.
  * return: status of the operation (1: success, -1: error).
 */
-int invert(StaticQueue* queue) {
+int invert(StaticQueue *queue) {
 	if (!is_valid(queue) || queue->quantity <= 1) {
 		return -1;
 	}
@@ -232,7 +232,7 @@ int invert(StaticQueue* queue) {
  * queue2: pointer to the second StaticQueue instance.
  * return: 1 if equal, 0 if different, -1 if error.
 */
-int is_equal(const StaticQueue* queue1, const StaticQueue* queue2) {
+int is_equal(const StaticQueue *queue1, const StaticQueue *queue2) {
 	if (!is_valid(queue1) || !is_valid(queue2)) {
 		return -1;
 	}
@@ -260,7 +260,7 @@ int is_equal(const StaticQueue* queue1, const StaticQueue* queue2) {
  * size: number of elements in the vector.
  * return: number of elements successfully inserted, -1 if error.
 */
-int insert_vector(StaticQueue* queue, const ElementType* vector, int size) {
+int insert_vector(StaticQueue *queue, const ElementType *vector, const int size) {
 	if (!is_valid(queue) || !vector || size < 0) {
 		return -1;
 	}
@@ -282,7 +282,7 @@ int insert_vector(StaticQueue* queue, const ElementType* vector, int size) {
  * queue: pointer to the StaticQueue instance.
  * return: 1 if valid, 0 if inconsistent, -1 if null pointer.
 */
-int is_valid(const StaticQueue* queue) {
+int is_valid(const StaticQueue *queue) {
 	if (!queue) {
 		return -1;
 	}
@@ -300,7 +300,7 @@ int is_valid(const StaticQueue* queue) {
  * queue: pointer to the StaticQueue instance.
  * return: status of the operation (1: success, -1: error).
 */
-int print_queue_attributes(const StaticQueue* queue) {
+int print_queue_attributes(const StaticQueue *queue) {
 	if (!is_valid(queue)) {
 		return -1;
 	}
@@ -317,7 +317,7 @@ int print_queue_attributes(const StaticQueue* queue) {
  * queue: pointer to the StaticQueue instance.
  * return: status of the operation (1: success, -1: error).
 */
-int print_queue(const StaticQueue* queue) {
+int print_queue(const StaticQueue *queue) {
 	if (!is_valid(queue)) {
 		return -1;
 	}
