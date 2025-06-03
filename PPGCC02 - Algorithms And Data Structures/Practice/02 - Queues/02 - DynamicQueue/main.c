@@ -267,7 +267,7 @@ int are_queues_equal(const DynamicQueue *q1, const DynamicQueue *q2) {
  * Function to insert multiple elements from an array into the queue.
  * queue: pointer to the DynamicQueue instance.
  * array: pointer to the array of elements.
- * length: number of elements in the array.
+ * size: number of elements in the array.
  * return: status of the operation (1: success, -1: error).
  */
 int insert_vector(DynamicQueue *queue, const ElementType *array, const int size) {
