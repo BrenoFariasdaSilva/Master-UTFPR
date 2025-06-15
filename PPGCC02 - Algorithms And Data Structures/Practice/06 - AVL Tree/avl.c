@@ -279,3 +279,182 @@ void avl_destroy(Node** root) {
 	free(*root);
 	*root = NULL;
 }
+
+/*
+* Finds the minimum element in the AVL tree.
+* If the tree is empty, returns NULL.
+*/
+Node* avl_find_min(Node* root) {
+	if (root == NULL) return NULL;
+	Node* current = root;
+	while (current->left != NULL)
+		current = current->left;
+	return current;
+}
+
+/*
+* Finds the maximum element in the AVL tree.
+* If the tree is empty, returns NULL.
+*/
+Node* avl_find_max(Node* root) {
+	if (root == NULL) return NULL;
+	Node* current = root;
+	while (current->right != NULL)
+		current = current->right;
+	return current;
+}
+
+/*
+* Checks if the AVL tree is balanced.
+* A tree is balanced if the height difference between left and right subtrees is at most 1.
+*/
+bool avl_is_balanced(Node* root) {
+	if (root == NULL) return true;
+
+	int balance = height(root->left) - height(root->right);
+	if (balance < -1 || balance > 1)
+		return false;
+
+	return avl_is_balanced(root->left) && avl_is_balanced(root->right);
+}
+
+/*
+* Finds the successor of a given element in the AVL tree.
+* The successor is the smallest element greater than the given element.
+* Returns NULL if no successor exists.
+*/
+Node* avl_successor(Node* root, ElementType data) {
+	Node* succ = NULL;
+	while (root != NULL) {
+		if (data < root->data) {
+			succ = root;
+			root = root->left;
+		} else {
+			root = root->right;
+		}
+	}
+	return succ;
+}
+
+/*
+* Finds the predecessor of a given element in the AVL tree.
+* The predecessor is the largest element smaller than the given element.
+* Returns NULL if no predecessor exists.
+*/
+Node* avl_predecessor(Node* root, ElementType data) {
+	Node* pred = NULL;
+	while (root != NULL) {
+		if (data > root->data) {
+			pred = root;
+			root = root->right;
+		} else {
+			root = root->left;
+		}
+	}
+	return pred;
+}
+
+/*
+* Returns the k-th smallest element in the AVL tree (1-based index).
+* If k is invalid (<=0 or > size), returns NULL.
+*/
+Node* avl_select(Node* root, int k) {
+	if (root == NULL || k <= 0) return NULL;
+	int left_size = avl_size(root->left);
+
+	if (k == left_size + 1)
+		return root;
+	else if (k <= left_size)
+		return avl_select(root->left, k);
+	else
+		return avl_select(root->right, k - left_size - 1);
+}
+
+/*
+* Returns the rank of an element in the AVL tree.
+* The rank is the number of elements less than the given element.
+* If the element does not exist, returns the rank it would have if it were inserted.
+*/
+int avl_rank(Node* root, ElementType data) {
+	if (root == NULL) return 0;
+	if (data < root->data)
+		return avl_rank(root->left, data);
+	else if (data > root->data)
+		return 1 + avl_size(root->left) + avl_rank(root->right, data);
+	else
+		return avl_size(root->left);
+}
+
+/*
+* Converts the AVL tree to a sorted array.
+* The array must be pre-allocated with enough space.
+*/
+void avl_to_array(Node* root, ElementType array[]) {
+	static int index = 0;
+	if (root == NULL) return;
+	avl_to_array(root->left, array);
+	array[index++] = root->data;
+	avl_to_array(root->right, array);
+	if (root->height == 0) index = 0; // Reset after full traversal
+}
+
+/*
+* Constructs an AVL tree from a sorted array.
+* The array must be sorted in ascending order.
+*/
+Node* avl_from_sorted_array(ElementType array[], int start, int end) {
+	if (start > end) return NULL;
+
+	int mid = (start + end) / 2;
+	Node* node = create_node(array[mid]);
+
+	node->left = avl_from_sorted_array(array, start, mid - 1);
+	node->right = avl_from_sorted_array(array, mid + 1, end);
+
+	node->height = 1 + max(height(node->left), height(node->right));
+
+	return node;
+}
+
+/*
+* Prints the AVL tree in a hierarchical format.
+* The tree is printed with right children on top and left children below.
+*/
+void avl_print_tree(Node* root, int space) {
+	if (root == NULL) return;
+
+	space += 5;
+	avl_print_tree(root->right, space);
+
+	printf("\n");
+	for (int i = 5; i < space; i++)
+		printf(" ");
+	printf("%d\n", root->data);
+
+	avl_print_tree(root->left, space);
+}
+
+/*
+* Counts the number of leaf nodes in the AVL tree.
+* A leaf node is a node with no children.
+*/
+int avl_leaf_count(Node* root) {
+	if (root == NULL) return 0;
+	if (root->left == NULL && root->right == NULL) return 1;
+	return avl_leaf_count(root->left) + avl_leaf_count(root->right);
+}
+
+/*
+* Returns the depth of a specific element in the AVL tree.
+* The depth is the number of edges from the root to the node containing the element.
+*/
+int avl_depth(Node* root, ElementType data) {
+	int depth = 0;
+	while (root != NULL) {
+		if (data == root->data) return depth;
+		else if (data < root->data) root = root->left;
+		else root = root->right;
+		depth++;
+	}
+	return -1; // Not found
+}
