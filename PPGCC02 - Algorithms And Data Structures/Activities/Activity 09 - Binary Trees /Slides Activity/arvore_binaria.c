@@ -7,11 +7,6 @@
 * DADOS
 **************************************/
 
-struct no {
-   TipoElemento dado;
-   struct no *esq, *dir;
-};
-
 /**************************************
 * FUNÇÕES AUXILIARES
 **************************************/
@@ -22,6 +17,16 @@ No* criar_no(TipoElemento elemento) {
    novo->esq = NULL;
    novo->dir = NULL;
    return novo;
+}
+
+No* encontrar_minimo(No* raiz) {
+   while (raiz->esq != NULL) raiz = raiz->esq;
+   return raiz;
+}
+
+No* encontrar_maximo(No* raiz) {
+   while (raiz->dir != NULL) raiz = raiz->dir;
+   return raiz;
 }
 
 /**************************************
@@ -49,11 +54,6 @@ bool ab_inserir(No **enderecoRaiz, TipoElemento elemento) {
    }
 
    return false; // elemento já existe
-}
-
-No* encontrar_minimo(No* raiz) {
-   while (raiz->esq != NULL) raiz = raiz->esq;
-   return raiz;
 }
 
 bool ab_remover(No** enderecoRaiz, TipoElemento dado) {
@@ -123,4 +123,118 @@ bool ab_consulta(No* raiz, TipoElemento dado) {
       return ab_consulta(raiz->esq, dado);
    else
       return ab_consulta(raiz->dir, dado);
+}
+
+/* ------- NOVAS FUNÇÕES ------- */
+
+// Profundidade do nó com dado "dado" (raiz é nível 0)
+// Retorna -1 se não encontrar
+int ab_profundidade(No *raiz, TipoElemento dado) {
+   if (raiz == NULL) return -1;
+   if (raiz->dado == dado) return 0;
+   int prof = ab_profundidade(raiz->esq, dado);
+   if (prof >= 0) return prof + 1;
+   prof = ab_profundidade(raiz->dir, dado);
+   if (prof >= 0) return prof + 1;
+   return -1;
+}
+
+// Conta o número de folhas (nós sem filhos)
+int ab_contar_folhas(No *raiz) {
+   if (raiz == NULL) return 0;
+   if (raiz->esq == NULL && raiz->dir == NULL) return 1;
+   return ab_contar_folhas(raiz->esq) + ab_contar_folhas(raiz->dir);
+}
+
+// Conta nós internos (com pelo menos um filho)
+int ab_contar_nos_internos(No *raiz) {
+   if (raiz == NULL) return 0;
+   if (raiz->esq == NULL && raiz->dir == NULL) return 0;
+   return 1 + ab_contar_nos_internos(raiz->esq) + ab_contar_nos_internos(raiz->dir);
+}
+
+// Verifica se a árvore está balanceada (diferença de altura das subárvores <= 1)
+static int ab_altura_balanceada(No *raiz) {
+   if (raiz == NULL) return 0;
+   int alt_esq = ab_altura_balanceada(raiz->esq);
+   if (alt_esq == -1) return -1;
+   int alt_dir = ab_altura_balanceada(raiz->dir);
+   if (alt_dir == -1) return -1;
+   if (abs(alt_esq - alt_dir) > 1) return -1;
+   return 1 + (alt_esq > alt_dir ? alt_esq : alt_dir);
+}
+
+bool ab_esta_balanceada(No *raiz) {
+   return ab_altura_balanceada(raiz) != -1;
+}
+
+// Verifica se duas árvores são iguais (mesma estrutura e valores)
+bool ab_sao_iguais(No *raiz1, No *raiz2) {
+   if (raiz1 == NULL && raiz2 == NULL) return true;
+   if (raiz1 == NULL || raiz2 == NULL) return false;
+   if (raiz1->dado != raiz2->dado) return false;
+   return ab_sao_iguais(raiz1->esq, raiz2->esq) && ab_sao_iguais(raiz1->dir, raiz2->dir);
+}
+
+// Encontra o sucessor em ordem para o dado (nó com menor valor maior que dado)
+No* ab_sucessor(No *raiz, TipoElemento dado) {
+   No *sucessor = NULL;
+   No *atual = raiz;
+   while (atual != NULL) {
+      if (dado < atual->dado) {
+         sucessor = atual;
+         atual = atual->esq;
+      } else {
+         atual = atual->dir;
+      }
+   }
+   return sucessor;
+}
+
+// Encontra o predecessor em ordem para o dado (nó com maior valor menor que dado)
+No* ab_predecessor(No *raiz, TipoElemento dado) {
+   No *predecessor = NULL;
+   No *atual = raiz;
+   while (atual != NULL) {
+      if (dado > atual->dado) {
+         predecessor = atual;
+         atual = atual->dir;
+      } else {
+         atual = atual->esq;
+      }
+   }
+   return predecessor;
+}
+
+// Helper para contar quantos nós tem
+static void ab_contar_nos(No *raiz, int *contador) {
+   if (raiz == NULL) return;
+   (*contador)++;
+   ab_contar_nos(raiz->esq, contador);
+   ab_contar_nos(raiz->dir, contador);
+}
+
+// Helper para preencher lista em ordem
+static void ab_preencher_lista(No *raiz, TipoElemento *lista, int *index) {
+   if (raiz == NULL) return;
+   ab_preencher_lista(raiz->esq, lista, index);
+   lista[*index] = raiz->dado;
+   (*index)++;
+   ab_preencher_lista(raiz->dir, lista, index);
+}
+
+// Converte árvore para lista ordenada, retorna array alocado dinamicamente e atualiza tamanho
+TipoElemento* ab_para_lista(No *raiz, int *tamanho) {
+   if (raiz == NULL) {
+      *tamanho = 0;
+      return NULL;
+   }
+   int total = 0;
+   ab_contar_nos(raiz, &total);
+
+   TipoElemento *lista = (TipoElemento*)malloc(total * sizeof(TipoElemento));
+   int idx = 0;
+   ab_preencher_lista(raiz, lista, &idx);
+   *tamanho = total;
+   return lista;
 }
