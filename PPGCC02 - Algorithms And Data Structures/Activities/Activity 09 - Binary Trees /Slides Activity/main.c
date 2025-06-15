@@ -25,7 +25,7 @@ void teste1(){
 	ab_destruir(&arvore);
 }
 
-int teste2(){
+void teste2(){
 
 	No *arvore = NULL;
 	ab_inserir(&arvore, 20);
