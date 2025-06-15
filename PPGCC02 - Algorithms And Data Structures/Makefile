@@ -12,8 +12,11 @@ CC = gcc
 # Compilation flags (optional, can include -Wall for warnings)
 CFLAGS = -Wall -O2
 
-# Default rule
+# Default rule: compile, run, and delete executable
 all: $(TARGET)
+	clear
+	./$(TARGET)
+	rm -f $(TARGET)
 
 # Rule to generate the executable
 $(TARGET): $(SRC)
