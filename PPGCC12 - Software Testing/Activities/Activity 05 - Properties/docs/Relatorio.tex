@@ -1,0 +1,480 @@
+% Options for packages loaded elsewhere
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+  letterpaper,
+  DIV=11,
+  numbers=noendperiod]{scrartcl}
+\usepackage{xcolor}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+% Make \paragraph and \subparagraph free-standing
+\makeatletter
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}{
+    \@ifstar
+      \xxxParagraphStar
+      \xxxParagraphNoStar
+  }
+  \newcommand{\xxxParagraphStar}[1]{\oldparagraph*{#1}\mbox{}}
+  \newcommand{\xxxParagraphNoStar}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}{
+    \@ifstar
+      \xxxSubParagraphStar
+      \xxxSubParagraphNoStar
+  }
+  \newcommand{\xxxSubParagraphStar}[1]{\oldsubparagraph*{#1}\mbox{}}
+  \newcommand{\xxxSubParagraphNoStar}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+\makeatother
+
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{241,243,245}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.40,0.45,0.13}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\BuiltInTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\ExtensionTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.28,0.35,0.67}{#1}}
+\newcommand{\ImportTok}[1]{\textcolor[rgb]{0.00,0.46,0.62}{#1}}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.07,0.07,0.07}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+
+
+
+
+
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+
+
+ 
+
+
+\KOMAoption{captions}{tableheading}
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Table of contents}
+\else
+  \newcommand\contentsname{Table of contents}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{List of Figures}
+\else
+  \newcommand\listfigurename{List of Figures}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{List of Tables}
+\else
+  \newcommand\listtablename{List of Tables}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Figure}
+\else
+  \newcommand\figurename{Figure}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Table}
+\else
+  \newcommand\tablename{Table}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Listing}
+\newcommand*\listoflistings{\listof{codelisting}{List of Listings}}
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Prática 07 - Teste Baseado em Propriedades},
+  pdfauthor={Breno Farias da Silva},
+  colorlinks=true,
+  linkcolor={blue},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={Blue},
+  pdfcreator={LaTeX via pandoc}}
+
+
+\title{Prática 07 - Teste Baseado em Propriedades}
+\author{Breno Farias da Silva}
+\date{2025-06-09}
+\begin{document}
+\maketitle
+
+
+\subsection{Introdução}\label{introduuxe7uxe3o}
+
+Este relatório descreve a aplicação da técnica de \textbf{teste baseado
+em propriedades (Property-Based Testing)} para verificar a implementação
+de uma função que valida identificadores na linguagem \emph{Silly
+Pascal}. A atividade faz parte da disciplina \textbf{PPGCC12 - Teste de
+Software}.
+
+A função \texttt{validateIdentifier(String\ s)} possui o objetivo de
+determinar se um identificador é válido segundo as seguintes regras:
+
+\begin{itemize}
+\tightlist
+\item
+  Deve começar com uma letra (maiúscula ou minúscula).
+\item
+  Pode conter apenas letras e dígitos após o primeiro caractere.
+\item
+  O comprimento deve ser de \textbf{1 a 6 caracteres}, inclusive.
+\end{itemize}
+
+\subsection{Análise da Solução
+Implementada}\label{anuxe1lise-da-soluuxe7uxe3o-implementada}
+
+A análise do código fornecido revela alguns problemas. O trecho abaixo
+mostra a implementação:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{public} \DataTypeTok{boolean} \FunctionTok{validateIdentifier}\OperatorTok{(}\BuiltInTok{String}\NormalTok{ s}\OperatorTok{)} \OperatorTok{\{}
+  \DataTypeTok{char}\NormalTok{ achar}\OperatorTok{;}
+  \DataTypeTok{boolean}\NormalTok{ valid\_id }\OperatorTok{=} \KeywordTok{false}\OperatorTok{;}
+\NormalTok{  achar }\OperatorTok{=}\NormalTok{ s}\OperatorTok{.}\FunctionTok{charAt}\OperatorTok{(}\DecValTok{0}\OperatorTok{);}
+\NormalTok{  valid\_id }\OperatorTok{=} \OperatorTok{((}\NormalTok{achar }\OperatorTok{\textgreater{}=} \CharTok{\textquotesingle{}A\textquotesingle{}}\OperatorTok{)} \OperatorTok{\&\&} \OperatorTok{(}\NormalTok{achar }\OperatorTok{\textless{}=} \CharTok{\textquotesingle{}Z\textquotesingle{}}\OperatorTok{))} \OperatorTok{||} \OperatorTok{((}\NormalTok{achar }\OperatorTok{\textgreater{}=} \CharTok{\textquotesingle{}a\textquotesingle{}}\OperatorTok{)} \OperatorTok{\&\&} \OperatorTok{(}\NormalTok{achar }\OperatorTok{\textless{}=} \CharTok{\textquotesingle{}z\textquotesingle{}}\OperatorTok{));}
+
+  \ControlFlowTok{if} \OperatorTok{(}\NormalTok{s}\OperatorTok{.}\FunctionTok{length}\OperatorTok{()} \OperatorTok{\textgreater{}} \DecValTok{1}\OperatorTok{)} \OperatorTok{\{}
+\NormalTok{      achar }\OperatorTok{=}\NormalTok{ s}\OperatorTok{.}\FunctionTok{charAt}\OperatorTok{(}\DecValTok{1}\OperatorTok{);}
+      \DataTypeTok{int}\NormalTok{ i }\OperatorTok{=} \DecValTok{1}\OperatorTok{;}
+      \ControlFlowTok{while} \OperatorTok{(}\NormalTok{i }\OperatorTok{\textless{}}\NormalTok{ s}\OperatorTok{.}\FunctionTok{length}\OperatorTok{()} \OperatorTok{{-}} \DecValTok{1}\OperatorTok{)} \OperatorTok{\{}
+\NormalTok{          achar }\OperatorTok{=}\NormalTok{ s}\OperatorTok{.}\FunctionTok{charAt}\OperatorTok{(}\NormalTok{i}\OperatorTok{);}
+          \ControlFlowTok{if} \OperatorTok{(((}\NormalTok{achar }\OperatorTok{\textgreater{}=} \CharTok{\textquotesingle{}A\textquotesingle{}}\OperatorTok{)} \OperatorTok{\&\&} \OperatorTok{(}\NormalTok{achar }\OperatorTok{\textless{}=} \CharTok{\textquotesingle{}Z\textquotesingle{}}\OperatorTok{))} \OperatorTok{||} \OperatorTok{((}\NormalTok{achar }\OperatorTok{\textgreater{}=} \CharTok{\textquotesingle{}a\textquotesingle{}}\OperatorTok{)} \OperatorTok{\&\&} \OperatorTok{(}\NormalTok{achar }\OperatorTok{\textless{}=} \CharTok{\textquotesingle{}z\textquotesingle{}}\OperatorTok{))} \OperatorTok{||} \OperatorTok{((}\NormalTok{achar }\OperatorTok{\textgreater{}=} \CharTok{\textquotesingle{}0\textquotesingle{}}\OperatorTok{)} \OperatorTok{\&\&} \OperatorTok{(}\NormalTok{achar }\OperatorTok{\textless{}=} \CharTok{\textquotesingle{}9\textquotesingle{}}\OperatorTok{)))} \OperatorTok{\{}
+\NormalTok{              valid\_id }\OperatorTok{=} \KeywordTok{false}\OperatorTok{;}
+          \OperatorTok{\}}
+\NormalTok{          i}\OperatorTok{++;}
+      \OperatorTok{\}}
+  \OperatorTok{\}}
+  \ControlFlowTok{if} \OperatorTok{(}\NormalTok{valid\_id }\OperatorTok{\&\&} \OperatorTok{(}\NormalTok{s}\OperatorTok{.}\FunctionTok{length}\OperatorTok{()} \OperatorTok{\textgreater{}=} \DecValTok{1}\OperatorTok{)} \OperatorTok{\&\&} \OperatorTok{(}\NormalTok{s}\OperatorTok{.}\FunctionTok{length}\OperatorTok{()} \OperatorTok{\textless{}} \DecValTok{6}\OperatorTok{))}
+      \ControlFlowTok{return} \KeywordTok{true}\OperatorTok{;}
+  \ControlFlowTok{else}
+      \ControlFlowTok{return} \KeywordTok{false}\OperatorTok{;}
+\OperatorTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\subsubsection{\texorpdfstring{\textbf{Observações sobre o
+código}}{Observações sobre o código}}\label{observauxe7uxf5es-sobre-o-cuxf3digo}
+
+\begin{itemize}
+\tightlist
+\item
+  Há um erro lógico no laço \texttt{while}: a condição invalida o
+  identificador sempre que um caractere válido (letra ou dígito) é
+  encontrado. Isso é oposto ao esperado.
+\item
+  O limite de tamanho está incorreto, pois o código verifica
+  \texttt{s.length()\ \textless{}\ 6}, quando deveria ser
+  \texttt{\textless{}=\ 6}.
+\item
+  Não há tratamento para strings vazias, o que pode gerar exceção
+  (\texttt{StringIndexOutOfBoundsException}).
+\end{itemize}
+
+\subsection{Definição das
+Propriedades}\label{definiuxe7uxe3o-das-propriedades}
+
+Baseado na especificação, definimos as seguintes propriedades para a
+função:
+
+\subsubsection{\texorpdfstring{\textbf{Propriedades de entrada
+válida}}{Propriedades de entrada válida}}\label{propriedades-de-entrada-vuxe1lida}
+
+\begin{itemize}
+\tightlist
+\item
+  Para qualquer string que:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Tenha de 1 a 6 caracteres;
+  \item
+    O primeiro caractere seja uma letra (\texttt{{[}a-zA-Z{]}});
+  \item
+    Os demais caracteres (se existirem) sejam letras ou dígitos
+    (\texttt{{[}a-zA-Z0-9{]}});
+  \end{itemize}
+\end{itemize}
+
+A função \textbf{deve retornar \texttt{true}}.
+
+\subsubsection{\texorpdfstring{\textbf{Propriedades de entrada
+inválida}}{Propriedades de entrada inválida}}\label{propriedades-de-entrada-invuxe1lida}
+
+\begin{itemize}
+\tightlist
+\item
+  A função deve retornar \textbf{\texttt{false}} se:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    O primeiro caractere não for uma letra;
+  \item
+    O comprimento for menor que 1 ou maior que 6;
+  \item
+    Contiver qualquer caractere que não seja letra ou dígito.
+  \end{itemize}
+\end{itemize}
+
+\subsection{Implementação dos Testes Baseados em
+Propriedades}\label{implementauxe7uxe3o-dos-testes-baseados-em-propriedades}
+
+A implementação dos testes foi realizada utilizando o framework
+\textbf{jqwik} para Java. Foram criados três conjuntos de propriedades:
+
+\subsubsection{\texorpdfstring{\textbf{Testa identificadores
+válidos}}{Testa identificadores válidos}}\label{testa-identificadores-vuxe1lidos}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\AttributeTok{@Property}
+\DataTypeTok{void} \FunctionTok{validIdentifiers}\OperatorTok{(}\AttributeTok{@ForAll} \AttributeTok{@AlphaChars} \AttributeTok{@StringLength}\OperatorTok{(}\NormalTok{min }\OperatorTok{=} \DecValTok{0}\OperatorTok{,}\NormalTok{ max }\OperatorTok{=} \DecValTok{5}\OperatorTok{)} \BuiltInTok{String}\NormalTok{ suffix}\OperatorTok{)} \OperatorTok{\{}
+    \BuiltInTok{String}\NormalTok{ id }\OperatorTok{=} \StringTok{"A"} \OperatorTok{+}\NormalTok{ suffix}\OperatorTok{;}
+    \FunctionTok{assumeTrue}\OperatorTok{(}\NormalTok{id}\OperatorTok{.}\FunctionTok{length}\OperatorTok{()} \OperatorTok{\textless{}=} \DecValTok{6}\OperatorTok{);}
+    \FunctionTok{assertThat}\OperatorTok{(}\NormalTok{identifier}\OperatorTok{.}\FunctionTok{validateIdentifier}\OperatorTok{(}\NormalTok{id}\OperatorTok{)).}\FunctionTok{isTrue}\OperatorTok{();}
+\OperatorTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\subsubsection{\texorpdfstring{\textbf{Testa identificadores inválidos
+por
+tamanho}}{Testa identificadores inválidos por tamanho}}\label{testa-identificadores-invuxe1lidos-por-tamanho}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\AttributeTok{@Property}
+\DataTypeTok{void} \FunctionTok{invalidLengthIdentifiers}\OperatorTok{(}\AttributeTok{@ForAll} \AttributeTok{@StringLength}\OperatorTok{(}\NormalTok{min }\OperatorTok{=} \DecValTok{7}\OperatorTok{,}\NormalTok{ max }\OperatorTok{=} \DecValTok{20}\OperatorTok{)} \BuiltInTok{String}\NormalTok{ id}\OperatorTok{)} \OperatorTok{\{}
+    \FunctionTok{assertThat}\OperatorTok{(}\NormalTok{identifier}\OperatorTok{.}\FunctionTok{validateIdentifier}\OperatorTok{(}\NormalTok{id}\OperatorTok{)).}\FunctionTok{isFalse}\OperatorTok{();}
+\OperatorTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\subsubsection{\texorpdfstring{\textbf{Testa identificadores inválidos
+por
+caracteres}}{Testa identificadores inválidos por caracteres}}\label{testa-identificadores-invuxe1lidos-por-caracteres}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\AttributeTok{@Property}
+\DataTypeTok{void} \FunctionTok{invalidCharacterIdentifiers}\OperatorTok{(}\AttributeTok{@ForAll} \AttributeTok{@StringLength}\OperatorTok{(}\NormalTok{min }\OperatorTok{=} \DecValTok{0}\OperatorTok{,}\NormalTok{ max }\OperatorTok{=} \DecValTok{5}\OperatorTok{)} \BuiltInTok{String}\NormalTok{ suffix}\OperatorTok{)} \OperatorTok{\{}
+    \BuiltInTok{String}\NormalTok{ id }\OperatorTok{=} \StringTok{"1"} \OperatorTok{+}\NormalTok{ suffix}\OperatorTok{;}
+    \FunctionTok{assumeTrue}\OperatorTok{(}\NormalTok{id}\OperatorTok{.}\FunctionTok{length}\OperatorTok{()} \OperatorTok{\textless{}=} \DecValTok{6}\OperatorTok{);}
+    \FunctionTok{assertThat}\OperatorTok{(}\NormalTok{identifier}\OperatorTok{.}\FunctionTok{validateIdentifier}\OperatorTok{(}\NormalTok{id}\OperatorTok{)).}\FunctionTok{isFalse}\OperatorTok{();}
+\OperatorTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Resultados dos Testes}\label{resultados-dos-testes}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.5342}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.2466}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.2192}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Propriedade
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Status
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Casos Gerados
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Identificadores válidos & Falha & 1 (primeiro caso) \\
+Identificadores inválidos por tamanho & Passou & 1000 \\
+Identificadores inválidos por caract. & Passou & 1000 \\
+\end{longtable}
+
+\subsubsection{\texorpdfstring{\textbf{Detalhes da
+falha}}{Detalhes da falha}}\label{detalhes-da-falha}
+
+\begin{itemize}
+\tightlist
+\item
+  A propriedade \textbf{``Identificadores válidos''} falhou logo na
+  primeira execução.
+\item
+  Caso que falhou: \texttt{"AA"} e \texttt{"YxU"}.
+\item
+  Erro: A função retornou \texttt{false} para identificadores válidos.
+\end{itemize}
+
+\subsection{Cobertura de Código}\label{cobertura-de-cuxf3digo}
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule\noalign{}
+Métrica & Cobertura \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Linha & 100\% \\
+Branch (Decisão) & 100\% \\
+Condição & 100\% \\
+\end{longtable}
+
+\subsection{Conclusão}\label{conclusuxe3o}
+
+O teste baseado em propriedades se mostrou eficiente na identificação de
+problemas na implementação. A falha detectada reforça que a função não
+atende corretamente à especificação quando se trata de validar
+identificadores válidos.
+
+A técnica não só verifica casos simples, mas também explora
+automaticamente cenários de borda e aleatórios, proporcionando uma
+cobertura ampla e eficaz.
+
+\subsubsection{\texorpdfstring{🔧
+\textbf{Recomendação}}{🔧 Recomendação}}\label{recomendauxe7uxe3o}
+
+A implementação fornecida apresenta erros lógicos. Recomenda-se a sua
+correção conforme a especificação. Segue uma versão correta da função:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{public} \DataTypeTok{boolean} \FunctionTok{validateIdentifier}\OperatorTok{(}\BuiltInTok{String}\NormalTok{ s}\OperatorTok{)} \OperatorTok{\{}
+    \ControlFlowTok{if} \OperatorTok{(}\NormalTok{s }\OperatorTok{==} \KeywordTok{null} \OperatorTok{||}\NormalTok{ s}\OperatorTok{.}\FunctionTok{length}\OperatorTok{()} \OperatorTok{\textless{}} \DecValTok{1} \OperatorTok{||}\NormalTok{ s}\OperatorTok{.}\FunctionTok{length}\OperatorTok{()} \OperatorTok{\textgreater{}} \DecValTok{6}\OperatorTok{)}
+        \ControlFlowTok{return} \KeywordTok{false}\OperatorTok{;}
+
+    \ControlFlowTok{if} \OperatorTok{(!}\BuiltInTok{Character}\OperatorTok{.}\FunctionTok{isLetter}\OperatorTok{(}\NormalTok{s}\OperatorTok{.}\FunctionTok{charAt}\OperatorTok{(}\DecValTok{0}\OperatorTok{)))}
+        \ControlFlowTok{return} \KeywordTok{false}\OperatorTok{;}
+
+    \ControlFlowTok{for} \OperatorTok{(}\DataTypeTok{int}\NormalTok{ i }\OperatorTok{=} \DecValTok{1}\OperatorTok{;}\NormalTok{ i }\OperatorTok{\textless{}}\NormalTok{ s}\OperatorTok{.}\FunctionTok{length}\OperatorTok{();}\NormalTok{ i}\OperatorTok{++)} \OperatorTok{\{}
+        \DataTypeTok{char}\NormalTok{ c }\OperatorTok{=}\NormalTok{ s}\OperatorTok{.}\FunctionTok{charAt}\OperatorTok{(}\NormalTok{i}\OperatorTok{);}
+        \ControlFlowTok{if} \OperatorTok{(!}\BuiltInTok{Character}\OperatorTok{.}\FunctionTok{isLetterOrDigit}\OperatorTok{(}\NormalTok{c}\OperatorTok{))}
+            \ControlFlowTok{return} \KeywordTok{false}\OperatorTok{;}
+    \OperatorTok{\}}
+
+    \ControlFlowTok{return} \KeywordTok{true}\OperatorTok{;}
+\OperatorTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Referências}\label{referuxeancias}
+
+\begin{itemize}
+\tightlist
+\item
+  Livro: \emph{Effective Software Testing} --- Maurício Aniche, 2022.
+\item
+  Documentação jqwik: https://jqwik.net/docs/current/user-guide.html
+\end{itemize}
+
+
+
+
+\end{document}
