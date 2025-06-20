@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="edu.utfpr.bookstore.ChristmasDiscountTest" time="0.054" tests="2" errors="0" skipped="0" failures="0">
+  <properties>
+    <property name="java.specification.version" value="17"/>
+    <property name="sun.jnu.encoding" value="UTF-8"/>
+    <property name="java.class.path" value="/Users/brenofarias/Documents/My Files/Backup/GitHub/Public/Master-UTFPR/PPGCC12 - Software Testing/Activities/Activity 06 - Mocks/target/test-classes:/Users/brenofarias/Documents/My Files/Backup/GitHub/Public/Master-UTFPR/PPGCC12 - Software Testing/Activities/Activity 06 - Mocks/target/classes:/Users/brenofarias/.m2/repository/net/jqwik/jqwik/1.6.4/jqwik-1.6.4.jar:/Users/brenofarias/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/Users/brenofarias/.m2/repository/net/jqwik/jqwik-api/1.6.4/jqwik-api-1.6.4.jar:/Users/brenofarias/.m2/repository/net/jqwik/jqwik-web/1.6.4/jqwik-web-1.6.4.jar:/Users/brenofarias/.m2/repository/net/jqwik/jqwik-time/1.6.4/jqwik-time-1.6.4.jar:/Users/brenofarias/.m2/repository/net/jqwik/jqwik-engine/1.6.4/jqwik-engine-1.6.4.jar:/Users/brenofarias/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.9.1/junit-jupiter-api-5.9.1.jar:/Users/brenofarias/.m2/repository/org/opentest4j/opentest4j/1.2.0/opentest4j-1.2.0.jar:/Users/brenofarias/.m2/repository/org/junit/platform/junit-platform-commons/1.9.1/junit-platform-commons-1.9.1.jar:/Users/brenofarias/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.9.1/junit-jupiter-engine-5.9.1.jar:/Users/brenofarias/.m2/repository/org/junit/platform/junit-platform-engine/1.9.1/junit-platform-engine-1.9.1.jar:/Users/brenofarias/.m2/repository/org/assertj/assertj-core/3.21.0/assertj-core-3.21.0.jar:/Users/brenofarias/.m2/repository/org/mockito/mockito-core/5.10.0/mockito-core-5.10.0.jar:/Users/brenofarias/.m2/repository/net/bytebuddy/byte-buddy/1.14.11/byte-buddy-1.14.11.jar:/Users/brenofarias/.m2/repository/net/bytebuddy/byte-buddy-agent/1.14.11/byte-buddy-agent-1.14.11.jar:/Users/brenofarias/.m2/repository/org/objenesis/objenesis/3.3/objenesis-3.3.jar:"/>
+    <property name="java.vm.vendor" value="Eclipse Adoptium"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="java.vendor.url" value="https://adoptium.net/"/>
+    <property name="user.timezone" value="America/Sao_Paulo"/>
+    <property name="os.name" value="Mac OS X"/>
+    <property name="java.vm.specification.version" value="17"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="user.country" value="BR"/>
+    <property name="sun.boot.library.path" value="/Users/brenofarias/.sdkman/candidates/java/17.0.9-tem/lib"/>
+    <property name="sun.java.command" value="/Users/brenofarias/Documents/My Files/Backup/GitHub/Public/Master-UTFPR/PPGCC12 - Software Testing/Activities/Activity 06 - Mocks/target/surefire/surefirebooter-20250620122941998_3.jar /Users/brenofarias/Documents/My Files/Backup/GitHub/Public/Master-UTFPR/PPGCC12 - Software Testing/Activities/Activity 06 - Mocks/target/surefire 2025-06-20T12-29-41_923-jvmRun1 surefire-20250620122941998_1tmp surefire_0-20250620122941998_2tmp"/>
+    <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="surefire.test.class.path" value="/Users/brenofarias/Documents/My Files/Backup/GitHub/Public/Master-UTFPR/PPGCC12 - Software Testing/Activities/Activity 06 - Mocks/target/test-classes:/Users/brenofarias/Documents/My Files/Backup/GitHub/Public/Master-UTFPR/PPGCC12 - Software Testing/Activities/Activity 06 - Mocks/target/classes:/Users/brenofarias/.m2/repository/net/jqwik/jqwik/1.6.4/jqwik-1.6.4.jar:/Users/brenofarias/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/Users/brenofarias/.m2/repository/net/jqwik/jqwik-api/1.6.4/jqwik-api-1.6.4.jar:/Users/brenofarias/.m2/repository/net/jqwik/jqwik-web/1.6.4/jqwik-web-1.6.4.jar:/Users/brenofarias/.m2/repository/net/jqwik/jqwik-time/1.6.4/jqwik-time-1.6.4.jar:/Users/brenofarias/.m2/repository/net/jqwik/jqwik-engine/1.6.4/jqwik-engine-1.6.4.jar:/Users/brenofarias/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.9.1/junit-jupiter-api-5.9.1.jar:/Users/brenofarias/.m2/repository/org/opentest4j/opentest4j/1.2.0/opentest4j-1.2.0.jar:/Users/brenofarias/.m2/repository/org/junit/platform/junit-platform-commons/1.9.1/junit-platform-commons-1.9.1.jar:/Users/brenofarias/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.9.1/junit-jupiter-engine-5.9.1.jar:/Users/brenofarias/.m2/repository/org/junit/platform/junit-platform-engine/1.9.1/junit-platform-engine-1.9.1.jar:/Users/brenofarias/.m2/repository/org/assertj/assertj-core/3.21.0/assertj-core-3.21.0.jar:/Users/brenofarias/.m2/repository/org/mockito/mockito-core/5.10.0/mockito-core-5.10.0.jar:/Users/brenofarias/.m2/repository/net/bytebuddy/byte-buddy/1.14.11/byte-buddy-1.14.11.jar:/Users/brenofarias/.m2/repository/net/bytebuddy/byte-buddy-agent/1.14.11/byte-buddy-agent-1.14.11.jar:/Users/brenofarias/.m2/repository/org/objenesis/objenesis/3.3/objenesis-3.3.jar:"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="/Users/brenofarias"/>
+    <property name="user.language" value="en"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.version.date" value="2023-10-17"/>
+    <property name="java.home" value="/Users/brenofarias/.sdkman/candidates/java/17.0.9-tem"/>
+    <property name="file.separator" value="/"/>
+    <property name="basedir" value="/Users/brenofarias/Documents/My Files/Backup/GitHub/Public/Master-UTFPR/PPGCC12 - Software Testing/Activities/Activity 06 - Mocks"/>
+    <property name="java.vm.compressedOopsMode" value="Zero based"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="surefire.real.class.path" value="/Users/brenofarias/Documents/My Files/Backup/GitHub/Public/Master-UTFPR/PPGCC12 - Software Testing/Activities/Activity 06 - Mocks/target/surefire/surefirebooter-20250620122941998_3.jar"/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
+    <property name="java.runtime.version" value="17.0.9+9"/>
+    <property name="user.name" value="brenofarias"/>
+    <property name="path.separator" value=":"/>
+    <property name="os.version" value="15.4"/>
+    <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+    <property name="java.vendor.version" value="Temurin-17.0.9+9"/>
+    <property name="localRepository" value="/Users/brenofarias/.m2/repository"/>
+    <property name="java.vendor.url.bug" value="https://github.com/adoptium/adoptium-support/issues"/>
+    <property name="java.io.tmpdir" value="/var/folders/21/dk90_3n13b380h4sk7xpkhqm0000gn/T/"/>
+    <property name="java.version" value="17.0.9"/>
+    <property name="user.dir" value="/Users/brenofarias/Documents/My Files/Backup/GitHub/Public/Master-UTFPR/PPGCC12 - Software Testing/Activities/Activity 06 - Mocks"/>
+    <property name="os.arch" value="aarch64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="native.encoding" value="UTF-8"/>
+    <property name="java.library.path" value="/Users/brenofarias/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:."/>
+    <property name="java.vm.info" value="mixed mode"/>
+    <property name="java.vendor" value="Eclipse Adoptium"/>
+    <property name="java.vm.version" value="17.0.9+9"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeBig"/>
+    <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
+    <property name="java.class.version" value="61.0"/>
+  </properties>
+  <testcase name="shouldNotApplyDiscountOnOtherDays" classname="edu.utfpr.bookstore.ChristmasDiscountTest" time="0.009"/>
+  <testcase name="shouldApplyDiscountOnChristmas" classname="edu.utfpr.bookstore.ChristmasDiscountTest" time="0.001"/>
+</testsuite>
