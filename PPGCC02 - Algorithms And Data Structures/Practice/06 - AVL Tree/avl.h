@@ -160,4 +160,93 @@ int avl_leaf_count(Node* root);
 */
 int avl_depth(Node* root, ElementType data);
 
+/*
+* Clears the AVL tree by freeing all nodes and setting root to NULL.
+* root: pointer to the root node pointer.
+* return: NULL after clearing the tree.
+*/
+Node* avl_clear(Node** root);
+
+/*
+* Creates a deep copy (clone) of the AVL tree.
+* root: pointer to the root node of the tree to copy.
+* return: pointer to the root node of the new cloned tree.
+*/
+Node* avl_clone(Node* root);
+
+/*
+* Validates if the AVL tree satisfies the BST properties and balance conditions.
+* root: pointer to the root node of the tree.
+* return: true if valid AVL tree, false otherwise.
+*/
+bool avl_is_valid(Node* root);
+
+/*
+* Removes the minimum element node from the AVL tree.
+* root: pointer to the root node of the tree.
+* return: pointer to the root node of the updated tree.
+*/
+Node* avl_remove_min(Node* root);
+
+/*
+* Removes the maximum element node from the AVL tree.
+* root: pointer to the root node of the tree.
+* return: pointer to the root node of the updated tree.
+*/
+Node* avl_remove_max(Node* root);
+
+/*
+* Counts the number of internal (non-leaf) nodes in the AVL tree.
+* root: pointer to the root node of the tree.
+* return: count of internal nodes.
+*/
+int avl_internal_node_count(Node* root);
+
+/*
+* Returns the height balance factor of a node.
+* root: pointer to the node.
+* return: balance factor (height of left subtree - height of right subtree).
+*/
+int avl_height_balance_factor(Node* root);
+
+/*
+* Checks if an element exists in the AVL tree using an iterative approach.
+* root: pointer to the root node of the tree.
+* data: element to search for.
+* return: true if element exists, false otherwise.
+*/
+bool avl_contains_iterative(Node* root, ElementType data);
+
+/*
+* Finds the path from root to the element data.
+* root: pointer to the root node.
+* data: target element to find.
+* path: pre-allocated array to store path elements.
+* max_length: max capacity of the path array.
+* return: length of path if found, 0 if not found or path exceeds max_length.
+*/
+int avl_find_path(Node* root, ElementType data, ElementType path[], int max_length);
+
+/*
+* Performs a left rotation on the subtree rooted at *root.
+* root: pointer to the root node pointer of the subtree.
+*/
+void avl_rotate_left(Node** root);
+
+/*
+* Performs a right rotation on the subtree rooted at *root.
+* root: pointer to the root node pointer of the subtree.
+*/
+void avl_rotate_right(Node** root);
+
+/*
+* Merges two AVL trees and returns the root of the merged AVL tree.
+*/
+Node* avl_merge(Node* tree1, Node* tree2);
+
+/*
+* Splits AVL tree into two trees: those less than key and those >= key.
+*/
+void avl_split(Node* root, ElementType key, Node** leftTree, Node** rightTree);
+
 #endif

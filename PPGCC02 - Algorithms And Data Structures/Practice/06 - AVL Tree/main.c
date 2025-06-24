@@ -1,5 +1,5 @@
 /*
- * Description: Simple test for AVL tree implementation.
+ * Description: Simple test for AVL tree implementation including new functions.
  * Author: Breno Farias da Silva.
  * Date: 14/06/2025.
  */
@@ -106,12 +106,116 @@ int main(int argc, char *argv[]) {
 	int depth = avl_depth(root, depth_key);
 	printf("Depth of %d: %d\n", depth_key, depth);
 
-	// Destroy trees
-	avl_destroy(&root);
-	avl_destroy(&new_tree);
+	// --- Testing new functions ---
 
-	if (root == NULL && new_tree == NULL) {
-		printf("\nTrees successfully destroyed.\n");
+	// Test avl_clear
+	printf("\nClearing original tree...\n");
+	avl_clear(&root);
+	printf("Root after clear: %p (should be NULL)\n", (void*)root);
+
+	// Rebuild tree to test other functions
+	root = avl_insert(root, 20);
+	root = avl_insert(root, 10);
+	root = avl_insert(root, 30);
+	root = avl_insert(root, 5);
+	root = avl_insert(root, 15);
+
+	// Test avl_clone
+	Node* clone = avl_clone(root);
+	printf("\nCloned tree inorder traversal:\n");
+	avl_inorder(clone);
+	printf("\n");
+
+	// Test avl_is_valid
+	printf("Is original tree valid AVL? %s\n", avl_is_valid(root) ? "Yes" : "No");
+	printf("Is cloned tree valid AVL? %s\n", avl_is_valid(clone) ? "Yes" : "No");
+
+	// Test avl_remove_min
+	root = avl_remove_min(root);
+	printf("\nAfter removing minimum element:\n");
+	avl_inorder(root);
+	printf("\n");
+
+	// Test avl_remove_max
+	root = avl_remove_max(root);
+	printf("\nAfter removing maximum element:\n");
+	avl_inorder(root);
+	printf("\n");
+
+	// Test avl_internal_node_count
+	int internal_nodes = avl_internal_node_count(root);
+	printf("Number of internal nodes: %d\n", internal_nodes);
+
+	// Test avl_height_balance_factor
+	int balance_factor = avl_height_balance_factor(root);
+	printf("Balance factor of root node: %d\n", balance_factor);
+
+	// Test avl_contains_iterative
+	ElementType search_val = 15;
+	bool found_iter = avl_contains_iterative(root, search_val);
+	printf("Contains %d (iterative)? %s\n", search_val, found_iter ? "Yes" : "No");
+
+	// Test avl_contains (recursive)
+	ElementType search_val_rec = 15;
+	bool found_rec = avl_contains(root, search_val_rec);
+	printf("Contains %d (recursive)? %s\n", search_val_rec, found_rec ? "Yes" : "No");
+
+	// Test avl_find_path
+	ElementType path[10];
+	int path_len = avl_find_path(root, 15, path, 10);
+	if (path_len > 0) {
+		printf("Path to %d: ", 15);
+		for (int i = 0; i < path_len; i++) {
+			printf("%d ", path[i]);
+		}
+		printf("\n");
+	} else {
+		printf("Element %d not found or path too long.\n", 15);
+	}
+
+	// Test avl_rotate_left and avl_rotate_right on root pointer
+	printf("\nOriginal tree inorder before rotations:\n");
+	avl_inorder(root);
+	printf("\n");
+
+	avl_rotate_left(&root);
+	printf("Inorder after left rotation at root:\n");
+	avl_inorder(root);
+	printf("\n");
+
+	avl_rotate_right(&root);
+	printf("Inorder after right rotation at root (restored):\n");
+	avl_inorder(root);
+	printf("\n");
+
+	printf("\n--- Testing avl_split ---\n");
+	Node* leftTree = NULL;
+	Node* rightTree = NULL;
+	avl_split(root, 20, &leftTree, &rightTree);
+
+	printf("Left tree (elements < 20):\n");
+	avl_inorder(leftTree);
+	printf("\nRight tree (elements >= 20):\n");
+	avl_inorder(rightTree);
+	printf("\n");
+
+	// Merge back
+	Node* mergedTree = avl_merge(leftTree, rightTree);
+	printf("\nMerged tree after split:\n");
+	avl_inorder(mergedTree);
+	printf("\n");
+
+	// Clean up split trees (if your avl_destroy works fine)
+	avl_destroy(&leftTree);
+	avl_destroy(&rightTree);
+	avl_destroy(&mergedTree);
+
+	// Cleanup
+	avl_destroy(&root);
+	avl_destroy(&clone);
+
+	if (root == NULL && clone == NULL) {
+		printf("Trees successfully destroyed after tests.\n");
 	}
 
 	return 0;

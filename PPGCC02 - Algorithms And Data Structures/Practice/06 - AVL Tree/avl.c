@@ -7,6 +7,7 @@
 #include "avl.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <limits.h>
 
 /* 
 * Helper function: returns max between two integers.
@@ -457,4 +458,311 @@ int avl_depth(Node* root, ElementType data) {
 		depth++;
 	}
 	return -1; // Not found
+}
+
+/*
+* Clears the AVL tree by freeing all nodes and setting root to NULL.
+* root: pointer to the root node pointer.
+* return: NULL after clearing the tree.
+*/
+Node* avl_clear(Node** root) {
+	if (root == NULL || *root == NULL) return NULL;
+
+	avl_destroy(root);
+	return NULL;
+}
+
+/*
+* Creates a deep copy (clone) of the AVL tree.
+* root: pointer to the root node of the tree to copy.
+* return: pointer to the root node of the new cloned tree.
+*/
+Node* avl_clone(Node* root) {
+	if (root == NULL) return NULL;
+
+	Node* new_node = create_node(root->data);
+	new_node->left = avl_clone(root->left);
+	new_node->right = avl_clone(root->right);
+	new_node->height = root->height;
+
+	return new_node;
+}
+
+/*
+* Helper function to validate BST properties within min and max bounds.
+*/
+static bool is_bst_util(Node* node, ElementType min, ElementType max) {
+	if (node == NULL) return true;
+	if (node->data <= min || node->data >= max) return false;
+	return is_bst_util(node->left, min, node->data) && is_bst_util(node->right, node->data, max);
+}
+
+/*
+* Validates if the AVL tree satisfies the BST properties and balance conditions.
+* root: pointer to the root node of the tree.
+* return: true if valid AVL tree, false otherwise.
+*/
+bool avl_is_valid(Node* root) {
+	if (root == NULL) return true;
+
+	// Check BST property
+	if (!is_bst_util(root, INT_MIN, INT_MAX))
+		return false;
+
+	// Check AVL balance
+	if (!avl_is_balanced(root))
+		return false;
+
+	return true;
+}
+
+/*
+* Removes the minimum element node from the AVL tree.
+* root: pointer to the root node of the tree.
+* return: pointer to the root node of the updated tree.
+*/
+Node* avl_remove_min(Node* root) {
+	if (root == NULL) return NULL;
+	if (root->left == NULL) {
+		Node* right_subtree = root->right;
+		free(root);
+		return right_subtree;
+	}
+	root->left = avl_remove_min(root->left);
+
+	// Update height
+	root->height = 1 + max(height(root->left), height(root->right));
+
+	// Balance node
+	int balance = get_balance(root);
+
+	if (balance > 1 && get_balance(root->left) >= 0)
+		return rotate_right(root);
+
+	if (balance > 1 && get_balance(root->left) < 0) {
+		root->left = rotate_left(root->left);
+		return rotate_right(root);
+	}
+
+	if (balance < -1 && get_balance(root->right) <= 0)
+		return rotate_left(root);
+
+	if (balance < -1 && get_balance(root->right) > 0) {
+		root->right = rotate_right(root->right);
+		return rotate_left(root);
+	}
+
+	return root;
+}
+
+/*
+* Removes the maximum element node from the AVL tree.
+* root: pointer to the root node of the tree.
+* return: pointer to the root node of the updated tree.
+*/
+Node* avl_remove_max(Node* root) {
+	if (root == NULL) return NULL;
+	if (root->right == NULL) {
+		Node* left_subtree = root->left;
+		free(root);
+		return left_subtree;
+	}
+	root->right = avl_remove_max(root->right);
+
+	// Update height
+	root->height = 1 + max(height(root->left), height(root->right));
+
+	// Balance node
+	int balance = get_balance(root);
+
+	if (balance > 1 && get_balance(root->left) >= 0)
+		return rotate_right(root);
+
+	if (balance > 1 && get_balance(root->left) < 0) {
+		root->left = rotate_left(root->left);
+		return rotate_right(root);
+	}
+
+	if (balance < -1 && get_balance(root->right) <= 0)
+		return rotate_left(root);
+
+	if (balance < -1 && get_balance(root->right) > 0) {
+		root->right = rotate_right(root->right);
+		return rotate_left(root);
+	}
+
+	return root;
+}
+
+/*
+* Counts the number of internal (non-leaf) nodes in the AVL tree.
+* root: pointer to the root node of the tree.
+* return: count of internal nodes.
+*/
+int avl_internal_node_count(Node* root) {
+	if (root == NULL) return 0;
+	if (root->left == NULL && root->right == NULL) return 0;
+	return 1 + avl_internal_node_count(root->left) + avl_internal_node_count(root->right);
+}
+
+/*
+* Returns the height balance factor of a node.
+* root: pointer to the node.
+* return: balance factor (height of left subtree - height of right subtree).
+*/
+int avl_height_balance_factor(Node* root) {
+	if (root == NULL) return 0;
+	return height(root->left) - height(root->right);
+}
+
+/*
+* Checks if an element exists in the AVL tree using an iterative approach.
+* root: pointer to the root node of the tree.
+* data: element to search for.
+* return: true if element exists, false otherwise.
+*/
+bool avl_contains_iterative(Node* root, ElementType data) {
+	while (root != NULL) {
+		if (data == root->data)
+			return true;
+		else if (data < root->data)
+			root = root->left;
+		else
+			root = root->right;
+	}
+	return false;
+}
+
+/*
+* Finds the path from root to the element data.
+* root: pointer to the root node.
+* data: target element to find.
+* path: pre-allocated array to store path elements.
+* max_length: max capacity of the path array.
+* return: length of path if found, 0 if not found or path exceeds max_length.
+*/
+int avl_find_path(Node* root, ElementType data, ElementType path[], int max_length) {
+	int length = 0;
+	Node* current = root;
+
+	while (current != NULL) {
+		if (length >= max_length) return 0;
+		path[length++] = current->data;
+
+		if (data == current->data)
+			return length;
+
+		if (data < current->data)
+			current = current->left;
+		else
+			current = current->right;
+	}
+
+	return 0; // Not found
+}
+
+/*
+* Performs a left rotation on the subtree rooted at *root.
+* root: pointer to the root node pointer of the subtree.
+*/
+void avl_rotate_left(Node** root) {
+	if (root == NULL || *root == NULL) return;
+
+	Node* new_root = rotate_left(*root);
+	*root = new_root;
+}
+
+/*
+* Performs a right rotation on the subtree rooted at *root.
+* root: pointer to the root node pointer of the subtree.
+*/
+void avl_rotate_right(Node** root) {
+	if (root == NULL || *root == NULL) return;
+
+	Node* new_root = rotate_right(*root);
+	*root = new_root;
+}
+
+// Helper: Merge two sorted arrays into one sorted array
+static void merge_sorted_arrays(ElementType arr1[], int size1, ElementType arr2[], int size2, ElementType dest[]) {
+	int i = 0, j = 0, k = 0;
+	while (i < size1 && j < size2) {
+		if (arr1[i] < arr2[j])
+			dest[k++] = arr1[i++];
+		else
+			dest[k++] = arr2[j++];
+	}
+	while (i < size1) dest[k++] = arr1[i++];
+	while (j < size2) dest[k++] = arr2[j++];
+}
+
+/*
+* Merges two AVL trees and returns the root of the merged AVL tree.
+* Approach:
+* 1. Convert both trees to sorted arrays.
+* 2. Merge arrays.
+* 3. Build AVL from merged sorted array.
+*/
+Node* avl_merge(Node* tree1, Node* tree2) {
+	if (!tree1) return tree2;
+	if (!tree2) return tree1;
+
+	int size1 = avl_size(tree1);
+	int size2 = avl_size(tree2);
+	ElementType* arr1 = malloc(size1 * sizeof(ElementType));
+	ElementType* arr2 = malloc(size2 * sizeof(ElementType));
+	ElementType* merged = malloc((size1 + size2) * sizeof(ElementType));
+
+	if (!arr1 || !arr2 || !merged) {
+		free(arr1);
+		free(arr2);
+		free(merged);
+		return NULL; // Allocation failure
+	}
+
+	avl_to_array(tree1, arr1);
+	avl_to_array(tree2, arr2);
+	merge_sorted_arrays(arr1, size1, arr2, size2, merged);
+
+	Node* merged_tree = avl_from_sorted_array(merged, 0, size1 + size2 - 1);
+
+	free(arr1);
+	free(arr2);
+	free(merged);
+
+	return merged_tree;
+}
+
+/*
+* Splits AVL tree into two trees: those less than key and those >= key.
+* Returns via pointers leftTree and rightTree.
+*/
+void avl_split(Node* root, ElementType key, Node** leftTree, Node** rightTree) {
+	if (!root) {
+		*leftTree = NULL;
+		*rightTree = NULL;
+		return;
+	}
+
+	if (root->data < key) {
+		// Current root goes to left tree
+		Node* left_subtree = NULL;
+		Node* right_subtree = NULL;
+		avl_split(root->right, key, &left_subtree, &right_subtree);
+
+		root->right = left_subtree;
+		// Rebalance root if needed here (optional depending on your AVL code)
+		*leftTree = root;
+		*rightTree = right_subtree;
+	} else {
+		// Current root goes to right tree
+		Node* left_subtree = NULL;
+		Node* right_subtree = NULL;
+		avl_split(root->left, key, &left_subtree, &right_subtree);
+
+		root->left = right_subtree;
+		// Rebalance root if needed here (optional depending on your AVL code)
+		*leftTree = left_subtree;
+		*rightTree = root;
+	}
 }
