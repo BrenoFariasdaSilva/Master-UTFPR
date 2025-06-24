@@ -1,11 +1,11 @@
 /*
  * Description: .
  * Author: Breno Farias da Silva.
- * Date: 27/03/2025.
+ * Date: 24/06/2025.
  */
 
-// Compile: gcc $filename.c -o $filenameWithoutExtension
-// Run: ./filenameWithoutExtension
+// Compile: gcc main.c -o main
+// Run: ./main
 
 #include <stdio.h> // printf, scanf
 
