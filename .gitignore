@@ -25,6 +25,7 @@ desktop.ini
 # Ignore the Data Files
 *.csv
 *.xlsx
+*.dat
 
 # Ignore compiled C/C++ files (with and without extensions)
 *.o
