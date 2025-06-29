@@ -4,16 +4,12 @@
 * FUNÇÕES AUXILIARES
 **************************************/
 
-int altura(No *no) {
-   return (no == NULL) ? 0 : no->altura;
-}
-
 int max(int a, int b) {
    return (a > b) ? a : b;
 }
 
-int fator_balanceamento(No *no) {
-   return (no == NULL) ? 0 : altura(no->esq) - altura(no->dir);
+int avl_fator_balanceamento(No *no) {
+   return (no == NULL) ? 0 : ab_altura(no->esq) - ab_altura(no->dir);
 }
 
 No* novoNo(TipoElemento valor) {
@@ -24,40 +20,40 @@ No* novoNo(TipoElemento valor) {
    return novo;
 }
 
-No* rotacao_direita(No *raiz) {
-   No *novaRaiz = raiz->esq;
-   No *subArvore = novaRaiz->dir;
+No* avl_rotacao_direita(No *y) {
+   No *x = y->esq;
+   No *T2 = x->dir;
 
-   novaRaiz->dir = raiz;
-   raiz->esq = subArvore;
+   x->dir = y;
+   y->esq = T2;
 
-   raiz->altura = max(altura(raiz->esq), altura(raiz->dir)) + 1;
-   novaRaiz->altura = max(altura(novaRaiz->esq), altura(novaRaiz->dir)) + 1;
+   y->altura = max(ab_altura(y->esq), ab_altura(y->dir)) + 1;
+   x->altura = max(ab_altura(x->esq), ab_altura(x->dir)) + 1;
 
-   return novaRaiz;
+   return x;
 }
 
-No* rotacao_esquerda(No *raiz) {
-   No *novaRaiz = raiz->dir;
-   No *subArvore = novaRaiz->esq;
+No* avl_rotacao_esquerda(No *x) {
+   No *y = x->dir;
+   No *T2 = y->esq;
 
-   novaRaiz->esq = raiz;
-   raiz->dir = subArvore;
+   y->esq = x;
+   x->dir = T2;
 
-   raiz->altura = max(altura(raiz->esq), altura(raiz->dir)) + 1;
-   novaRaiz->altura = max(altura(novaRaiz->esq), altura(novaRaiz->dir)) + 1;
+   x->altura = max(ab_altura(x->esq), ab_altura(x->dir)) + 1;
+   y->altura = max(ab_altura(y->esq), ab_altura(y->dir)) + 1;
 
-   return novaRaiz;
+   return y;
 }
 
-No* rotacao_dupla_direita(No *raiz) {
-   raiz->esq = rotacao_esquerda(raiz->esq);
-   return rotacao_direita(raiz);
+No* avl_rotacao_dupla_direita(No *z) {
+   z->esq = avl_rotacao_esquerda(z->esq);
+   return avl_rotacao_direita(z);
 }
 
-No* rotacao_dupla_esquerda(No *raiz) {
-   raiz->dir = rotacao_direita(raiz->dir);
-   return rotacao_esquerda(raiz);
+No* avl_rotacao_dupla_esquerda(No *z) {
+   z->dir = avl_rotacao_direita(z->dir);
+   return avl_rotacao_esquerda(z);
 }
 
 /**************************************
@@ -72,29 +68,121 @@ No* avl_inserir(No *raiz, TipoElemento elemento) {
    else if (elemento > raiz->dado)
       raiz->dir = avl_inserir(raiz->dir, elemento);
    else
-      return raiz; // Não permite elementos duplicados
+      return raiz; // Não permite duplicatas
 
-   raiz->altura = 1 + max(altura(raiz->esq), altura(raiz->dir));
+   raiz->altura = 1 + max(ab_altura(raiz->esq), ab_altura(raiz->dir));
+   int fb = avl_fator_balanceamento(raiz);
 
-   int fb = fator_balanceamento(raiz);
+   // Casos de desequilíbrio
+   if (fb > 1 && elemento < raiz->esq->dado)
+      return avl_rotacao_direita(raiz);
+
+   if (fb < -1 && elemento > raiz->dir->dado)
+      return avl_rotacao_esquerda(raiz);
+
+   if (fb > 1 && elemento > raiz->esq->dado)
+      return avl_rotacao_dupla_direita(raiz);
+
+   if (fb < -1 && elemento < raiz->dir->dado)
+      return avl_rotacao_dupla_esquerda(raiz);
+
+   return raiz;
+}
+
+/**************************************
+* BUSCA
+**************************************/
+No* avl_buscar(No* raiz, TipoElemento dado) {
+   if (raiz == NULL || raiz->dado == dado)
+      return raiz;
+
+   if (dado < raiz->dado)
+      return avl_buscar(raiz->esq, dado);
+   else
+      return avl_buscar(raiz->dir, dado);
+}
+
+/**************************************
+* CONSULTA (bool)
+**************************************/
+bool ab_consulta(No* raiz, TipoElemento dado) {
+   return avl_buscar(raiz, dado) != NULL;
+}
+
+/**************************************
+* REMOÇÃO AVL
+**************************************/
+No* no_minimo(No* no) {
+   No* atual = no;
+   while (atual->esq != NULL)
+      atual = atual->esq;
+   return atual;
+}
+
+No* avl_remover(No* raiz, TipoElemento elemento) {
+   if (raiz == NULL)
+      return raiz;
+
+   if (elemento < raiz->dado)
+      raiz->esq = avl_remover(raiz->esq, elemento);
+   else if (elemento > raiz->dado)
+      raiz->dir = avl_remover(raiz->dir, elemento);
+   else {
+      // Nó com um ou nenhum filho
+      if ((raiz->esq == NULL) || (raiz->dir == NULL)) {
+         No* temp = raiz->esq ? raiz->esq : raiz->dir;
+
+         // Sem filho
+         if (temp == NULL) {
+            temp = raiz;
+            raiz = NULL;
+         } else
+            *raiz = *temp; // Copia o conteúdo do filho
+
+         free(temp);
+      } else {
+         // Nó com dois filhos: pega o menor da subárvore direita
+         No* temp = no_minimo(raiz->dir);
+
+         // Copia o valor
+         raiz->dado = temp->dado;
+
+         // Remove o sucessor
+         raiz->dir = avl_remover(raiz->dir, temp->dado);
+      }
+   }
+
+   // Se a árvore tinha apenas um nó
+   if (raiz == NULL)
+      return raiz;
+
+   // Atualiza altura
+   raiz->altura = 1 + max(ab_altura(raiz->esq), ab_altura(raiz->dir));
+
+   // Verifica balanceamento
+   int fb = avl_fator_balanceamento(raiz);
 
    // Casos de desequilíbrio
 
    // Esquerda pesada (LL)
-   if (fb > 1 && elemento < raiz->esq->dado)
-      return rotacao_direita(raiz);
-
-   // Direita pesada (RR)
-   if (fb < -1 && elemento > raiz->dir->dado)
-      return rotacao_esquerda(raiz);
+   if (fb > 1 && avl_fator_balanceamento(raiz->esq) >= 0)
+      return avl_rotacao_direita(raiz);
 
    // Esquerda-Direita (LR)
-   if (fb > 1 && elemento > raiz->esq->dado)
-      return rotacao_dupla_direita(raiz);
+   if (fb > 1 && avl_fator_balanceamento(raiz->esq) < 0) {
+      raiz->esq = avl_rotacao_esquerda(raiz->esq);
+      return avl_rotacao_direita(raiz);
+   }
+
+   // Direita pesada (RR)
+   if (fb < -1 && avl_fator_balanceamento(raiz->dir) <= 0)
+      return avl_rotacao_esquerda(raiz);
 
    // Direita-Esquerda (RL)
-   if (fb < -1 && elemento < raiz->dir->dado)
-      return rotacao_dupla_esquerda(raiz);
+   if (fb < -1 && avl_fator_balanceamento(raiz->dir) > 0) {
+      raiz->dir = avl_rotacao_direita(raiz->dir);
+      return avl_rotacao_esquerda(raiz);
+   }
 
    return raiz;
 }
@@ -127,21 +215,6 @@ void ab_pos_ordem(No* raiz) {
 }
 
 /**************************************
-* CONSULTA
-**************************************/
-bool ab_consulta(No* raiz, TipoElemento dado) {
-   if (raiz == NULL)
-      return false;
-
-   if (dado == raiz->dado)
-      return true;
-   else if (dado < raiz->dado)
-      return ab_consulta(raiz->esq, dado);
-   else
-      return ab_consulta(raiz->dir, dado);
-}
-
-/**************************************
 * DESTRUIÇÃO
 **************************************/
 void ab_destruir(No** enderecoRaiz) {
@@ -154,7 +227,7 @@ void ab_destruir(No** enderecoRaiz) {
 }
 
 /**************************************
-* ALTURA E TOTAL DE VÉRTICES
+* INFORMAÇÕES
 **************************************/
 int ab_altura(No *raiz) {
    return (raiz == NULL) ? 0 : raiz->altura;

@@ -23,10 +23,19 @@ typedef struct no {
 No* avl_inserir(No *raiz, TipoElemento elemento);
 
 /**************************************
+* FUNÇÕES AVL - REMOÇÃO
+**************************************/
+// Remoção balanceada na árvore AVL
+No* avl_remover(No* raiz, TipoElemento elemento);
+
+/**************************************
 * FUNÇÕES DE CONSULTA
 **************************************/
 // Consulta se um elemento existe na árvore
 bool ab_consulta(No* raiz, TipoElemento dado);
+
+// Busca um nó com determinado valor e retorna o ponteiro (NULL se não existir)
+No* avl_buscar(No* raiz, TipoElemento dado);
 
 /**************************************
 * FUNÇÕES DE DESTRUIÇÃO
@@ -51,5 +60,20 @@ void ab_pos_ordem(No* raiz);
 int ab_altura(No *raiz);
 // Retorna o total de vértices (nós) da árvore
 int ab_total_vertices(No *raiz);
+
+/**************************************
+* FUNÇÕES AUXILIARES (ROTACIONAR)
+**************************************/
+// Rotação simples à direita
+No* avl_rotacao_direita(No* y);
+// Rotação simples à esquerda
+No* avl_rotacao_esquerda(No* x);
+// Rotação dupla à direita
+No* avl_rotacao_dupla_direita(No* z);
+// Rotação dupla à esquerda
+No* avl_rotacao_dupla_esquerda(No* z);
+
+// Obtém o fator de balanceamento do nó
+int avl_fator_balanceamento(No* no);
 
 #endif
