@@ -1,4 +1,4 @@
-# Makefile to compile and run the SRC program
+# Makefile to compile, run and clean the SRC program
 
 # Source file
 SRC = main.c
@@ -9,20 +9,22 @@ TARGET = $(basename $(SRC))
 # Compiler
 CC = gcc
 
-# Compilation flags (optional, can include -Wall for warnings)
+# Compilation flags
 CFLAGS = -Wall -O2
 
-# Default rule
-all: $(TARGET)
+# Default rule: compile, run, then clean
+all: run clean
 
 # Rule to generate the executable
 $(TARGET): $(SRC)
 	$(CC) $(CFLAGS) $(SRC) -o $(TARGET)
 
-# Rule to run the program
+# Rule to run the program (clears terminal first)
 run: $(TARGET)
+	@clear
 	./$(TARGET)
 
-# Clean up generated files
+# Clean up generated files with a preceding empty line
 clean:
+	@echo ""
 	rm -f $(TARGET)
