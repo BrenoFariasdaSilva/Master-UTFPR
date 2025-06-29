@@ -82,7 +82,7 @@ make
 
 This will:
 - Compile the source files (`main.c` and `b_tree.c`)
-- Run the executable, demonstrating insertion, traversal, persistence, and modification of the B-Tree
+- Run the executable, demonstrating insertion, traversal, search, persistence, and modification of the B-Tree
 - Clean up object files and executable after running
 
 To manually compile and run without the Makefile:
@@ -106,21 +106,24 @@ The `main.c` file serves as the entry point for testing and demonstrating the **
    - A new B-Tree is created and linked to the binary index file (`btree_index.dat`).
    - The program inserts a predefined set of integer keys (`{10, 20, 5, 6, 12, 30, 7, 17}`) into the tree.
    - After each insertion, the tree is displayed using **level-order traversal**, showing how it reorganizes to remain balanced.
-   - The final in-order and level-order traversals confirm the correct structure.
+   
+2. **Search Demonstration**
+   - The program searches for several keys (e.g., 6, 15, 25, 30).
+   - It prints whether each key was found or not, validating the `btree_search` functionality.
 
-2. **Persistence Validation**
+3. **Persistence Validation**
    - The B-Tree is closed using `btree_close`, simulating application termination.
    - It is then reopened from the same binary file with `btree_open`.
    - The reopened tree is traversed again using both in-order and level-order methods to confirm that the data persisted correctly across sessions.
 
-3. **Structural Comparison**
+4. **Structural Comparison**
    - The original and reopened trees are compared using `btree_are_equal` to verify that persistence preserved not only data but structure.
 
-4. **Post-Reopen Modifications**
+5. **Post-Reopen Modifications**
    - The program inserts a new key (`25`) and deletes an existing key (`10`) from the reopened tree.
    - These changes are followed by another round of traversals to demonstrate that the tree can continue operating seamlessly after being restored from disk.
 
-5. **Finalization**
+6. **Finalization**
    - The modified tree is closed again to finalize the state on disk.
    - The test ends with a success message.
 

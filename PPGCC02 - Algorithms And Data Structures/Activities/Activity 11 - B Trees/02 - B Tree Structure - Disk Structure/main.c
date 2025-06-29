@@ -4,6 +4,7 @@
  *              This program performs the following:
  *              - Creation of a persistent B-Tree stored on disk.
  *              - Insertion of initial keys into the B-Tree.
+ *              - Demonstration of searching keys in the B-Tree.
  *              - Display of the B-Tree content using both in-order and level-order traversals.
  *              - Closure and reopening of the B-Tree from disk to validate persistence.
  *              - Comparison of the original and reopened trees to ensure data integrity.
@@ -29,13 +30,14 @@
  * This function serves as a comprehensive test harness for the persistent B-Tree:
  * 1. Creates or opens a B-Tree file on disk.
  * 2. Inserts a predefined set of keys into the B-Tree, displaying the tree after each insertion.
- * 3. Performs in-order traversal to print sorted keys after initial insertions.
- * 4. Closes the B-Tree to simulate program termination.
- * 5. Reopens the B-Tree from disk and verifies that the data was correctly persisted.
- * 6. Compares the reopened tree with the original to confirm structural and key equality.
- * 7. Performs further insertion and deletion operations on the reopened tree.
- * 8. Displays the final state of the B-Tree.
- * 9. Properly closes and cleans up all allocated resources before exiting.
+ * 3. Demonstrates searching for selected keys and prints whether they are found.
+ * 4. Performs in-order traversal to print sorted keys after initial insertions.
+ * 5. Closes the B-Tree to simulate program termination.
+ * 6. Reopens the B-Tree from disk and verifies that the data was correctly persisted.
+ * 7. Compares the reopened tree with the original to confirm structural and key equality.
+ * 8. Performs further insertion and deletion operations on the reopened tree.
+ * 9. Displays the final state of the B-Tree.
+ * 10. Properly closes and cleans up all allocated resources before exiting.
  *
  * @param argc Number of command-line arguments (unused).
  * @param argv Array of command-line argument strings (unused).
@@ -63,6 +65,18 @@ int main(int argc, char *argv[]) {
       btree_print_level_order(tree);
       printf("\n");
    }
+
+   // === STEP 1.1: DEMONSTRATE SEARCH FUNCTIONALITY ===
+   printf("Demonstrating search functionality:\n");
+   int search_keys[] = {6, 15, 25, 30};
+   int search_n = sizeof(search_keys) / sizeof(search_keys[0]);
+
+   for (int i = 0; i < search_n; i++) {
+      int key = search_keys[i];
+      int found = btree_search(tree, key);
+      printf("Search for key %d: %s\n", key, found ? "Found" : "Not Found");
+   }
+   printf("\n");
 
    // Display the B-Tree contents in sorted order (in-order traversal).
    printf("In-order traversal after initial insertions:\n");
