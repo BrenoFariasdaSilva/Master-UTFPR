@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Boliche.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">test-doubles-practice</a> &gt; <a href="index.source.html" class="el_package">edu.utfpr</a> &gt; <span class="el_source">Boliche.java</span></div><h1>Boliche.java</h1><pre class="source lang-java linenums">package edu.utfpr;
+
+<span class="nc" id="L3">public class Boliche {</span>
+
+   public static int calcular_pontuacao_boliche(int[] jogadas) {
+<span class="fc" id="L6">      int score = 0;</span>
+<span class="fc" id="L7">      int index = 0;</span>
+
+<span class="fc bfc" id="L9" title="All 2 branches covered.">      for (int frame = 0; frame &lt; 10; frame++) {</span>
+<span class="fc bfc" id="L10" title="All 2 branches covered.">         if (jogadas[index] == 10) { // Strike</span>
+<span class="fc" id="L11">            score += 10 + jogadas[index + 1] + jogadas[index + 2];</span>
+<span class="fc" id="L12">            index++;</span>
+<span class="fc bfc" id="L13" title="All 2 branches covered.">         } else if (jogadas[index] + jogadas[index + 1] == 10) { // Spare</span>
+<span class="fc" id="L14">            score += 10 + jogadas[index + 2];</span>
+<span class="fc" id="L15">            index += 2;</span>
+         } else {
+<span class="fc" id="L17">            score += jogadas[index] + jogadas[index + 1];</span>
+<span class="fc" id="L18">            index += 2;</span>
+         }
+      }
+
+<span class="fc" id="L22">      return score;</span>
+   }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>
