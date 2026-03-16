@@ -62,3 +62,14 @@ This repository brings together the material developed for two master's level su
 - Make
 - Java Development Kit (JDK 21 or higher)
 - Maven 3 or higher
+
+## Setup
+
+### Clone the repository
+
+1. Clone the repository with the following command:
+
+   ```bash
+  git clone https://github.com/BrenoFariasdaSilva/Master-UTFPR.git
+   cd Master-UTFPR
+   ```
