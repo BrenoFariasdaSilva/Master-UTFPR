@@ -119,3 +119,17 @@ mvn clean test
   cd "Subjects/PPGCC12 - Software Testing/Activities/Activity 06 - Mocks"
   mvn dependency:resolve
    ```
+
+## Usage
+
+In order to run the project, choose a subject activity and use the corresponding command:
+
+```bash
+# C activities
+cd "Subjects/PPGCC02 - Algorithms And Data Structures/Activities/Activity 07 - Recursion/ex06 - Binary Search"
+make run
+
+# Java activities
+cd "Subjects/PPGCC12 - Software Testing/Activities/Activity 06 - Mocks"
+mvn clean test
+```
