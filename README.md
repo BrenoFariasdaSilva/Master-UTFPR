@@ -54,3 +54,11 @@ Master-UTFPR centralizes coursework, practices, and reports from UTFPR's postgra
 ## Introduction
 
 This repository brings together the material developed for two master's level subjects at UTFPR. In PPGCC02 - Algorithms And Data Structures, the content is organized into activities, classes, practice folders, templates, and tests that cover arrays, heterogeneous structures, dynamic memory allocation, files, stacks, lists, recursion, hash tables, binary trees, AVL trees, B-trees, and sorting algorithms through C implementations. In PPGCC12 - Software Testing, the activities focus on automated testing techniques with Java projects structured with Maven, including unit testing, identifier validation, mutation-oriented exercises, property-based testing, mocks, and Test-Driven Development.
+
+## Requirements
+
+- Git
+- GCC compiler
+- Make
+- Java Development Kit (JDK 21 or higher)
+- Maven 3 or higher
