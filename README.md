@@ -48,7 +48,6 @@ Project-Description.
     - [Dataset - Optional](#dataset---optional)
   - [Usage](#usage)
   - [Results - Optional](#results---optional)
-  - [How to Cite?](#how-to-cite)
   - [Contributing](#contributing)
   - [Collaborators](#collaborators)
   - [License](#license)
@@ -129,20 +128,6 @@ make run
 ## Results - Optional
 
 Discuss the results obtained in the project.
-
-## How to Cite?
-
-If you use the Master-UTFPR in your research, please cite it using the following BibTeX entry:
-
-```
-@misc{softwareMaster-UTFPR:2024,
-  title = {Master-UTFPR: Project-Description},
-  author = {Breno Farias da Silva},
-  year = {2024},
-  howpublished = {https://github.com/BrenoFariasdaSilva/Master-UTFPR},
-  note = {Accessed on September 11, 2024}
-}
-```
 
 Additionally, a `main.bib` file is available in the root directory of this repository, in which contains the BibTeX entry for this project.
 
