@@ -25,7 +25,7 @@ Master-UTFPR centralizes coursework, practices, and reports from UTFPR's postgra
 ![GitHub Stars](https://img.shields.io/github/stars/BrenoFariasdaSilva/Master-UTFPR)
 ![GitHub Contributors](https://img.shields.io/github/contributors/BrenoFariasdaSilva/Master-UTFPR)
 ![GitHub Created At](https://img.shields.io/github/created-at/BrenoFariasdaSilva/Master-UTFPR)
-![wakatime](https://wakatime.com/badge/github/BrenoFariasdaSilva/Master-UTFPRsvg)
+![wakatime](https://wakatime.com/badge/github/BrenoFariasdaSilva/Master-UTFPR.svg)
 
 </div>
 
