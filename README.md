@@ -73,3 +73,28 @@ This repository brings together the material developed for two master's level su
   git clone https://github.com/BrenoFariasdaSilva/Master-UTFPR.git
    cd Master-UTFPR
    ```
+
+## Installation:
+
+* Programing Languages:
+
+  * Manually:
+      ```bash
+    # C toolchain
+    sudo apt install gcc make -y
+
+    # Java toolchain
+    sudo apt install openjdk-21-jdk maven -y
+      ```
+
+  * Using Makefile:
+      ```bash
+    cd "Subjects/PPGCC02 - Algorithms And Data Structures/Template"
+    make
+      ```
+
+  * Using Maven:
+      ```bash
+    cd "Subjects/PPGCC12 - Software Testing/Activities/Activity 01 - Adição Números Grandes"
+    mvn clean test
+      ```
