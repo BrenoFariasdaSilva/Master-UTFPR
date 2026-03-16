@@ -45,7 +45,6 @@ Project-Description.
   - [Installation:](#installation)
   - [Run Programing Language Code:](#run-programing-language-code)
     - [Dependencies](#dependencies)
-    - [Dataset - Optional](#dataset---optional)
   - [Usage](#usage)
   - [Contributing](#contributing)
   - [Collaborators](#collaborators)
@@ -104,14 +103,6 @@ Bullet points of the requirements.
 
    ```bash
    make dependencies
-   ```
-
-### Dataset - Optional
-
-1. Download the dataset from [WEBSITE-HERE]() and place it in this project directory `(/Master-UTFPR)` and run the following command:
-
-   ```bash
-   make dataset
    ```
 
 ## Usage
