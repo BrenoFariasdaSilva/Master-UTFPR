@@ -1,18 +1,25 @@
+# ----------------------------
 # System Files
+# ----------------------------
 .DS_Store
+.DS_Store_
 Thumbs.db
-
-# Ignore the Windows .Desktop Files
 desktop.ini
+Icon?
+Icon\r
 
-# Ignore the Compressed Files
+# ----------------------------
+# Compressed Files
+# ----------------------------
 *.zip
 *.rar
 *.gz
 *.7z
-.tar.gz
+*.tar.gz
 
-# Ignore the Data Directories
+# ----------------------------
+# Data Directories
+# ----------------------------
 */Dados/
 */Data/
 */Dataset/
@@ -22,12 +29,16 @@ desktop.ini
 */dataset/
 */results/
 
-# Ignore the Data Files
+# ----------------------------
+# Data Files
+# ----------------------------
 *.csv
 *.xlsx
 *.dat
 
-# Ignore compiled C/C++ files (with and without extensions)
+# ----------------------------
+# C / C++ Compiled Artifacts
+# ----------------------------
 *.o
 *.obj
 *.exe
@@ -37,19 +48,71 @@ desktop.ini
 *.dylib
 *.a
 *.lib
-a.out      # Common default binary output on Unix-like systems
-core        # Ignore core dumps (optional)
+a.out
+core
 
-# Ignore build directories
+# ----------------------------
+# Java / Maven / Gradle
+# ----------------------------
+*.class
+*.jar
+*.war
+*.ear
+target/
+.gradle/
+build/
+out/
+
+# ----------------------------
+# Python
+# ----------------------------
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pyc.*
+*.py,cover
+.python-version
+.mypy_cache/
+.pytest_cache/
+.venv/
+venv/
+env/
+ENV/
+
+# ----------------------------
+# Node / JS
+# ----------------------------
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+dist/
+coverage/
+
+# ----------------------------
+# General Build Directories
+# ----------------------------
 /build/
 /bin/
 /dist/
-/CMakeFiles/
-/CMakeCache.txt
-CMakeLists.txt.user
-output/
+/output/
+/release/
+/debug/
 
-# Ignore macOS files
-Icon?
-Icon\r
-.DS_Store_
+# ----------------------------
+# CMake
+# ----------------------------
+/CMakeFiles/
+CMakeCache.txt
+cmake-build-*/
+CMakeLists.txt.user
+
+# ----------------------------
+# IDE / Editor
+# ----------------------------
+.vscode/
+.idea/
+*.swp
+*.swo
+*.tmp
