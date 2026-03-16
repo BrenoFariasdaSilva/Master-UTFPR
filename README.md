@@ -8,7 +8,7 @@
   
 ---
 
-Project-Description.
+Master-UTFPR centralizes coursework, practices, and reports from UTFPR's postgraduate Computer Science program, combining C implementations for Algorithms and Data Structures with Java and Maven-based activities for Software Testing.
   
 ---
 
