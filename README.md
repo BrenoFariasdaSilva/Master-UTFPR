@@ -47,7 +47,6 @@ Project-Description.
     - [Dependencies](#dependencies)
     - [Dataset - Optional](#dataset---optional)
   - [Usage](#usage)
-  - [Results - Optional](#results---optional)
   - [Contributing](#contributing)
   - [Collaborators](#collaborators)
   - [License](#license)
@@ -122,16 +121,6 @@ In order to run the project, run the following command:
 ```bash
 make run
 ```
-
-## Results - Optional
-
-Discuss the results obtained in the project.
-
-Additionally, a `main.bib` file is available in the root directory of this repository, in which contains the BibTeX entry for this project.
-
-If you find this repository valuable, please don't forget to give it a ⭐ to show your support! Contributions are highly encouraged, whether by creating issues for feedback or submitting pull requests (PRs) to improve the project. For details on how to contribute, please refer to the [Contributing](#contributing) section below.
-
-Thank you for your support and for recognizing the contribution of this tool to your work!
 
 ## Contributing
 
