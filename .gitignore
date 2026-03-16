@@ -116,3 +116,8 @@ CMakeLists.txt.user
 *.swp
 *.swo
 *.tmp
+
+# Automation Scripts
+class_block_functions_committer.py
+functions_committer.py
+readme_sections_committer.py
