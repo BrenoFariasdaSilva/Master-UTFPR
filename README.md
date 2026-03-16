@@ -97,4 +97,25 @@ This repository brings together the material developed for two master's level su
       ```bash
     cd "Subjects/PPGCC12 - Software Testing/Activities/Activity 01 - Adição Números Grandes"
     mvn clean test
-      ```
+      ```  
+
+## Run Programing Language Code:
+
+```bash
+# C example
+cd "Subjects/PPGCC02 - Algorithms And Data Structures/Activities/Activity 12 - Sorting Algorithms"
+make run
+
+# Java example
+cd "Subjects/PPGCC12 - Software Testing/Activities/Activity 07 - Test Driven Development"
+mvn clean test
+```
+
+### Dependencies
+
+1. Install the Maven dependencies for the Software Testing activities with the following command:
+
+   ```bash
+  cd "Subjects/PPGCC12 - Software Testing/Activities/Activity 06 - Mocks"
+  mvn dependency:resolve
+   ```
